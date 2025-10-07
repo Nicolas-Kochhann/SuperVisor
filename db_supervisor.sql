@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/10/2025 às 19:34
+-- Tempo de geração: 07/10/2025 às 20:39
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `db_supervisor`
 --
-CREATE DATABASE IF NOT EXISTS `db_supervisor` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `db_supervisor`;
 
 -- --------------------------------------------------------
 
@@ -73,7 +71,8 @@ CREATE TABLE `usuario` (
   `status` int(11) DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL,
   `data_hora_cadastro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `imagem` varchar(255) DEFAULT NULL
+  `imagem` varchar(255) DEFAULT NULL,
+  `disponivel` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -141,6 +140,28 @@ ALTER TABLE `usuario_desinteresse`
 ALTER TABLE `usuario_interesse`
   ADD PRIMARY KEY (`fk_usuario_idUsuario`,`fk_interesse_idInteresse`),
   ADD KEY `FK_usuario_interesse_interesse` (`fk_interesse_idInteresse`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `interesse`
+--
+ALTER TABLE `interesse`
+  MODIFY `idInteresse` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `solicitacao`
+--
+ALTER TABLE `solicitacao`
+  MODIFY `idSolicitacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
