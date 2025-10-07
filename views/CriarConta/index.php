@@ -22,30 +22,28 @@
 
         <main class="container-formulario">
             <form method="POST" action="" enctype="multipart/form-data" class="formulario-grande">
-                <h1 class="titulo-formulario">Cadastro</h1>
-                <label class="label-form-grande"> Foto de Perfil
-                    <input type="file" name="foto" id="foto" accept="image/*" class="input-form-grande">
+                <h1 class="titulo-formulario-grande">Cadastro</h1>
+                <label class="label-form-grande obrigatorio">Nome Completo
+                    <input type="text" name="nome" id="nome" class="input-form-grande" required>
                 </label>
-                <label class="label-form-grande">E-mail
-                    <input type="email" name="email" id="email" class="input-form-grande">
+                <label class="label-form-grande obrigatorio">E-mail
+                    <input type="email" name="email" id="email" class="input-form-grande" required>
                 </label>
-                <label class="label-form-grande">Senha
-                    <input type="password" name="senha" id="senha" pattern="(?=.*\d).{8,}" title="Deve conter 8 ou mais caracteres e pelo menos um número e uma letra" class="input-form-grande">
+                <label class="label-form-grande obrigatorio">Senha
+                    <input type="password" name="senha" id="senha" pattern="(?=.*\d).{8,}" title="Deve conter 8 ou mais caracteres e pelo menos um número e uma letra" class="input-form-grande" required>
                 </label>
                 <div class="bloco-info">
                     <p>A senha deve conter:
-                        <ul>
+                        <ul class="lista-info">
                             <li>8 caracteres ou mais</li>
                             <li>Pelo menos uma letra</li>
                             <li>Pelo menos um número</li>
                         </ul>
                     </p>
                 </div>
-                <label class="label-form-grande">Nome Completo
-                    <input type="text" name="nome" id="nome" class="input-form-grande">
-                </label>
+                <p class="texto-obrigatorio">* - indica um dado obrigatório</p>
                 <button class="botao-strong">Próximo</button>
-                <a href="" class="link-formulario">Voltar</a>
+                <a href="" class="link-formulario">Login</a>
             </form>
         </main>
 
