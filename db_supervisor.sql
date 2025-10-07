@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/10/2025 às 20:19
+-- Tempo de geração: 07/10/2025 às 20:39
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -71,7 +71,8 @@ CREATE TABLE `usuario` (
   `status` int(11) DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL,
   `data_hora_cadastro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `imagem` varchar(255) DEFAULT NULL
+  `imagem` varchar(255) DEFAULT NULL,
+  `disponivel` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
