@@ -45,7 +45,7 @@
                     <input type="text" name="nome" id="nome" class="input-form-grande">
                 </label>
                 <button class="botao-strong">Próximo</button>
-                <a href="">Voltar</a>
+                <a href="" class="link-formulario">Voltar</a>
             </form>
         </main>
 

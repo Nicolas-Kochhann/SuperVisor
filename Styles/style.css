@@ -79,3 +79,8 @@ html, body{
 .botao-strong:hover{
     cursor: pointer;
 }
+
+.link-formulario{
+    width: 100%;
+    text-align: center;
+}
