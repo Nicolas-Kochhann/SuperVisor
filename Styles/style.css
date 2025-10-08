@@ -1,120 +1,159 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-*, *::before, *::after{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body{
-    width: 100vw;
-    height: 100vh;
+html,
+body {
+  width: 100vw;
+  height: 100vh;
 }
 
-.container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.cabecalho{
-    width: 100%;
-    height: 70px;
-    background-color: #024211;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.cabecalho {
+  width: 100%;
+  height: 70px;
+  background-color: #024211;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border-bottom: 3px solid rgb(5, 112, 30);
 }
 
-.logo-cabecalho{
-    height: 100%;
-    align-self: flex-end;
-    margin: 0 10px 0 auto
+.logo-cabecalho {
+  height: 100%;
+  align-self: flex-end;
+  margin: 0 10px 0 auto;
 }
 
-.container-formulario{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container-formulario {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.formulario-grande{
-    width: 40%;
-    min-width: 500px;
-    padding: 20px 40px;
-    border: solid 1px black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    resize: none;
+.formulario-grande {
+  width: 40%;
+  min-width: 500px;
+  padding: 20px 40px;
+  border: solid 1px black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  resize: none;
 }
 
-.titulo-formulario-grande{
-    width: 100%;
-    text-align: center;
-    margin: 0 0 20px 0;
-    font-family: "Roboto Slab", serif;
+.titulo-formulario-grande {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-family: "Roboto Slab", serif;
 }
 
-.label-form-grande{
-    font-weight: bold;
-    margin: 0 0 10px 0;
-    font-size: 1.05rem;
-    font-family: "Roboto", sans-serif;
+.label-form-grande {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+  font-family: "Roboto", sans-serif;
 }
 
-.input-form-grande{
-    width: 100%;
-    padding: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: inherit;
+.input-form-grande {
+  width: 100%;
+  padding: 3px;
+  font-family: "Roboto", sans-serif;
+  font-size: inherit;
 }
 
-input.input-form-grande[type="file"]{
-    font-size: 1rem;
+input.input-form-grande[type="file"] {
+  font-size: 1rem;
 }
 
-input.input-form-grande[type="file"]:hover{
-    cursor: pointer;
+input.input-form-grande[type="file"]:hover {
+  cursor: pointer;
 }
 
-.obrigatorio::before{
-    content: "* ";
-    color: red;
+.obrigatorio::before {
+  content: "* ";
+  color: red;
 }
 
-.bloco-info{
-    margin: 0 0 10px 10px;
-    font-family: "Roboto", sans-serif;
-    font-size: 0.95rem;
+.bloco-info {
+  margin: 0 0 10px 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
 }
 
-.lista-info{
-    margin: 0 0 0 20px;
+.lista-info {
+  margin: 0 0 0 10px;
+  color: #555;
+  list-style-type: none;
 }
 
-.botao-strong{
-    padding: 5px;
-    margin: 10px 0 10px 0;
-    color: white;
-    background-color: #024211;
-    border: solid 1px black;
-    font-family: "Roboto", sans-serif;
+.lista-info li {
+  transition: color 0.2s ease;
 }
 
-.botao-strong:hover{
-    cursor: pointer;
+.lista-info li::before {
+  transition: color 0.2s ease;
+  content: "> ";
+  font-family: "Roboto Mono", monospace;
 }
 
-.link-formulario{
-    width: 100%;
-    text-align: center;
-    font-family: "Roboto", sans-serif;
+.lista-info li.valido {
+  color: green;
 }
 
-.texto-obrigatorio{
-    color: red;
-    font-family: "Roboto", sans-serif;
+.lista-info li.valido::before {
+  content: "✓ ";
+  color: green;
+  font-family: "Roboto Mono", monospace;
+}
+
+.lista-info li.invalido {
+  color: red;
+}
+
+.lista-info li.invalido::before{
+  content: "X ";
+  color: red;
+  font-family: "Roboto Mono", monospace;
+}
+
+.botao-strong {
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background-color: #024211;
+  border: solid 1px black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.05rem;
+  transition: background-color 0.3s ease;
+}
+
+.botao-strong:hover {
+  cursor: pointer;
+  background-color: rgb(5, 97, 26);
+}
+
+.link-formulario {
+  width: 100%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.texto-obrigatorio {
+  color: red;
+  font-family: "Roboto", sans-serif;
 }

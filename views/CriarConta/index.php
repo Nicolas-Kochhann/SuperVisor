@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperVisor</title>
-    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../Styles/style.css">
     <link rel="icon" href="../../resources/images/favicon.ico">
 </head>
 <body>
@@ -30,23 +30,23 @@
                     <input type="email" name="email" id="email" class="input-form-grande" required>
                 </label>
                 <label class="label-form-grande obrigatorio">Senha
-                    <input type="password" name="senha" id="senha" pattern="(?=.*\d).{8,}" title="Deve conter 8 ou mais caracteres e pelo menos um número e uma letra" class="input-form-grande" required>
+                    <input type="password" name="senha" id="senha" class="input-form-grande" required>
                 </label>
                 <div class="bloco-info">
                     <p>A senha deve conter:
                         <ul class="lista-info">
-                            <li>8 caracteres ou mais</li>
-                            <li>Pelo menos uma letra</li>
-                            <li>Pelo menos um número</li>
+                            <li id="tamanho">8 caracteres ou mais</li>
+                            <li id="letra">Pelo menos uma letra</li>
+                            <li id="numero">Pelo menos um número</li>
                         </ul>
                     </p>
                 </div>
-                <p class="texto-obrigatorio">* - indica um dado obrigatório</p>
+                <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <button class="botao-strong">Próximo</button>
                 <a href="" class="link-formulario">Login</a>
             </form>
         </main>
-
     </div>
+    <script src="../../scripts/criacaoDeConta.js"></script>
 </body>
 </html>
