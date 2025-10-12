@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperVisor</title>
-    <link rel="stylesheet" href="../../Styles/style.css">
+    <link rel="stylesheet" href="../../styles/style.css">
     <link rel="icon" href="../../resources/images/favicon.ico">
 </head>
 <body>
@@ -23,15 +23,15 @@
         <main class="container-formulario">
             <form method="POST" action="" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Cadastro</h1>
-                <label class="label-form-grande obrigatorio">Nome Completo
-                    <input type="text" name="nome" id="nome" class="input-form-grande" required>
-                </label>
-                <label class="label-form-grande obrigatorio">E-mail
-                    <input type="email" name="email" id="email" class="input-form-grande" required>
-                </label>
-                <label class="label-form-grande obrigatorio">Senha
-                    <input type="password" name="senha" id="senha" class="input-form-grande" required>
-                </label>
+                <label for="nome" class="label-form-grande obrigatorio">Nome Completo</label>
+                <input type="text" name="nome" id="nome" class="input-form-grande" required>
+                <label for="email" class="label-form-grande obrigatorio">E-mail</label>
+                <input type="email" name="email" id="email" class="input-form-grande" required>
+                <label for="senha" class="label-form-grande obrigatorio">Senha</label>
+                <div class="password-container">
+                    <input class="input-form-grande" type="password" name="senha" id="senha" required>
+                    <img class="show-password" id="show-password" src="../../resources/images/eye.svg" alt="show passwd">
+                </div>
                 <div class="bloco-info">
                     <p>A senha deve conter:
                         <ul class="lista-info">
@@ -47,6 +47,7 @@
             </form>
         </main>
     </div>
-    <script src="../../scripts/criacaoDeConta.js"></script>
+    <script src="../../scripts/verificaSenha.js"></script>
+    <script src="../../scripts/mostraSenha.js"></script>
 </body>
 </html>
