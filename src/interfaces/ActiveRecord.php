@@ -1,5 +1,7 @@
 <?php
 
+namespace Src\Interfaces;
+
 interface ActiveRecord{
     public function salvar(): bool;
     public static function buscarPorId($id): self;

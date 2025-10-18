@@ -1,6 +1,29 @@
 <?php
 
+use Src\Models\Usuario;
+require __DIR__."/../../vendor/autoload.php";
+
+$emailErro = $senhaErro = '';
+
 # Cadastro de Conta do Aluno
+if(isset($_POST['submit'])){
+    $user = new Usuario(
+        $_POST['nome'],
+        null,
+        $_POST['email'], 
+        $_POST['senha']
+    );
+
+    try{
+        $user->cadastrar();
+    } catch(RuntimeException $e){
+        if($e->getCode() === 100){
+            $emailErro = $e->getMessage();
+        } else if ($e->getCode() === 101){
+            $senhaErro = $e->getMessage();
+        }
+    }
+}
 
 ?>
 
@@ -21,7 +44,7 @@
         </header>
 
         <main class="container-formulario">
-            <form method="POST" action="" enctype="multipart/form-data" class="formulario-grande">
+            <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Cadastro</h1>
                 <label for="nome" class="label-form-grande obrigatorio">Nome Completo</label>
                 <input type="text" name="nome" id="nome" class="input-form-grande" required>
@@ -42,7 +65,9 @@
                     </p>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <button class="botao-strong">Próximo</button>
+                <span style="color: red"><?php echo $emailErro ?></span>
+                <span style="color: red"><?php echo $senhaErro ?></span>
+                <button name="submit" class="botao-strong">Próximo</button>
                 <a href="" class="link-formulario">Login</a>
             </form>
         </main>

@@ -1,6 +1,8 @@
 <?php
 
+namespace Config;
+
 define('HOST', 'localhost');
 define('USUARIO', 'root');
-define('BANCO', 'supervisor');
+define('BANCO', 'db_supervisor');
 define('SENHA', '');

@@ -1,0 +1,16 @@
+{
+    "name": "gasoso/super-visor",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "Config\\": "config/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolas",
+            "email": "kochhann.nicolass.soldi@gmail.com"
+        }
+    ],
+    "require": {}
+}
