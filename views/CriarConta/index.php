@@ -3,7 +3,8 @@
 use Src\Models\Usuario;
 require __DIR__."/../../vendor/autoload.php";
 
-$emailErro = $senhaErro = '';
+$emailErro = '';
+$senhaErro = '';
 
 # Cadastro de Conta do Aluno
 if(isset($_POST['submit'])){
@@ -67,7 +68,7 @@ if(isset($_POST['submit'])){
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <span style="color: red"><?php echo $emailErro ?></span>
                 <span style="color: red"><?php echo $senhaErro ?></span>
-                <button name="submit" class="botao-strong">Próximo</button>
+                <button disabled id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="" class="link-formulario">Login</a>
             </form>
         </main>

@@ -173,6 +173,15 @@ img.showing {
   background-color: rgb(5, 97, 26);
 }
 
+.botao-strong:disabled {
+  background-color: transparent;
+  color: black;
+}
+
+.botao-strong:disabled:hover {
+  cursor: default;
+}
+
 .link-formulario {
   width: 100%;
   text-align: center;
@@ -182,4 +191,45 @@ img.showing {
 .texto-obrigatorio {
   color: red;
   font-family: "Roboto", sans-serif;
+}
+
+.info {
+  font-family: "Roboto";
+  width: 100%;
+  text-align: center;
+}
+
+.bloco-interesses {
+  width: 100%;
+  margin: 15px 0 0 0;
+  border: 1px solid #00000062;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.container-checkbox-interesse {
+  font-family: "Roboto";
+  margin: 9px 3px;
+}
+
+.interesse-checkbox {
+  display: none;
+}
+
+.interesse-checkbox-label {
+  padding: 5px;
+  font-size: 1.1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.interesse-checkbox:checked + .interesse-checkbox-label {
+  background-color: #4fd56e;
+  border: 1px solid #015a16;
 }
