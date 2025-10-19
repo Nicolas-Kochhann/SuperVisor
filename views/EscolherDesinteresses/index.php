@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <button id="submit" name="submit" class="botao-strong">Próximo</button>
+                <button id="submit" name="submit" class="botao-strong">Concluir Cadastro</button>
                 <a href="" class="link-formulario">Voltar</a>
             </form>
         </main>
