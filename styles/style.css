@@ -233,3 +233,21 @@ img.showing {
   background-color: #4fd56e;
   border: 1px solid #015a16;
 }
+
+.desinteresse-checkbox {
+  display: none;
+}
+
+.desinteresse-checkbox-label {
+  padding: 5px;
+  font-size: 1.1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.desinteresse-checkbox:checked + .desinteresse-checkbox-label {
+  background-color: #d54f4f;
+  border: 1px solid #5a0101;
+}
