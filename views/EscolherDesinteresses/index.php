@@ -37,5 +37,11 @@
         </main>
 
     </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            checkboxes.forEach((cb) => (cb.checked = false));
+        });
+    </script>
 </body>
 </html>

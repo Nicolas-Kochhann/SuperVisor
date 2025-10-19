@@ -248,6 +248,6 @@ img.showing {
 }
 
 .desinteresse-checkbox:checked + .desinteresse-checkbox-label {
-  background-color: #d54f4f;
+  background-color: #e86a6a;
   border: 1px solid #5a0101;
 }
