@@ -20,16 +20,18 @@ if(isset($_POST['submit'])){
         $_POST['email'], 
         $_POST['senha']
     );
-
-    try{
-        $idUsuario = $usuario->cadastrar();
-        $_SESSION['idUsuario'] = $idUsuario;
-        header('Location: ../EscolherInteresses/');
-    } catch(RuntimeException $e){
-        if($e->getCode() === 100){
-            $emailErro = $e->getMessage();
-        } else if ($e->getCode() === 101){
-            $senhaErro = $e->getMessage();
+    if(str_ends_with($_POST['email'], "aluno.feliz.ifrs.edu.br")){
+        try{
+            
+            $idUsuario = $usuario->cadastrar();
+            $_SESSION['idUsuario'] = $idUsuario;
+            header('Location: ../EscolherInteresses/');
+        } catch(RuntimeException $e){
+            if($e->getCode() === 100){
+                $emailErro = $e->getMessage();
+            } else if ($e->getCode() === 101){
+                $senhaErro = $e->getMessage();
+            }
         }
     }
 }

@@ -95,6 +95,27 @@ class Usuario{
         }
     }
 
+    public function acharInteresses(): array{
+        $conn = new MySQL();
+        $sql = "SELECT idInteresse FROM usuario_interesse WHERE idUsuario={$this->idUsuario}";
+        $resultado = $conn->consulta($sql);
+        $interesses = [];
+        foreach($resultado as $r){
+            $interesses[] = $r['idInteresse'];
+        }
+        return $interesses;
+    }
+    public function acharDesinteresses(): array{
+        $conn = new MySQL();
+        $sql = "SELECT idInteresse FROM usuario_desinteresse WHERE idUsuario={$this->idUsuario}";
+        $resultado = $conn->consulta($sql);
+        $desinteresses = [];
+        foreach($resultado as $r){
+            $desintereses[] = $r['idInteresse'];
+        }
+        return $desinteresses;
+    }
+
     public function getNome(): string{
         return $this->nome;
     }
