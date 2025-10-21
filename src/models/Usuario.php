@@ -93,7 +93,7 @@ class Usuario{
 
     public static function autenticar($email, $senha): bool{
         $conn = new MySQL();
-        $sql = "SELECT idUsuario,senha, tipo, disponivel, nome, imagem  FROM usuario WHERE email={$email}";
+        $sql = "SELECT idUsuario,senha, tipo, disponivel, nome, imagem  FROM usuario WHERE email='{$email}'";
         $resultado = $conn->consulta($sql);
         if(count($resultado) === 1 and password_verify($senha, $resultado[0])){
             session_start();

@@ -1,6 +1,18 @@
 <?php
+require __DIR__."/../../vendor/autoload.php";
+use Src\models\Usuario;
 
-
+if(isset($_POST['submit'])){
+    if($u=Usuario::autenticar($_POST['email'],$_POST['senha'])){
+        session_start();
+        $_SESSION['usuario']=$u;
+        header("location: ../TelaInicial/index.php");
+        exit();
+    }else{
+        header("location: index.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +42,7 @@
                     <img class="show-password" id="show-password" src="../../resources/images/eye.svg" alt="show passwd">
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <span style="color: red"><?php echo $emailErro ?></span>
-                <span style="color: red"><?php echo $senhaErro ?></span>
+                
                 <button id="submit" name="submit" class="botao-strong">Acessar</button>
                 <a href="" class="link-formulario">Cadastro</a>
             </form>
