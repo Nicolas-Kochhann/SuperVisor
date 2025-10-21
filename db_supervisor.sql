@@ -73,10 +73,10 @@ CREATE TABLE `usuario` (
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `status` int(11) DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
+  `tipo` varchar(255) NOT NULL,
   `data_hora_cadastro` timestamp NOT NULL DEFAULT current_timestamp(),
   `imagem` varchar(255) DEFAULT NULL,
-  `disponivel` tinyint(1) DEFAULT NULL
+  `disponivel` tinyint(1) DEFAULT TRUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

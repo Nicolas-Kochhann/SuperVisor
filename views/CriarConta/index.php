@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     );
     if(str_ends_with($_POST['email'], "aluno.feliz.ifrs.edu.br")){
         try{
-            
+            $usuario->setTipo('aluno');
             $idUsuario = $usuario->cadastrar();
             $_SESSION['idUsuario'] = $idUsuario;
             header('Location: ../EscolherInteresses/');

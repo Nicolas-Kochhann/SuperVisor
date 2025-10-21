@@ -11,8 +11,11 @@ class Usuario{
     private string $nome;
     private string $email;
     private string $senha;
+    private string $tipo;
     private ?string $foto_perfil = null;
     private string $data_hora_cadastro;
+    private bool $disponivel;
+    private int $status; // 0 - ativo / 1 - pendente / 2 - inativo
 
     public function __construct($nome, $foto_perfil, $email, $senha){
         $this->nome = $nome;
@@ -23,6 +26,10 @@ class Usuario{
 
     public function  setIdUsuario(int $idUsuario){
         $this->idUsuario = $idUsuario;
+    }
+
+    public function setDisponivel(bool $disponivel){
+        $this->disponivel = $disponivel;
     }
 
     public static function validarEmail(string $email): bool{
@@ -51,6 +58,34 @@ class Usuario{
         return null;
     }
 
+    public static function listarProfessores() : array{
+        $conn = new MySQL();    
+        $sql = "SELECT idUsuario, nome, imagem, email, disponivel FROM usuario WHERE tipo='professor'";
+        $resultado = $conn->consulta($sql);
+        $professores = [];
+        foreach($resultado as $r){
+            $u = new Usuario($r['nome'], $r['imagem'], $r['email']);
+            $u->setIdUsuario($r['idUsuario']);
+            $u->setDisponivel($r['disponivel']);
+            $professores[] = $u;
+        }
+        return $professores;
+    }
+
+    public static function listarAlunos() : array{
+        $conn = new MySQL();    
+        $sql = "SELECT idUsuario, nome, imagem, email, disponivel FROM usuario WHERE tipo='aluno'";
+        $resultado = $conn->consulta($sql);
+        $alunos = [];
+        foreach($resultado as $r){
+            $u = new Usuario($r['nome'], $r['imagem'], $r['email']);
+            $u->setIdUsuario($r['idUsuario']);
+            $u->setDisponivel($r['disponivel']);
+            $alunos[] = $u;
+        }
+        return $alunos;
+    }
+
     public static function validarSenha(string $senha): bool{
         $regex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/';
         return preg_match($regex, $senha) === 1;  # preg_match retorna 1 para correspondência e 0 para não correspondência.
@@ -58,9 +93,18 @@ class Usuario{
 
     public static function autenticar($email, $senha): bool{
         $conn = new MySQL();
-        $sql = "SELECT senha FROM usuario WHERE email={$email}";
+        $sql = "SELECT idUsuario,senha, tipo, disponivel, nome, imagem  FROM usuario WHERE email={$email}";
         $resultado = $conn->consulta($sql);
         if(count($resultado) === 1 and password_verify($senha, $resultado[0])){
+            session_start();
+
+            $_SESSION['idUsuario'] = $resultado[0]['idUsuario'];
+            $_SESSION['nome'] = $resultado[0]['nome'];
+            $_SESSION['imagem'] = $resultado[0]['imagem'];
+            $_SESSION['tipo'] = $resultado[0]['tipo'];
+            $_SESSION['disponivel'] = $resultado[0]['disponivel'];
+            $_SESSION['status'] = $resultado[0]['status'];
+
             return true;
         }
         return false;
@@ -73,8 +117,16 @@ class Usuario{
         }
         if(!self::validarSenha($this->senha)){
             throw new RuntimeException('Senha inválida', 101);
-        }        
-        $sql = "INSERT INTO usuario(nome, email, senha) VALUES('{$this->nome}', '{$this->email}', '{$this->senha}')";
+        }
+        if(str_ends_with($this->email , "aluno.feliz.ifrs.edu.br")){
+            $this->tipo = "aluno";
+            $this->status = "0";
+        }else{
+            $this->tipo = "professor";
+            $this->status = "1";
+        }
+
+        $sql = "INSERT INTO usuario(nome, email, senha, tipo, status) VALUES('{$this->nome}', '{$this->email}', '".password_hash($this->senha, PASSWORD_BCRYPT)."', '{$this->tipo}', '{$this->status}')";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
@@ -114,6 +166,10 @@ class Usuario{
             $desintereses[] = $r['idInteresse'];
         }
         return $desinteresses;
+    }
+
+    public function setTipo(string $tipo):void{
+        $this->tipo = $tipo;
     }
 
     public function getNome(): string{
