@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Models;
+namespace Src\models;
 
-use Src\Database\MySQL;
+use Src\database\MySQL;
 use RuntimeException;
 
 
@@ -30,17 +30,18 @@ class Usuario{
         if (filter_var($email, FILTER_VALIDATE_EMAIL) != false){
             if(str_ends_with(strtolower($email), 'feliz.ifrs.edu.br')){
                 $conn = new MySQL();
-                $sql = "SELECT idUsuario WHERE email={$email}";
+                $sql = "SELECT idUsuario FROM usuario WHERE email='{$email}'";
                 $resultado = $conn->consulta($sql);
-                return count($resultado) > 1 ? false : true;
-            }   
+                return count($resultado) === 0;
+            }
+            return false;
         }
         return false;
     }
 
-    public static function validarSenha($senha): bool{
+    public static function validarSenha(string $senha): bool{
         $regex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/';
-        return preg_match($regex, $senha) == 1;  # preg_match retorna 1 para correspondência e 0 para não correspondência.
+        return preg_match($regex, $senha) === 1;  # preg_match retorna 1 para correspondência e 0 para não correspondência.
     }
 
     public static function autenticar($email, $senha): bool{
@@ -55,9 +56,13 @@ class Usuario{
 
     public function cadastrar(): int{
         $conn = new MySQL();
-        self::validarEmail($this->email) ? null : throw new RuntimeException('Email inválido', 100);
-        self::validarSenha($this->senha) ? null : throw new RuntimeException('Senha inválida', 101);
-        $sql = "INSERT INTO usuario(nome, email, senha) VALUES({$this->nome}, {$this->email}, {$this->senha})";
+        if(!self::validarEmail($this->email)){
+            throw new RuntimeException('Email inválido', 100);
+        }
+        if(!self::validarSenha($this->senha)){
+            throw new RuntimeException('Senha inválida', 101);
+        }        
+        $sql = "INSERT INTO usuario(nome, email, senha) VALUES('{$this->nome}', '{$this->email}', '{$this->senha}')";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }

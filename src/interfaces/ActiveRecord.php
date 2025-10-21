@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Interfaces;
+namespace Src\interfaces;
 
 interface ActiveRecord{
     public function salvar(): bool;

@@ -1,6 +1,12 @@
 <?php
+session_start();
 
-use Src\Models\Usuario;
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use Src\models\Usuario;
 require __DIR__."/../../vendor/autoload.php";
 
 $emailErro = '';
@@ -16,7 +22,9 @@ if(isset($_POST['submit'])){
     );
 
     try{
-        $user->cadastrar();
+        $userId = $user->cadastrar();
+        $_SESSION['userId'] = $userId;
+        header('Location: /../EscolherInteresses/');
     } catch(RuntimeException $e){
         if($e->getCode() === 100){
             $emailErro = $e->getMessage();
@@ -68,7 +76,7 @@ if(isset($_POST['submit'])){
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <span style="color: red"><?php echo $emailErro ?></span>
                 <span style="color: red"><?php echo $senhaErro ?></span>
-                <button disabled id="submit" name="submit" class="botao-strong">Próximo</button>
+                <button id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="" class="link-formulario">Login</a>
             </form>
         </main>
