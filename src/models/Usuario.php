@@ -39,6 +39,18 @@ class Usuario{
         return false;
     }
 
+    public static function acharUsuario(int $idUsuario) : ?Usuario{
+        $conn = new MySQL();
+        $sql = "SELECT nome, imagem, email, senha FROM usuario WHERE idUsuario={$idUsuario}";
+        $resultado = $conn->consulta($sql);
+        if(count($resultado) === 1){
+            $u = new Usuario($resultado[0]['nome'], $resultado[0]['imagem'], $resultado[0]['email'], $resultado[0]['senha']);
+            $u->setIdUsuario($idUsuario);
+            return $u;
+        }
+        return null;
+    }
+
     public static function validarSenha(string $senha): bool{
         $regex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/';
         return preg_match($regex, $senha) === 1;  # preg_match retorna 1 para correspondência e 0 para não correspondência.
@@ -67,5 +79,36 @@ class Usuario{
         return $conn->getUltimoIdInserido();
     }
 
+    public function cadastrarInteresses(array $interesses): void{
+        $conn = new MySQL();
+        foreach($interesses as $i){
+            $sql = "INSERT INTO usuario_interesse(idUsuario, idInteresse) VALUES({$this->idUsuario}, {$i})";
+            $conn->executa($sql);
+        }
+    }
+
+    public function cadastrarDesinteresses(array $desinteresses): void{
+        $conn = new MySQL();
+        foreach($desinteresses as $i){
+            $sql = "INSERT INTO usuario_desinteresse(idUsuario, idInteresse) VALUES({$this->idUsuario}, {$i})";
+            $conn->executa($sql);
+        }
+    }
+
+    public function getNome(): string{
+        return $this->nome;
+    }
+    public function getEmail(): string{
+        return $this->email;
+    }
+    public function getSenha(): string{
+        return $this->senha;
+    }
+    public function getFotoPerfil(): ?string{
+        return $this->foto_perfil;
+    }
+    public function getIdUsuario(): int{
+        return $this->idUsuario;
+    }
     
 }

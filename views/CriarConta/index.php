@@ -14,7 +14,7 @@ $senhaErro = '';
 
 # Cadastro de Conta do Aluno
 if(isset($_POST['submit'])){
-    $user = new Usuario(
+    $usuario = new Usuario(
         $_POST['nome'],
         null,
         $_POST['email'], 
@@ -22,9 +22,9 @@ if(isset($_POST['submit'])){
     );
 
     try{
-        $userId = $user->cadastrar();
-        $_SESSION['userId'] = $userId;
-        header('Location: /../EscolherInteresses/');
+        $idUsuario = $usuario->cadastrar();
+        $_SESSION['idUsuario'] = $idUsuario;
+        header('Location: ../EscolherInteresses/');
     } catch(RuntimeException $e){
         if($e->getCode() === 100){
             $emailErro = $e->getMessage();

@@ -41,8 +41,9 @@ CREATE TABLE `interesse` (
 --
 
 CREATE TABLE `professor_solicitacao` (
-  `fk_usuario_idUsuario` int(11) NOT NULL,
-  `fk_solicitacao_idSolicitacao` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idSolicitacao` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -57,7 +58,7 @@ CREATE TABLE `solicitacao` (
   `titulo` varchar(255) NOT NULL,
   `descricao` varchar(500) DEFAULT NULL,
   `carga_horaria_semanal` int(11) DEFAULT NULL,
-  `fk_usuario_idUsuario` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -85,8 +86,9 @@ CREATE TABLE `usuario` (
 --
 
 CREATE TABLE `usuario_desinteresse` (
-  `fk_usuario_idUsuario` int(11) NOT NULL,
-  `fk_interesse_idInteresse` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idInteresse` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,8 +98,9 @@ CREATE TABLE `usuario_desinteresse` (
 --
 
 CREATE TABLE `usuario_interesse` (
-  `fk_usuario_idUsuario` int(11) NOT NULL,
-  `fk_interesse_idInteresse` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idInteresse` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -114,15 +117,15 @@ ALTER TABLE `interesse`
 -- Índices de tabela `professor_solicitacao`
 --
 ALTER TABLE `professor_solicitacao`
-  ADD PRIMARY KEY (`fk_usuario_idUsuario`,`fk_solicitacao_idSolicitacao`),
-  ADD KEY `FK_prof_solic_solicitacao` (`fk_solicitacao_idSolicitacao`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_prof_solic_solicitacao` (`idSolicitacao`);
 
 --
 -- Índices de tabela `solicitacao`
 --
 ALTER TABLE `solicitacao`
   ADD PRIMARY KEY (`idSolicitacao`),
-  ADD KEY `FK_solicitacao_usuario` (`fk_usuario_idUsuario`);
+  ADD KEY `FK_solicitacao_usuario` (`idUsuario`);
 
 --
 -- Índices de tabela `usuario`
@@ -134,15 +137,15 @@ ALTER TABLE `usuario`
 -- Índices de tabela `usuario_desinteresse`
 --
 ALTER TABLE `usuario_desinteresse`
-  ADD PRIMARY KEY (`fk_usuario_idUsuario`,`fk_interesse_idInteresse`),
-  ADD KEY `FK_usuario_desinteresse_interesse` (`fk_interesse_idInteresse`);
+  ADD PRIMARY KEY (`id`) ,
+  ADD KEY `FK_usuario_desinteresse_interesse` (`idInteresse`);
 
 --
 -- Índices de tabela `usuario_interesse`
 --
 ALTER TABLE `usuario_interesse`
-  ADD PRIMARY KEY (`fk_usuario_idUsuario`,`fk_interesse_idInteresse`),
-  ADD KEY `FK_usuario_interesse_interesse` (`fk_interesse_idInteresse`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_usuario_interesse_interesse` (`idInteresse`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -167,6 +170,24 @@ ALTER TABLE `usuario`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `professor_solicitacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario_desinteresse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario_interesse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restrições para tabelas despejadas
 --
 
@@ -174,28 +195,28 @@ ALTER TABLE `usuario`
 -- Restrições para tabelas `professor_solicitacao`
 --
 ALTER TABLE `professor_solicitacao`
-  ADD CONSTRAINT `FK_prof_solic_solicitacao` FOREIGN KEY (`fk_solicitacao_idSolicitacao`) REFERENCES `solicitacao` (`idSolicitacao`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_prof_solic_usuario` FOREIGN KEY (`fk_usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_prof_solic_solicitacao` FOREIGN KEY (`idSolicitacao`) REFERENCES `solicitacao` (`idSolicitacao`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_prof_solic_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `solicitacao`
 --
 ALTER TABLE `solicitacao`
-  ADD CONSTRAINT `FK_solicitacao_usuario` FOREIGN KEY (`fk_usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_solicitacao_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `usuario_desinteresse`
 --
 ALTER TABLE `usuario_desinteresse`
-  ADD CONSTRAINT `FK_usuario_desinteresse_interesse` FOREIGN KEY (`fk_interesse_idInteresse`) REFERENCES `interesse` (`idInteresse`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_usuario_desinteresse_usuario` FOREIGN KEY (`fk_usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_usuario_desinteresse_interesse` FOREIGN KEY (`idInteresse`) REFERENCES `interesse` (`idInteresse`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_usuario_desinteresse_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `usuario_interesse`
 --
 ALTER TABLE `usuario_interesse`
-  ADD CONSTRAINT `FK_usuario_interesse_interesse` FOREIGN KEY (`fk_interesse_idInteresse`) REFERENCES `interesse` (`idInteresse`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_usuario_interesse_usuario` FOREIGN KEY (`fk_usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_usuario_interesse_interesse` FOREIGN KEY (`idInteresse`) REFERENCES `interesse` (`idInteresse`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_usuario_interesse_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

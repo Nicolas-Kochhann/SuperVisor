@@ -3,6 +3,22 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+use Src\models\Usuario;
+use Src\models\Interesse;
+require __DIR__."/../../vendor/autoload.php";
+
+$interesses = Interesse::listarTodos();
+session_start();
+
+if(isset($_POST['submit'])){
+    $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+    $u = new Usuario($usuario->getNome(), $usuario->getFotoPerfil(), $usuario->getEmail(), $usuario->getSenha());
+    $u->setIdUsuario($_SESSION['idUsuario']);
+    $u->cadastrarInteresses($_POST['interesses']);
+    header("Location: ../EscolherDesinteresses/");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +45,19 @@ error_reporting(E_ALL);
                 
                 <div class="bloco-interesses">
                     <!--Aqui são listados os interesses-->
-                    <div class="container-checkbox-interesse">
-                        <input class="interesse-checkbox" type="checkbox" name="1" id="1"> <!--Aqui vai o ID da tag no BD (?)-->
-                        <label class="interesse-checkbox-label" for="1">Exemplo</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                    </div>
+                    <?php
+
+                    foreach($interesses as $i){
+                        echo'
+                            <div class="container-checkbox-interesse">
+                            <input class="interesse-checkbox" type="checkbox" name="interesses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
+                            <label class="interesse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                            </div>
+                        ';
+                    }
+
+                    ?>
+                    
                 </div>
 
                 <button disabled id="submit" name="submit" class="botao-strong">Próximo</button>
