@@ -113,22 +113,44 @@ class Usuario{
     public function cadastrar(): int{
         $conn = new MySQL();
         if(!self::validarEmail($this->email)){
-            throw new RuntimeException('Email inválido', 100);
+            throw new RuntimeException('Email ou senha inválidos', 100);
         }
         if(!self::validarSenha($this->senha)){
-            throw new RuntimeException('Senha inválida', 101);
+            throw new RuntimeException('Email ou senha inválidos', 101);
         }
-        if(str_ends_with($this->email , "aluno.feliz.ifrs.edu.br")){
+        if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
             $this->status = "0";
-        }else{
+        }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
             $this->tipo = "professor";
             $this->status = "1";
+        } else {
+            throw new RuntimeException('Email ou senha inválidos', 102);
         }
-
         $sql = "INSERT INTO usuario(nome, email, senha, tipo, status) VALUES('{$this->nome}', '{$this->email}', '".password_hash($this->senha, PASSWORD_BCRYPT)."', '{$this->tipo}', '{$this->status}')";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
+    }
+
+    public function atualizar(): bool{
+        $conn = new MySQL();
+        if(!self::validarEmail($this->email)){
+            throw new RuntimeException('Email ou senha inválidos', 100);
+        }
+        if(!self::validarSenha($this->senha)){
+            throw new RuntimeException('Email ou senha inválidos', 101);
+        }
+        if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
+            $this->tipo = "aluno";
+            $this->status = "0";
+        }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
+            $this->tipo = "professor";
+            $this->status = "1";
+        } else {
+            throw new RuntimeException('Email ou senha inválidos', 102);
+        }
+        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='". password_hash($this->senha) ."', tipo={$this->tipo}, status={$this->status} WHERE idUsuario={$this->idUsuario}";
+        return $conn->executa($sql);
     }
 
     public function cadastrarInteresses(array $interesses): void{
