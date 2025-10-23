@@ -9,8 +9,7 @@ error_reporting(E_ALL);
 use Src\models\Usuario;
 require __DIR__."/../../vendor/autoload.php";
 
-$emailErro = '';
-$senhaErro = '';
+$erro = '';
 
 # Cadastro de Conta do Aluno
 if(isset($_POST['submit'])){
@@ -20,6 +19,10 @@ if(isset($_POST['submit'])){
         $_POST['email'], 
         $_POST['senha']
     );
+    if(isset($_SESSION['idUsuario'])){
+        $usuario->setIdUsuario($_SESSION['idUsuario']);
+    } else {
+        
     if(str_ends_with($_POST['email'], "aluno.feliz.ifrs.edu.br")){
         try{
             $usuario->setTipo('aluno');
@@ -27,12 +30,9 @@ if(isset($_POST['submit'])){
             $_SESSION['idUsuario'] = $idUsuario;
             header('Location: ../EscolherInteresses/');
         } catch(RuntimeException $e){
-            if($e->getCode() === 100){
-                $emailErro = $e->getMessage();
-            } else if ($e->getCode() === 101){
-                $senhaErro = $e->getMessage();
-            }
+            $erro = $e->getMessage();
         }
+    }
     }
 }
 
@@ -76,8 +76,7 @@ if(isset($_POST['submit'])){
                     </p>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <span style="color: red"><?php echo $emailErro ?></span>
-                <span style="color: red"><?php echo $senhaErro ?></span>
+                <span style="color: red"><?php echo $erro ?></span>
                 <button id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="" class="link-formulario">Login</a>
             </form>
