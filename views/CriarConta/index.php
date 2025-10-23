@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <span style="color: red"><?php echo $erro ?></span>
                 <button id="submit" name="submit" class="botao-strong">Próximo</button>
-                <a href="" class="link-formulario">Login</a>
+                <a href="../Login/index.php" class="link-formulario">Login</a>
             </form>
         </main>
     </div>

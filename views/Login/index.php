@@ -1,16 +1,24 @@
 <?php
 require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
+;
+
+$msg = ""; 
 
 if(isset($_POST['submit'])){
     if($u=Usuario::autenticar($_POST['email'],$_POST['senha'])){
         session_start();
-        $_SESSION['usuario']=$u;
-        header("location: ../TelaInicial/index.php");
-        exit();
+        if($_SESSION['status']==0){
+            header( "location: ../TelaInicial/index.php");
+            exit();  
+        }elseif($_SESSION["status"]== 1){
+            header("location: ../EscolherInteresse/index.php");
+            exit();
+        }else{
+            $msg="Usuário inativo! solicite ativação ao Administrador";
+        }
     }else{
-        header("location: index.php");
-        exit();
+        $msg="E-mail ou senha incorretos!";        
     }
 }
 ?>
@@ -41,13 +49,20 @@ if(isset($_POST['submit'])){
                     <input class="input-form-grande" type="password" name="senha" id="senha" required>
                     <img class="show-password" id="show-password" src="../../resources/images/eye.svg" alt="show passwd">
                 </div>
-                <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 
+                <p class="texto-obrigatorio">* indica algo obrigatório</p>
+                <p class="texto-obrigatorio"><?php echo $msg; ?></p>
                 <button id="submit" name="submit" class="botao-strong">Acessar</button>
-                <a href="" class="link-formulario">Cadastro</a>
+                <a href="../CriarConta/index.php" class="link-formulario">Cadastro</a>
             </form>
         </main>
     </div>
     <script src="../../scripts/mostraSenha.js"></script>
+    <script>
+        if (performance.navigation.type === 1) {
+            const msgEl = document.querySelector('.texto-obrigatorio:last-of-type');
+            if (msgEl) msgEl.textContent = "";
+        }
+    </script>
 </body>
 </html>
