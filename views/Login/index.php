@@ -1,7 +1,11 @@
 <?php
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
-;
 
 $msg = ""; 
 
@@ -9,7 +13,7 @@ if(isset($_POST['submit'])){
     if($u=Usuario::autenticar($_POST['email'],$_POST['senha'])){
         session_start();
         if($_SESSION['status']==0){
-            header( "location: ../TelaInicial/index.php");
+            header( header: "location: ../TelaInicial/index.php");
             exit();  
         }elseif($_SESSION["status"]== 1){
             header("location: ../EscolherInteresse/index.php");

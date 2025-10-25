@@ -19,20 +19,20 @@ if(isset($_POST['submit'])){
         $_POST['email'], 
         $_POST['senha']
     );
+
     if(isset($_SESSION['idUsuario'])){
         $usuario->setIdUsuario($_SESSION['idUsuario']);
+        $usuario->atualizar();
+    } else if((Usuario::acharUsuarioPeloEmail($usuario->getEmail())) != null){
+        $erro = 'Esse e-mail já está cadastrado. Por favor, faça <a class="texto-obrigatorio" href="../Login/">login</a>.';
     } else {
-        
-    if(str_ends_with($_POST['email'], "aluno.feliz.ifrs.edu.br")){
         try{
-            $usuario->setTipo('aluno');
             $idUsuario = $usuario->cadastrar();
             $_SESSION['idUsuario'] = $idUsuario;
             header('Location: ../EscolherInteresses/');
         } catch(RuntimeException $e){
             $erro = $e->getMessage();
         }
-    }
     }
 }
 
@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
                     </p>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <span style="color: red"><?php echo $erro ?></span>
+                <span class="texto-obrigatorio"><?php echo $erro ?></span>
                 <button id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="../Login/index.php" class="link-formulario">Login</a>
             </form>

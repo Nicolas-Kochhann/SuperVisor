@@ -46,6 +46,19 @@ class Usuario{
         return false;
     }
 
+    public static function acharUsuarioPeloEmail(string $email) : ?Usuario{
+        $conn = new MySQL();
+        $sql = "SELECT idUsuario, nome, imagem, senha FROM usuario WHERE email='{$email}'";
+        $resultado = $conn->consulta($sql);
+        if(count($resultado) === 1){
+            $u = new Usuario($resultado[0]['nome'], $resultado[0]['imagem'], $email, $resultado[0]['senha']);
+            $u->setIdUsuario($resultado[0]['idUsuario']);
+            return $u;
+        }
+        return null;
+
+    }
+    
     public static function acharUsuario(int $idUsuario) : ?Usuario{
         $conn = new MySQL();
         $sql = "SELECT nome, imagem, email, senha FROM usuario WHERE idUsuario={$idUsuario}";
@@ -58,13 +71,14 @@ class Usuario{
         return null;
     }
 
+
     public static function listarProfessores() : array{
         $conn = new MySQL();    
-        $sql = "SELECT idUsuario, nome, imagem, email, disponivel FROM usuario WHERE tipo='professor'";
+        $sql = "SELECT idUsuario, nome, imagem, email, senha, disponivel FROM usuario WHERE tipo='professor'";
         $resultado = $conn->consulta($sql);
         $professores = [];
         foreach($resultado as $r){
-            $u = new Usuario($r['nome'], $r['imagem'], $r['email']);
+            $u = new Usuario($r['nome'], $r['imagem'], $r['email'], $r['senha']);
             $u->setIdUsuario($r['idUsuario']);
             $u->setDisponivel($r['disponivel']);
             $professores[] = $u;
@@ -74,11 +88,11 @@ class Usuario{
 
     public static function listarAlunos() : array{
         $conn = new MySQL();    
-        $sql = "SELECT idUsuario, nome, imagem, email, disponivel FROM usuario WHERE tipo='aluno'";
+        $sql = "SELECT idUsuario, nome, imagem, email, senha, disponivel FROM usuario WHERE tipo='aluno'";
         $resultado = $conn->consulta($sql);
         $alunos = [];
         foreach($resultado as $r){
-            $u = new Usuario($r['nome'], $r['imagem'], $r['email']);
+            $u = new Usuario($r['nome'], $r['imagem'], $r['email'], $r['senha']);
             $u->setIdUsuario($r['idUsuario']);
             $u->setDisponivel($r['disponivel']);
             $alunos[] = $u;
@@ -91,11 +105,11 @@ class Usuario{
         return preg_match($regex, $senha) === 1;  # preg_match retorna 1 para correspondência e 0 para não correspondência.
     }
 
-    public static function autenticar($email, $senha): bool{
+    public static function autenticar(string $email, string $senha): bool{
         $conn = new MySQL();
         $sql = "SELECT idUsuario,senha, tipo, disponivel, nome, imagem  FROM usuario WHERE email='{$email}'";
         $resultado = $conn->consulta($sql);
-        if(count($resultado) === 1 and password_verify($senha, $resultado[0])){
+        if(count($resultado) === 1 and password_verify($senha, $resultado[0]['senha'])){
             session_start();
 
             $_SESSION['idUsuario'] = $resultado[0]['idUsuario'];
@@ -120,13 +134,12 @@ class Usuario{
         }
         if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
-            $this->status = "0";
         }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
             $this->tipo = "professor";
-            $this->status = "1";
         } else {
             throw new RuntimeException('Email ou senha inválidos', 102);
         }
+        $this->status = 1;
         $sql = "INSERT INTO usuario(nome, email, senha, tipo, status) VALUES('{$this->nome}', '{$this->email}', '".password_hash($this->senha, PASSWORD_BCRYPT)."', '{$this->tipo}', '{$this->status}')";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
@@ -142,14 +155,13 @@ class Usuario{
         }
         if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
-            $this->status = "0";
         }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
             $this->tipo = "professor";
-            $this->status = "1";
         } else {
             throw new RuntimeException('Email ou senha inválidos', 102);
         }
-        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='". password_hash($this->senha) ."', tipo={$this->tipo}, status={$this->status} WHERE idUsuario={$this->idUsuario}";
+        isset($_SESSION['status']) and $_SESSION['status'] == 0 ? $this->status = 0 : $this->status = 1;
+        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='". password_hash($this->senha,  PASSWORD_BCRYPT) ."', tipo='{$this->tipo}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
         return $conn->executa($sql);
     }
 
@@ -188,6 +200,10 @@ class Usuario{
             $desintereses[] = $r['idInteresse'];
         }
         return $desinteresses;
+    }
+
+    public function setStatus(int $status): void{
+        $this->status = $status;
     }
 
     public function setTipo(string $tipo):void{

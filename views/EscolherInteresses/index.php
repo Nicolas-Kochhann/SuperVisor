@@ -11,6 +11,12 @@ require __DIR__."/../../vendor/autoload.php";
 $interesses = Interesse::listarTodos();
 session_start();
 
+$user = Usuario::acharUsuario($_SESSION['idUsuario']);
+
+if(count($user->acharInteresses()) >= 3){
+    header('Location: ../EscolherDesinteresses/');
+}
+
 if(isset($_POST['submit'])){
     $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
     $u = new Usuario($usuario->getNome(), $usuario->getFotoPerfil(), $usuario->getEmail(), $usuario->getSenha());

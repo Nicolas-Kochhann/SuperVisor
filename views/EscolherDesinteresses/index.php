@@ -13,9 +13,11 @@ session_start();
 
 if(isset($_POST['submit'])){
     $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
-    $u = new Usuario($usuario->getNome(), $usuario->getFotoPerfil(), $usuario->getEmail(), $usuario->getSenha());
-    $u->setIdUsuario($_SESSION['idUsuario']);
-    $u->cadastrarDesinteresses($_POST['desinteresses']);
+    $usuario->cadastrarDesinteresses($_POST['desinteresses']);
+    $usuario->setStatus(0);
+
+    $usuario->atualizar();
+
     header("Location: ../Login/");
 }
 ?>
