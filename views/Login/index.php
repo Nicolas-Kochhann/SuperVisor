@@ -13,10 +13,10 @@ if(isset($_POST['submit'])){
     if($u=Usuario::autenticar($_POST['email'],$_POST['senha'])){
         session_start();
         if($_SESSION['status']==0){
-            header( header: "location: ../TelaInicial/index.php");
+            header( header: "location: ../TelaInicial/");
             exit();  
         }elseif($_SESSION["status"]== 1){
-            header("location: ../EscolherInteresse/index.php");
+            header("location: ../EscolherInteresses/");
             exit();
         }else{
             $msg="Usuário inativo! solicite ativação ao Administrador";

@@ -8,21 +8,15 @@ use Src\models\Usuario;
 use Src\models\Interesse;
 require __DIR__."/../../vendor/autoload.php";
 
-$interesses = Interesse::listarTodos();
 session_start();
 
-$user = Usuario::acharUsuario($_SESSION['idUsuario']);
-
-if(count($user->acharInteresses()) >= 3){
-    header('Location: ../EscolherDesinteresses/');
-}
+$interesses = Interesse::listarTodos();
 
 if(isset($_POST['submit'])){
-    $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
-    $u = new Usuario($usuario->getNome(), $usuario->getFotoPerfil(), $usuario->getEmail(), $usuario->getSenha());
-    $u->setIdUsuario($_SESSION['idUsuario']);
-    $u->cadastrarInteresses($_POST['interesses']);
-    header("Location: ../EscolherDesinteresses/");
+    if(count($_POST['interesses']) >= 3){
+        $_SESSION['cadastro']['interesses'] = $_POST['interesses'];
+        header('Location: ../EscolherDesinteresses');
+    }
 }
 
 ?>
@@ -52,7 +46,6 @@ if(isset($_POST['submit'])){
                 <div class="bloco-interesses">
                     <!--Aqui são listados os interesses-->
                     <?php
-
                     foreach($interesses as $i){
                         echo'
                             <div class="container-checkbox-interesse">
@@ -67,7 +60,7 @@ if(isset($_POST['submit'])){
                 </div>
 
                 <button disabled id="submit" name="submit" class="botao-strong">Próximo</button>
-                <a href="" class="link-formulario">Voltar</a>
+                <a href="../CriarConta/" class="link-formulario">Voltar</a>
             </form>
         </main>
 

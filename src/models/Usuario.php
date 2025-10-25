@@ -107,7 +107,7 @@ class Usuario{
 
     public static function autenticar(string $email, string $senha): bool{
         $conn = new MySQL();
-        $sql = "SELECT idUsuario,senha, tipo, disponivel, nome, imagem  FROM usuario WHERE email='{$email}'";
+        $sql = "SELECT idUsuario, senha, status, tipo, disponivel, nome, imagem  FROM usuario WHERE email='{$email}'";
         $resultado = $conn->consulta($sql);
         if(count($resultado) === 1 and password_verify($senha, $resultado[0]['senha'])){
             session_start();
@@ -126,12 +126,6 @@ class Usuario{
 
     public function cadastrar(): int{
         $conn = new MySQL();
-        if(!self::validarEmail($this->email)){
-            throw new RuntimeException('Email ou senha inválidos', 100);
-        }
-        if(!self::validarSenha($this->senha)){
-            throw new RuntimeException('Email ou senha inválidos', 101);
-        }
         if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
         }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
@@ -139,7 +133,7 @@ class Usuario{
         } else {
             throw new RuntimeException('Email ou senha inválidos', 102);
         }
-        $this->status = 1;
+        $this->status = 0;
         $sql = "INSERT INTO usuario(nome, email, senha, tipo, status) VALUES('{$this->nome}', '{$this->email}', '".password_hash($this->senha, PASSWORD_BCRYPT)."', '{$this->tipo}', '{$this->status}')";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
@@ -147,12 +141,6 @@ class Usuario{
 
     public function atualizar(): bool{
         $conn = new MySQL();
-        if(!self::validarEmail($this->email)){
-            throw new RuntimeException('Email ou senha inválidos', 100);
-        }
-        if(!self::validarSenha($this->senha)){
-            throw new RuntimeException('Email ou senha inválidos', 101);
-        }
         if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
         }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
@@ -160,7 +148,7 @@ class Usuario{
         } else {
             throw new RuntimeException('Email ou senha inválidos', 102);
         }
-        isset($_SESSION['status']) and $_SESSION['status'] == 0 ? $this->status = 0 : $this->status = 1;
+        $this->status = 0;
         $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='". password_hash($this->senha,  PASSWORD_BCRYPT) ."', tipo='{$this->tipo}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
         return $conn->executa($sql);
     }

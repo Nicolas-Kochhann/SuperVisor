@@ -8,17 +8,39 @@ use Src\models\Usuario;
 use Src\models\Interesse;
 require __DIR__."/../../vendor/autoload.php";
 
-$interesses = Interesse::listarTodos();
 session_start();
 
+$interesses = Interesse::listarTodos();
+
 if(isset($_POST['submit'])){
-    $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
-    $usuario->cadastrarDesinteresses($_POST['desinteresses']);
-    $usuario->setStatus(0);
+    if($_SESSION['idUsuario']){
+        $interesses = $_SESSION['cadastro']['interesses'];
+        $desinteresses = $_POST['desinteresses'];
+        $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+        $usuario->setStatus(0);
+        $usuario->cadastrarInteresses($interesses);
+        $usuario->cadastrarDesinteresses($desinteresses);
+        $usuario->atualizar();
+        unset($_SESSION['cadastro']);
+        header("Location: ../TelaInicial/");
+    } else {
+        $nome = $_SESSION['cadastro']['nome'];
+        $email = $_SESSION['cadastro']['email'];
+        $foto_perfil = $_SESSION['cadastro']['foto_perfil'];
+        $senha = $_SESSION['cadastro']['senha'];
+        $interesses = $_SESSION['cadastro']['interesses'];
+        $desinteresses = $_POST['desinteresses'];
 
-    $usuario->atualizar();
+        $usuario = new Usuario($nome, $foto_perfil, $email, $senha);
+        $usuario->setIdUsuario($usuario->cadastrar());
+        $usuario->cadastrarInteresses($interesses);
+        $usuario->cadastrarDesinteresses($desinteresses);
 
-    header("Location: ../Login/");
+        session_unset();
+        session_destroy();
+
+        header("Location: ../Login/");
+    }
 }
 ?>
 
@@ -60,7 +82,7 @@ if(isset($_POST['submit'])){
                 </div>
 
                 <button id="submit" name="submit" class="botao-strong">Concluir Cadastro</button>
-                <a href="" class="link-formulario">Voltar</a>
+                <a href="../EscolherInteresses/" class="link-formulario">Voltar</a>
             </form>
         </main>
 

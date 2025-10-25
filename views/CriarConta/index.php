@@ -13,26 +13,14 @@ $erro = '';
 
 # Cadastro de Conta do Aluno
 if(isset($_POST['submit'])){
-    $usuario = new Usuario(
-        $_POST['nome'],
-        null,
-        $_POST['email'], 
-        $_POST['senha']
-    );
-
-    if(isset($_SESSION['idUsuario'])){
-        $usuario->setIdUsuario($_SESSION['idUsuario']);
-        $usuario->atualizar();
-    } else if((Usuario::acharUsuarioPeloEmail($usuario->getEmail())) != null){
-        $erro = 'Esse e-mail já está cadastrado. Por favor, faça <a class="texto-obrigatorio" href="../Login/">login</a>.';
+    if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){
+        $_SESSION['cadastro']['nome'] = $_POST['nome'];
+        $_SESSION['cadastro']['email'] = $_POST['email'];
+        $_SESSION['cadastro']['foto_perfil'] = null;
+        $_SESSION['cadastro']['senha'] = $_POST['senha'];
+        header('Location: ../EscolherInteresses/');
     } else {
-        try{
-            $idUsuario = $usuario->cadastrar();
-            $_SESSION['idUsuario'] = $idUsuario;
-            header('Location: ../EscolherInteresses/');
-        } catch(RuntimeException $e){
-            $erro = $e->getMessage();
-        }
+        $erro = 'Email ou senha inválida';
     }
 }
 
