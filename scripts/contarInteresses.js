@@ -21,8 +21,10 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
+/* 
 window.addEventListener("DOMContentLoaded", () => {
   checkboxes.forEach((cb) => (cb.checked = false));
   contador.innerText = quant + " / 3";
   botao.disabled = true;
 });
+*/

@@ -185,7 +185,7 @@ class Usuario{
         $resultado = $conn->consulta($sql);
         $desinteresses = [];
         foreach($resultado as $r){
-            $desintereses[] = $r['idInteresse'];
+            $desinteresses[] = $r['idInteresse'];
         }
         return $desinteresses;
     }

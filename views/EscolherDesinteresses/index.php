@@ -11,13 +11,16 @@ require __DIR__."/../../vendor/autoload.php";
 session_start();
 
 $interesses = Interesse::listarTodos();
+$usuario = '';
+
+if(isset($_SESSION['idUsuario'])){
+    $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+}
 
 if(isset($_POST['submit'])){
-    if($_SESSION['idUsuario']){
+    if($usuario){
         $interesses = $_SESSION['cadastro']['interesses'];
         $desinteresses = $_POST['desinteresses'];
-        $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
-        $usuario->setStatus(0);
         $usuario->cadastrarInteresses($interesses);
         $usuario->cadastrarDesinteresses($desinteresses);
         $usuario->atualizar();
@@ -69,13 +72,39 @@ if(isset($_POST['submit'])){
                     <!--Aqui são listados os desinteresses-->
                     <?php
 
-                    foreach($interesses as $i){
-                        echo'
-                            <div class="container-checkbox-interesse">
-                            <input class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
-                            <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                            </div>
-                        ';
+                    if($usuario){
+                        foreach($interesses as $i){
+                            if(in_array($i->getIdInteresse, $_SESSION['cadastro']['interesses'], true)){
+                                continue;
+                            }
+                            if(in_array($i->getIdInteresse(), $usuario->acharDesinteresses())){
+                                echo'
+                                    div class="container-checkbox-interesse">
+                                    <input checked class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
+                                    <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                                    </div>
+                                ';
+                            } else {
+                                echo'
+                                    <div class="container-checkbox-interesse">
+                                    <input class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
+                                    <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                                    </div>
+                                ';
+                            }
+                        }
+                    } else {
+                        foreach($interesses as $i){
+                            if(in_array($i->getIdInteresse(), $_SESSION['cadastro']['interesses'])){
+                                continue;
+                            }
+                            echo'
+                                <div class="container-checkbox-interesse">
+                                <input class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
+                                <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                                </div>
+                            ';
+                        }
                     }
 
                     ?>

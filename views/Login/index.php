@@ -11,8 +11,7 @@ $msg = "";
 
 if(isset($_POST['submit'])){
     if(Usuario::autenticar($_POST['email'],$_POST['senha'])){
-        $usuario = new Usuario($_SESSION['nome'], $_SESSION['imagem'], $_POST['email'], $_POST['senha']);
-        $usuario->setIdUsuario($_SESSION['idUsuario']);
+        $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
         if($_SESSION['status']==0 and count($usuario->acharInteresses()) >= 3){
             header( header: "location: ../TelaInicial/");
             exit();  
