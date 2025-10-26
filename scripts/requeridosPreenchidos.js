@@ -1,4 +1,3 @@
-// Script que testa se todos inputs com "required" num formulário foram preenchidos
 const botaoSubmit = document.getElementById("submit");
 const requiredInputs = document.querySelectorAll("input[required]");
 

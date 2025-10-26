@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     if(Usuario::autenticar($_POST['email'],$_POST['senha'])){
         $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
         if($_SESSION['status']==0 and count($usuario->acharInteresses()) >= 3){
-            header( header: "location: ../TelaInicial/");
+            header("location: ../TelaInicial/");
             exit();  
         }elseif($_SESSION["status"]==0 and count($usuario->acharInteresses()) < 3){
             header("location: ../EscolherInteresses/");
@@ -46,6 +46,11 @@ if(isset($_POST['submit'])){
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Login</h1>
+                <?php
+                    if ($msg) {
+                        echo "<span class='bloco-aviso'>$msg</span>";
+                    }
+                ?>
                 <label for="email" class="label-form-grande obrigatorio">E-mail</label>
                 <input type="email" name="email" id="email" class="input-form-grande" required>
                 <label for="senha" class="label-form-grande obrigatorio">Senha</label>
@@ -55,8 +60,7 @@ if(isset($_POST['submit'])){
                 </div>
                 
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <p class="texto-obrigatorio"><?php echo $msg; ?></p>
-                <button id="submit" name="submit" class="botao-strong">Acessar</button>
+                <button disabled id="submit" name="submit" class="botao-strong">Acessar</button>
                 <a href="../CriarConta/index.php" class="link-formulario">Cadastro</a>
             </form>
         </main>
@@ -68,5 +72,6 @@ if(isset($_POST['submit'])){
             if (msgEl) msgEl.textContent = "";
         }
     </script>
+    <script src="../../scripts/requeridosPreenchidos.js"></script>
 </body>
 </html>
