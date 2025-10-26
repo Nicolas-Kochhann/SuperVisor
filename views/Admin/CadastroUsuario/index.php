@@ -1,5 +1,25 @@
 <?php
 
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use Src\models\Usuario;
+require __DIR__."/../../vendor/autoload.php";
+
+$erro = '';
+
+if(isset($_POST['submit'])){
+    if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){
+        $usuario = new Usuario($nome, $foto_perfil, $email, $senha);
+        $usuario->cadastrar();
+        header('Location: ../../../index.php');
+    } else {
+        $erro = 'Email ou senha inválida';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

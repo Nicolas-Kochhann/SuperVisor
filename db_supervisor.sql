@@ -26,6 +26,20 @@ USE `db_supervisor`;
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `admin`
+--
+
+CREATE TABLE `admin` (
+  `idAdmin` int(11) PRIMARY KEY,
+  `email` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `interesse`
 --
 
