@@ -45,6 +45,12 @@ if(isset($_POST['submit'])){
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Cadastro</h1>
+                <?php
+                    if ($erro) {
+                        echo "<span class='bloco-erro'>".$erro."</span>";
+                    }
+                ?>
+                
                 <label for="nome" class="label-form-grande obrigatorio">Nome Completo</label>
                 <input type="text" name="nome" id="nome" class="input-form-grande" required>
                 <label for="email" class="label-form-grande obrigatorio">E-mail</label>
@@ -64,7 +70,6 @@ if(isset($_POST['submit'])){
                     </p>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <span class="texto-obrigatorio"><?php echo $erro ?></span>
                 <button id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="../Login/index.php" class="link-formulario">Login</a>
             </form>
