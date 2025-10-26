@@ -74,12 +74,12 @@ if(isset($_POST['submit'])){
 
                     if($usuario){
                         foreach($interesses as $i){
-                            if(in_array($i->getIdInteresse, $_SESSION['cadastro']['interesses'], true)){
+                            if(in_array(strval($i->getIdInteresse()), $_SESSION['cadastro']['interesses'], true)){
                                 continue;
                             }
                             if(in_array($i->getIdInteresse(), $usuario->acharDesinteresses())){
                                 echo'
-                                    div class="container-checkbox-interesse">
+                                    <div class="container-checkbox-interesse">
                                     <input checked class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
                                     <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
                                     </div>

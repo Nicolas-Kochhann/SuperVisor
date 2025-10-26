@@ -1,6 +1,6 @@
 const contador = document.getElementById("contador-interesses");
 const botao = document.getElementById("submit");
-let quant = 0;
+let quant = document.querySelectorAll("input[type='checkbox']:checked").length;
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
 checkboxes.forEach((checkbox) => {
@@ -21,10 +21,11 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
-/* 
 window.addEventListener("DOMContentLoaded", () => {
-  checkboxes.forEach((cb) => (cb.checked = false));
   contador.innerText = quant + " / 3";
-  botao.disabled = true;
+  if (quant >= 3) {
+    botao.disabled = false;
+  } else {
+    botao.disabled = true;
+  }
 });
-*/
