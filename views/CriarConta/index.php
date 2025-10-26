@@ -70,7 +70,7 @@ if(isset($_POST['submit'])){
                     </p>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <button id="submit" name="submit" class="botao-strong">Próximo</button>
+                <button disabled id="submit" name="submit" class="botao-strong">Próximo</button>
                 <a href="../Login/index.php" class="link-formulario">Login</a>
             </form>
         </main>
