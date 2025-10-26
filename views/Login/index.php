@@ -61,7 +61,11 @@ if(isset($_POST['submit'])){
                 
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <button disabled id="submit" name="submit" class="botao-strong">Acessar</button>
-                <a href="../CriarConta/index.php" class="link-formulario">Cadastro</a>
+                <div class="container-formulario-links">
+                    <a href="../CriarConta/index.php" class="link-formulario">Criar Conta</a>
+                    <p class="spacer">|</p>
+                    <a href="../Admin/Login" class="link-formulario">Sou Administrador</a>
+                </div>
             </form>
         </main>
     </div>

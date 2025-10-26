@@ -12,7 +12,7 @@ $msg = "";
 
 if(isset($_POST['submit'])){
     if(Admin::autenticar($_POST['email'],$_POST['senha'])){
-        header( header: "location: ../CadastroUsuario/");
+        header("location: ../CadastroUsuario/");
     } else {
         $msg="E-mail ou senha incorretos!";        
     }
@@ -38,6 +38,11 @@ if(isset($_POST['submit'])){
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Login de Administrador</h1>
+                <?php
+                    if ($msg) {
+                        echo "<span class='bloco-aviso'>$msg</span>";
+                    }
+                ?>
                 <label for="email" class="label-form-grande obrigatorio">E-mail</label>
                 <input type="email" name="email" id="email" class="input-form-grande" required>
                 <label for="senha" class="label-form-grande obrigatorio">Senha</label>
@@ -47,12 +52,15 @@ if(isset($_POST['submit'])){
                 </div>
                 
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
-                <p class="texto-obrigatorio"><?php echo $msg; ?></p>
-                <button id="submit" name="submit" class="botao-strong">Acessar</button>
+                <button disabled id="submit" name="submit" class="botao-strong">Acessar</button>
+                <div class="container-formulario-links">
+                    <a href="../../Login" class="link-formulario">Não Sou Administrador</a>
+                </div>
             </form>
         </main>
     </div>
     <script src="../../../scripts/mostraSenha.js"></script>
+    <script src="../../../scripts/requeridosPreenchidos.js"></script>
     <script>
         if (performance.navigation.type === 1) {
             const msgEl = document.querySelector('.texto-obrigatorio:last-of-type');

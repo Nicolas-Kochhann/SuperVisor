@@ -67,7 +67,7 @@ if(isset($_POST['submit'])){
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
                 <h1 class="titulo-formulario-grande">Desinteresses</h1>
                 <p class="info">Agora, você pode escolher alguns desinteresses</p>
-                <p class="info">Você pode mudá-los depois</p>
+                <p class="info">Você poderá mudá-los depois</p>
                 <div class="bloco-interesses">
                     <!--Aqui são listados os desinteresses-->
                     <?php
