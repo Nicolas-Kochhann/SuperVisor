@@ -3,9 +3,9 @@
     session_start();
 
     if (isset($_SESSION['idUsuario'])) {
-        header("Location:views/TelaInicial/");
+        header("Location:TelaInicial/");
     } else {
-        header("Location:views/Login/");
+        header("Location:Login/");
     }
 
 ?>
