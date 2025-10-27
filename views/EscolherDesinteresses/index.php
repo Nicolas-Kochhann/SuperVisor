@@ -32,7 +32,11 @@ if(isset($_POST['submit'])){
         $foto_perfil = $_SESSION['cadastro']['foto_perfil'];
         $senha = $_SESSION['cadastro']['senha'];
         $interesses = $_SESSION['cadastro']['interesses'];
-        $desinteresses = $_POST['desinteresses'];
+        if (isset($_POST['desinteresses'])) {
+            $desinteresses = $_POST['desinteresses'];
+        } else {
+            $desinteresses = [];
+        }
 
         $usuario = new Usuario($nome, $foto_perfil, $email, $senha);
         $usuario->setIdUsuario($usuario->cadastrar());
