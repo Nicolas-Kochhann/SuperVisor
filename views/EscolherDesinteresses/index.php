@@ -20,7 +20,11 @@ if(isset($_SESSION['idUsuario'])){
 if(isset($_POST['submit'])){
     if($usuario){
         $interesses = $_SESSION['cadastro']['interesses'];
-        $desinteresses = $_POST['desinteresses'];
+        if (isset($_POST['desinteresses'])) {
+            $desinteresses = $_POST['desinteresses'];
+        } else {
+            $desinteresses = [];
+        }
         $usuario->cadastrarInteresses($interesses);
         $usuario->cadastrarDesinteresses($desinteresses);
         $usuario->atualizar();
