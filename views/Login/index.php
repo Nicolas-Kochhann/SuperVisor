@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     if(Usuario::autenticar($_POST['email'],$_POST['senha'])){
         $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
         if($_SESSION['status']==0 and count($usuario->acharInteresses()) >= 3){
-            header("location: ../TelaInicial/");
+            header("location: ../TelaInicial/index.php");
             exit();  
         }elseif($_SESSION["status"]==0 and count($usuario->acharInteresses()) < 3){
             header("location: ../EscolherInteresses/");
