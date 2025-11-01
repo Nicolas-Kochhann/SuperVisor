@@ -4,6 +4,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
+
 require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
 
@@ -24,6 +26,10 @@ if(isset($_POST['submit'])){
     }else{
         $msg="E-mail ou senha incorretos!";
     }
+}
+
+if(isset($_SESSION['idUsuario'])){
+    header("location: ../TelaInicial/");
 }
 ?>
 
@@ -70,12 +76,6 @@ if(isset($_POST['submit'])){
         </main>
     </div>
     <script src="../../scripts/mostraSenha.js"></script>
-    <script>
-        if (performance.navigation.type === 1) {
-            const msgEl = document.querySelector('.texto-obrigatorio:last-of-type');
-            if (msgEl) msgEl.textContent = "";
-        }
-    </script>
     <script src="../../scripts/requeridosPreenchidos.js"></script>
 </body>
 </html>

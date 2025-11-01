@@ -9,6 +9,7 @@ require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
 
 session_start();
+
 if(!isset($_SESSION['idUsuario'])){
     header("location:index.php");
     exit();
@@ -31,6 +32,7 @@ $usuario = Usuario::acharUsuario($_SESSION["idUsuario"]);
         
         <header class="cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
 
         <main class="container-formulario">
