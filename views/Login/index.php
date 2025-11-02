@@ -28,6 +28,11 @@ if(isset($_POST['submit'])){
     }
 }
 
+if (isset($_SESSION["error"])) {
+    $msg = $_SESSION["error"];
+    unset($_SESSION["error"]);
+}
+
 if(isset($_SESSION['idUsuario'])){
     header("location: ../TelaInicial/");
 }

@@ -10,8 +10,9 @@ use Src\models\Usuario;
 
 session_start();
 
-if(!isset($_SESSION['idUsuario'])){
-    header("location:index.php");
+if(!isset($_SESSION["idUsuario"])){
+    $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
+    header("location: ../Login");
     exit();
 }
 
@@ -48,7 +49,7 @@ $usuario = Usuario::acharUsuario($_SESSION["idUsuario"]);
                         <p class="texto-listagem">Conrad von Hötzendorf</p> <!-- NOME DO PROFESSOR -->
                     </a>
                     <div class="container-contadores-listagem"> 
-                        <span class="contador-interesses-listagem">1</span> <!-- INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
+                        <span class="contador-interesses-listagem">1</span> <!-- NUM DE INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
                         <span class="contador-desinteresses-listagem">0</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
                     </div>
                 </div>
