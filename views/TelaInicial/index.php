@@ -35,14 +35,26 @@ $usuario = Usuario::acharUsuario($_SESSION["idUsuario"]);
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
 
-        <main class="container-formulario">
-            <?php
-            $professores=Usuario::listarProfessores();
-            foreach($professores as $professor) {
-                
-            }
-    
-            ?>
+        <main class="container-listagem">
+
+            <h2 class="titulo1">Olá, <?= $usuario->getNome() ?></h2>
+            <h3 class="titulo2">Encontre orientadores</h3>
+
+            <div class="container-item-listagem">
+
+                <div class="item-listagem"> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
+                    <a class="link-perfil-listagem" href=""> <!-- LINK DO PERFIL DO PROFESSOR NO href -->
+                        <img class="foto-redonda-listagem" src="../../resources/images/placeholders/professor.png" alt="Foto de um professor"> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
+                        <p class="texto-listagem">Conrad von Hötzendorf</p> <!-- NOME DO PROFESSOR -->
+                    </a>
+                    <div class="container-contadores-listagem"> 
+                        <span class="contador-interesses-listagem">1</span> <!-- INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
+                        <span class="contador-desinteresses-listagem">0</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
+                    </div>
+                </div>
+
+            </div>
+            
         </main>
     </div>
 </body>

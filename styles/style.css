@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+/*
+
+fontes:
+  > Roboto Slab, serif
+  > Roboto Mono, monospace,
+  > Roboto, sans-serif
+
+*/
+
 *,
 *::before,
 *::after {
@@ -296,4 +305,100 @@ img.showing {
 .desinteresse-checkbox:checked + .desinteresse-checkbox-label {
   background-color: #e86a6a;
   border: 1px solid #5a0101;
+}
+
+.container-listagem {
+  height: 100%;
+  width: 60%;
+  align-self: center;
+  padding: 20px 0;
+}
+
+.titulo1 {
+  font-family: "Roboto Slab", serif;
+  font-size: 2.2rem;
+  transform: skew(-10deg);
+}
+
+.titulo2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+}
+
+.container-item-listagem {
+  margin: 10px 0 0 0;
+  padding: 10px;
+  border-top: 3px solid #00000074;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.item-listagem {
+  padding: 5px 10px;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.link-perfil-listagem {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #0649b4;
+  font-style: none;
+  text-decoration: none;
+}
+
+.foto-redonda-listagem {
+  object-fit: contain;
+  height: 100%;
+  border-radius: 100vh;
+  margin: 0 5px 0 0;
+}
+
+.texto-listagem {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
+.container-contadores-listagem {
+  height: 100%;
+  margin: 0 0 0 auto;
+  display: flex;
+  gap: 10px;
+  width: 20%;
+}
+
+.contador-interesses-listagem {
+  height: 100%;
+  background-color: #06b42f94;
+  color: #00410f;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  border: 3px solid #00410fbf;
+  border-radius: 10px;
+}
+
+.contador-desinteresses-listagem {
+  height: 100%;
+  background-color: #b4060694;
+  color: #410000;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  border: 3px solid #410000bf;
+  border-radius: 10px;
 }
