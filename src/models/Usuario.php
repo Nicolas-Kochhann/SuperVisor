@@ -21,6 +21,8 @@ class Usuario{
     private string $tipo;
     private ?string $foto_perfil = null;
     private string $data_hora_cadastro;
+    private int $interreses_em_comum = 0;
+    private int $desinteresses_em_comum = 0;
     private bool $disponivel;
     private int $status; // 0 - ativo / 1 - pendente / 2 - inativo
 
@@ -37,6 +39,24 @@ class Usuario{
 
     public function setDisponivel(bool $disponivel){
         $this->disponivel = $disponivel;
+    }
+
+    public function getInteressesEmComum(): int{
+        return $this->interreses_em_comum;
+    }
+
+    public function getDesinteressesEmComum():  int{
+        return $this->desinteresses_em_comum;
+    }
+
+    public function calcularInteressesEmComum(array $interesses): void {
+        $comuns = array_intersect($this->acharInteresses(), $interesses);
+        $this->interreses_em_comum = count($comuns);
+    }
+
+    public function calcularDesinteressesEmComum(array $desinteresses): void{
+        $comuns = array_intersect($this->acharDesinteresses(), $desinteresses);
+        $this->desinteresses_em_comum = count($comuns);
     }
 
     public static function validarEmail(string $email): bool{
@@ -176,6 +196,22 @@ class Usuario{
         $conn = new MySQL();
         foreach($desinteresses as $i){
             $sql = "INSERT INTO usuario_desinteresse(idUsuario, idInteresse) VALUES({$this->idUsuario}, {$i})";
+            $conn->executa($sql);
+        }
+    }
+
+    public function removerInteresses(array $interesses): void{
+        $conn = new MySQL();
+        foreach($interesses as $i){
+            $sql = "DELETE FROM usuario_interesse WHERE idUsuario={$this->idUsuario} AND idInteresse = {$i}";
+            $conn->executa($sql);
+        }
+    }
+
+    public function removerDesinteresses(array $desinteresses): void{
+        $conn = new MySQL();
+        foreach($desinteresses as $i){
+            $sql = "DELETE FROM usuario_desinteresse WHERE idUsuario={$this->idUsuario} AND idInteresse = {$i}";
             $conn->executa($sql);
         }
     }

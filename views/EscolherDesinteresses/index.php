@@ -25,11 +25,17 @@ if(isset($_POST['submit'])){
         } else {
             $desinteresses = [];
         }
+
+        $usuario->removerInteresses($usuario->acharInteresses());
+        $usuario->removerDesinteresses($usuario->acharDesinteresses());
+
         $usuario->cadastrarInteresses($interesses);
         $usuario->cadastrarDesinteresses($desinteresses);
         $usuario->atualizar();
+
         unset($_SESSION['cadastro']);
         header("Location: ../TelaInicial/");
+        
     } else {
         $nome = $_SESSION['cadastro']['nome'];
         $email = $_SESSION['cadastro']['email'];
