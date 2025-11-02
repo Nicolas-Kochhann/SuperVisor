@@ -40,7 +40,7 @@ $usuario = Usuario::acharUsuario($_SESSION["idUsuario"]);
             <h2 class="titulo1">Olá, <?= $usuario->getNome() ?></h2>
             <h3 class="titulo2">Encontre orientadores</h3>
 
-            <div class="container-item-listagem">
+            <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
 
                 <div class="item-listagem"> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                     <a class="link-perfil-listagem" href=""> <!-- LINK DO PERFIL DO PROFESSOR NO href -->
