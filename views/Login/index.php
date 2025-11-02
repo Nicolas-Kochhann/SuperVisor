@@ -15,16 +15,16 @@ if(isset($_POST['submit'])){
     if(Usuario::autenticar($_POST['email'],$_POST['senha'])){
         $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
         if($_SESSION['status']==0 and count($usuario->acharInteresses()) >= 3){
-            header("location: ../TelaInicial/index.php");
+            header("location: ../TelaInicial/", true);
             exit();  
         }elseif($_SESSION["status"]==0 and count($usuario->acharInteresses()) < 3){
             header("location: ../EscolherInteresses/");
             exit();
         }else{
-            $msg="Usuário inativo! solicite ativação ao Administrador";
+            $_SESSION['error']="Usuário inativo! solicite ativação ao Administrador";
         }
     }else{
-        $msg="E-mail ou senha incorretos!";
+        $_SESSION['error']="E-mail ou senha incorretos!";
     }
 }
 

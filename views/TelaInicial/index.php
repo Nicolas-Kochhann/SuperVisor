@@ -1,5 +1,5 @@
-
 <?php
+
 // Mostra todos os erros na tela
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -12,11 +12,12 @@ session_start();
 
 if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
-    header("location: ../Login");
+    header("location: ../Login/");
     exit();
 }
 
 $usuario = Usuario::acharUsuario($_SESSION["idUsuario"]);
+
 ?>
 
 <!DOCTYPE html>
