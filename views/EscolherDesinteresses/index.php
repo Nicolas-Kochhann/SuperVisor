@@ -31,8 +31,7 @@ if(isset($_POST['submit'])){
 
         $usuario->cadastrarInteresses($interesses);
         $usuario->cadastrarDesinteresses($desinteresses);
-        $usuario->atualizar();
-
+        //$usuario->atualizar();
         unset($_SESSION['cadastro']);
         header("Location: ../TelaInicial/");
         
