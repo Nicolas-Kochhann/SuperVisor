@@ -26,7 +26,7 @@ foreach($professores as $professor){
     $professor->calcularDesinteressesEmComum($usuarioLogado->acharInteresses());
 }
 
-usort($professores, function($a, $b){ $a->getInteressesEmComum <=> $b->getInteressesEmComum; });
+usort($professores, function($a, $b){ $a->getInteressesEmComum() <=> $b->getInteressesEmComum(); });
 
 ?>
 
