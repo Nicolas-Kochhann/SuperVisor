@@ -50,6 +50,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 
         <main class="container-listagem">
 
+            <a href="Perfil/index.php">Editar Perfil</a>
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
             <h3 class="titulo2">Encontre orientadores</h3>
 
