@@ -39,6 +39,15 @@ class Interesse{
         return $interesses;
     }
 
+    public static function acharInteresse(int $idInteresse): ?self{
+        $conn = new MySQL();
+        $sql = "SELECT idInteresse, descricao FROM interesse";
+        $r = $conn->consulta($sql);
+        $interesse = new Interesse($r['descricao']);
+        $interesse->setIdInteresse($idInteresse);
+        return $interesse;
+    }
+
     public function cadastrar(): int{
         $conn = new MySQL();     
         $sql = "INSERT INTO interesse(descricao) VALUES('{$this->descricao}')";

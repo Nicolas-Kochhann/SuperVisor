@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
     if($_POST['interesses'] != null){
         if(count($_POST['interesses']) >= 3){
                 $_SESSION['cadastro']['interesses'] = $_POST['interesses'];
-                header('Location: ../EscolherDesinteresses');   
+                header('Location: ../EscolherDesinteresses');
         } else {
             $erro = 'Você deve selecionar ao menos 3 interesses';
         }

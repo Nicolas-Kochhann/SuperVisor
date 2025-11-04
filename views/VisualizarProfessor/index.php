@@ -2,11 +2,24 @@
 
 session_start();
 
-if(!isset($_SESSION["idUsuario"])){
-    $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
-    header("location: ../Login/");
-    exit();
+require_once __DIR__."/../../vendor/autoload.php";
+use Src\models\Usuario;
+use Src\models\Interesse;
+
+session_start();
+
+if(!isset($_SESSION['idUsuario'])){
+    $_SESSION['error'] = 'É necessário entrar na sua conta antes disso.';
+    header('Location: ../Login/');
 }
+
+$professor = Usuario::acharUsuario($_GET['id']);
+$professorInteresses = $professor->acharInteresses();
+$professorDesinteresses = $professor->acharDesinteresses();
+
+$usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+$usuarioInteresses = $usuario->acharInteresses();
+$usuarioDesinteresses = $usuario->acharDesinteresses();
 
 ?>
 
@@ -31,18 +44,69 @@ if(!isset($_SESSION["idUsuario"])){
             <div>
                 <img src="" alt="">
                 <span>
-                    <h2>Conrad von Hötzendorf</h2>
-                    <h3>conrad.pereira@feliz.ifrs.edu.br</h3>
+                    <h2><?= $professor->getNome() ?></h2>
+                    <h3><?= $professor->getEmail() ?></h3>
                 </span>
             </div>
 
             <h2>Interesses</h2>
             <div class="bloco-interesses">
+            <?php
 
+            foreach($professorInteresses as $professorInteresseId){
+                $i = Interesse::acharInteresse($professorInteresseId);
+                if(in_array($professorInteresseId, $usuarioInteresses)){
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    ';
+                } else if(in_array($professorInteresseId, $usuarioDesinteresses)){
+                   echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                } else {
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                }
+            }
+
+            ?> 
             </div>
 
             <h2>Desinteresses</h2>
             <div class="bloco-interesses">
+            <?php
+
+            foreach($professorInteresses as $professorInteresseId){
+                $i = Interesse::acharInteresse($professorInteresseId);
+                if(in_array($professorDesinteresseId, $usuarioDesinteresses)){
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    ';
+                } else if(in_array($professorDesinteresseId, $usuarioInteresses)){
+                   echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                } else {
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                }
+            }
+
+            ?> 
             </div>
 
         </main>
