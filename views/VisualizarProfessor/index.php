@@ -21,6 +21,8 @@ $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
 $usuarioInteresses = $usuario->acharInteresses();
 $usuarioDesinteresses = $usuario->acharDesinteresses();
 
+$foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ $usuarioDesinteresses = $usuario->acharDesinteresses();
     
         <main class="container-listagem" style="background-color: red">
             <div>
-                <img src="" alt="">
+                <img src="../../resources/images/<?= $foto_perfil ?>" alt="Foto de perfil">
                 <span>
                     <h2><?= $professor->getNome() ?></h2>
                     <h3><?= $professor->getEmail() ?></h3>
@@ -54,6 +56,7 @@ $usuarioDesinteresses = $usuario->acharDesinteresses();
             <?php
 
             foreach($professorInteresses as $professorInteresseId){
+                echo $professorInteresseId;
                 $i = Interesse::acharInteresse($professorInteresseId);
                 if(in_array($professorInteresseId, $usuarioInteresses)){
                     echo'
@@ -74,6 +77,7 @@ $usuarioDesinteresses = $usuario->acharDesinteresses();
                     </div>
                     '; 
                 }
+                unset($i);
             }
 
             ?> 
@@ -84,7 +88,7 @@ $usuarioDesinteresses = $usuario->acharDesinteresses();
             <?php
 
             foreach($professorInteresses as $professorInteresseId){
-                $i = Interesse::acharInteresse($professorInteresseId);
+                $i = Interesse::acharInteresse($professorDesinteresseId);
                 if(in_array($professorDesinteresseId, $usuarioDesinteresses)){
                     echo'
                     <div class="container-checkbox-interesse">

@@ -43,7 +43,7 @@ class Interesse{
         $conn = new MySQL();
         $sql = "SELECT idInteresse, descricao FROM interesse";
         $r = $conn->consulta($sql);
-        $interesse = new Interesse($r['descricao']);
+        $interesse = new Interesse($r[0]['descricao']);
         $interesse->setIdInteresse($idInteresse);
         return $interesse;
     }
