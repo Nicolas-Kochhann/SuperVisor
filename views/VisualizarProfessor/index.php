@@ -2,6 +2,12 @@
 
 session_start();
 
+if(!isset($_SESSION["idUsuario"])){
+    $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
+    header("location: ../Login/");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +27,26 @@ session_start();
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
     
+        <main class="container-listagem" style="background-color: red">
+            <div>
+                <img src="" alt="">
+                <span>
+                    <h2>Conrad von Hötzendorf</h2>
+                    <h3>conrad.pereira@feliz.ifrs.edu.br</h3>
+                </span>
+            </div>
+
+            <h2>Interesses</h2>
+            <div class="bloco-interesses">
+
+            </div>
+
+            <h2>Desinteresses</h2>
+            <div class="bloco-interesses">
+            </div>
+
+        </main>
+
     </div>
 </body>
 </html>
