@@ -40,6 +40,15 @@ class Usuario{
     public function setDisponivel(bool $disponivel){
         $this->disponivel = $disponivel;
     }
+    public function setNome(string $nome){
+        $this->nome = $nome;
+    }
+    public function setImagem(?string $imagem){
+        $this->foto_perfil = $imagem;
+    }
+    public function setSenha(string $senha){
+        $this->senha = $senha;
+    }
 
     public function getInteressesEmComum(): int{
         return $this->interreses_em_comum;
