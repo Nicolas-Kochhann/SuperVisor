@@ -81,35 +81,39 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             ?> 
             </div>
 
-            <h2>Desinteresses</h2>
-            <div class="bloco-interesses">
             <?php
+            if(count($professorDesinteresses) > 0){
+                echo '
+                <h2>Desinteresses</h2>
+                <div class="bloco-interesses">';
+            
 
-            foreach($professorDesinteresses as $professorDesinteresseId){
-                $i = Interesse::acharInteresse($professorDesinteresseId);
-                if(in_array($professorDesinteresseId, $usuarioDesinteresses)){
+                foreach($professorDesinteresses as $professorDesinteresseId){
+                    $i = Interesse::acharInteresse($professorDesinteresseId);
+                    if(in_array($professorDesinteresseId, $usuarioDesinteresses)){
+                        echo'
+                        <div class="container-checkbox-interesse">
+                        <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                        </div>
+                        ';
+                    } else if(in_array($professorDesinteresseId, $usuarioInteresses)){
                     echo'
-                    <div class="container-checkbox-interesse">
-                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                    </div>
-                    ';
-                } else if(in_array($professorDesinteresseId, $usuarioInteresses)){
-                   echo'
-                    <div class="container-checkbox-interesse">
-                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                    </div>
-                    '; 
-                } else {
-                    echo'
-                    <div class="container-checkbox-interesse">
-                    <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                    </div>
-                    '; 
+                        <div class="container-checkbox-interesse">
+                        <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                        </div>
+                        '; 
+                    } else {
+                        echo'
+                        <div class="container-checkbox-interesse">
+                        <label class="interesse-checkbox-label">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                        </div>
+                        '; 
+                    }
                 }
-            }
 
-            ?> 
-            </div>
+                echo '</div>';
+            }
+            ?>
 
         </main>
 
