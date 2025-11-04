@@ -156,6 +156,7 @@ class Usuario{
     }
 
     public function cadastrar(): int{
+
         $conn = new MySQL();
         if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
             $this->tipo = "aluno";
@@ -170,17 +171,15 @@ class Usuario{
         return $conn->getUltimoIdInserido();
     }
 
-    public function atualizar(): bool{
+    public function atualizar(bool $mudaSenha): bool{
         $conn = new MySQL();
-        if(str_ends_with($this->email , "@aluno.feliz.ifrs.edu.br")){
-            $this->tipo = "aluno";
-        }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
-            $this->tipo = "professor";
-        } else {
-            throw new RuntimeException('Email ou senha inválidos', 102);
+        
+        if($mudaSenha){
+            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', status={$this->status} WHERE idUsuario={$this->idUsuario}";
+        }else{
+            $sql = "UPDATE usuario SET nome='{$this->nome}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
         }
-        $this->status = 0;
-        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', tipo='{$this->tipo}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
+        
         return $conn->executa($sql);
     }
 
