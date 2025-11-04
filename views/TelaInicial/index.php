@@ -58,6 +58,9 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
             <?php
 
             foreach($professores as $professor){
+                if(count($professor->acharInteresses()) < 3){
+                    continue;
+                }
                 $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                 echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                         <a class='link-perfil-listagem' href='../VisualizarProfessor/?id={$professor->getIdUsuario()}'> <!-- LINK DO PERFIL DO PROFESSOR NO href -->
