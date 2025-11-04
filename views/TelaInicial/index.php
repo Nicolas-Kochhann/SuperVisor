@@ -27,6 +27,7 @@ foreach($professores as $professor){
 }
 
 usort($professores, function($a, $b){ $a->getInteressesEmComum() <=> $b->getInteressesEmComum(); });
+usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
 
 ?>
 

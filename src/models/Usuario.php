@@ -180,7 +180,7 @@ class Usuario{
             throw new RuntimeException('Email ou senha inválidos', 102);
         }
         $this->status = 0;
-        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='". password_hash($this->senha,  PASSWORD_BCRYPT) ."', tipo='{$this->tipo}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
+        $sql = "UPDATE usuario SET nome='{$this->nome}', email='{$this->email}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', tipo='{$this->tipo}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
         return $conn->executa($sql);
     }
 
