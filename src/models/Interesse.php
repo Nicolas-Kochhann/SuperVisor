@@ -41,7 +41,7 @@ class Interesse{
 
     public static function acharInteresse(int $idInteresse): ?self{
         $conn = new MySQL();
-        $sql = "SELECT idInteresse, descricao FROM interesse";
+        $sql = "SELECT idInteresse, descricao FROM interesse WHERE idInteresse={$idInteresse}";
         $r = $conn->consulta($sql);
         $interesse = new Interesse($r[0]['descricao']);
         $interesse->setIdInteresse($idInteresse);

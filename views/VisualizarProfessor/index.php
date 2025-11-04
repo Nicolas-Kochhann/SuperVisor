@@ -56,7 +56,6 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             <?php
 
             foreach($professorInteresses as $professorInteresseId){
-                echo $professorInteresseId;
                 $i = Interesse::acharInteresse($professorInteresseId);
                 if(in_array($professorInteresseId, $usuarioInteresses)){
                     echo'
@@ -77,7 +76,6 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                     </div>
                     '; 
                 }
-                unset($i);
             }
 
             ?> 
@@ -87,7 +85,7 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             <div class="bloco-interesses">
             <?php
 
-            foreach($professorInteresses as $professorInteresseId){
+            foreach($professorDesinteresses as $professorDesinteresseId){
                 $i = Interesse::acharInteresse($professorDesinteresseId);
                 if(in_array($professorDesinteresseId, $usuarioDesinteresses)){
                     echo'
