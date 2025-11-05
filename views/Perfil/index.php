@@ -40,7 +40,7 @@ if(isset($_POST['botao'])){
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
-        <div class="container-listagem" style="background-color: red">
+        <div class="editarPerfial">
             
         <h1>Editar perfil</h1>
         <form action='index.php'method='POST' enctype="multipart/form-data">
@@ -61,25 +61,8 @@ if(isset($_POST['botao'])){
             <label for="indisponivel">Não</label>
 
 
-
             <a href="editarInteresses.php">Editar interesses</a>
             <a href="editarDesinteresses.php">Editar desinteresses</a>
-            <div>
-                <img src="" alt="">
-                <span>
-                    <h2>Conrad von Hötzendorf</h2>
-                    <h3>conrad.pereira@feliz.ifrs.edu.br</h3>
-                </span>
-            </div>
-
-            <h2>Interesses</h2>
-            <div class="bloco-interesses">
-
-            </div>
-
-            <h2>Desinteresses</h2>
-            <div class="bloco-interesses">
-            </div>
 
         </div>
 
