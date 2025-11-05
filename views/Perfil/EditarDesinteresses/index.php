@@ -6,56 +6,34 @@ error_reporting(E_ALL);
 
 use Src\models\Usuario;
 use Src\models\Interesse;
-require __DIR__."/../../vendor/autoload.php";
+require __DIR__."/../../../vendor/autoload.php";
 
 session_start();
 
-$interesses = Interesse::listarTodos();
-$usuario = '';
-
-if(isset($_SESSION['idUsuario'])){
-    $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+if(!isset($_SESSION['idUsuario'])){
+    $_SESSION['error'] = 'É necessário entrar na sua conta antes disso.';
+    header('Location: ../Login/');
 }
+
+$interesses = Interesse::listarTodos();
+
+$usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
 
 if(isset($_POST['submit'])){
     if($usuario){
-        $interesses = $_SESSION['cadastro']['interesses'];
+        
         if (isset($_POST['desinteresses'])) {
             $desinteresses = $_POST['desinteresses'];
         } else {
             $desinteresses = [];
         }
 
-        $usuario->removerInteresses($usuario->acharInteresses());
         $usuario->removerDesinteresses($usuario->acharDesinteresses());
-
-        $usuario->cadastrarInteresses($interesses);
         $usuario->cadastrarDesinteresses($desinteresses);
         //$usuario->atualizar();
-        unset($_SESSION['cadastro']);
-        header("Location: ../TelaInicial/");
+
+        header("Location: ../");
         
-    } else {
-        $nome = $_SESSION['cadastro']['nome'];
-        $email = $_SESSION['cadastro']['email'];
-        $foto_perfil = $_SESSION['cadastro']['foto_perfil'];
-        $senha = $_SESSION['cadastro']['senha'];
-        $interesses = $_SESSION['cadastro']['interesses'];
-        if (isset($_POST['desinteresses'])) {
-            $desinteresses = $_POST['desinteresses'];
-        } else {
-            $desinteresses = [];
-        }
-
-        $usuario = new Usuario($nome, $foto_perfil, $email, $senha);
-        $usuario->setIdUsuario($usuario->cadastrar());
-        $usuario->cadastrarInteresses($interesses);
-        $usuario->cadastrarDesinteresses($desinteresses);
-
-        session_unset();
-        session_destroy();
-
-        header("Location: ../Login/");
     }
 }
 ?>
@@ -66,14 +44,14 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperVisor</title>
-    <link rel="stylesheet" href="../../styles/style.css">
-    <link rel="icon" href="../../resources/images/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/style.css">
+    <link rel="icon" href="../../../resources/images/favicon.ico">
 </head>
 <body>
     <div class="container">
 
         <header class="cabecalho">
-            <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
         </header>
 
         <main class="container-formulario">
@@ -83,9 +61,8 @@ if(isset($_POST['submit'])){
                     <!--Aqui são listados os desinteresses-->
                     <?php
 
-                    if($usuario){
                         foreach($interesses as $i){
-                            if(in_array(strval($i->getIdInteresse()), $_SESSION['cadastro']['interesses'], true)){
+                            if(in_array($i->getIdInteresse(), $usuario->acharInteresses())){
                                 continue;
                             }
                             if(in_array($i->getIdInteresse(), $usuario->acharDesinteresses())){
@@ -104,25 +81,12 @@ if(isset($_POST['submit'])){
                                 ';
                             }
                         }
-                    } else {
-                        foreach($interesses as $i){
-                            if(in_array($i->getIdInteresse(), $_SESSION['cadastro']['interesses'])){
-                                continue;
-                            }
-                            echo'
-                                <div class="container-checkbox-interesse">
-                                <input class="desinteresse-checkbox" type="checkbox" name="desinteresses[]" id="'.$i->getIdInteresse().'" value="'.$i->getIdInteresse().'"> <!--Aqui vai o ID da tag no BD (?)-->
-                                <label class="desinteresse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                                </div>
-                            ';
-                        }
-                    }
 
                     ?>
                 </div>
 
                 <button id="submit" name="submit" class="botao-strong">Salvar alterações</button>
-                <a href="../Perfil/index.php" class="link-formulario">Voltar</a>
+                <a href="../" class="link-formulario">Voltar</a>
             </form>
         </main>
 

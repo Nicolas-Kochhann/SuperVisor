@@ -40,7 +40,7 @@ if(isset($_POST['editarPerfil'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperVisor</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <link rel="icon" href="../../resources/images/favicon.ico">
+    <link rel="icon" href="../../resourcesE" class="botao-strong"/images/favicon.ico">
 </head>
 <body>
 <div class="container">
@@ -88,8 +88,8 @@ if(isset($_POST['editarPerfil'])){
       ?>
 
       <div class="links-edicao">
-        <a href="editarInteresses.php" class="botao-strong">Editar interesses</a>
-        <a href="editarDesinteresses.php" class="botao-strong">Editar desinteresses</a>
+        <a href="EditarInteresses/" class="botao-strong">Editar interesses</a>
+        <a href="EditarDesinteresses/" class="botao-strong">Editar desinteresses</a>
       </div>
       <button type="submit" name="editarPerfil" id="editarPerfil" class="botao-strong">Finalizar</button>
     </form>
