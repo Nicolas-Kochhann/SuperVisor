@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
 use Src\models\Interesse;
@@ -15,7 +13,7 @@ if(!isset($_SESSION['idUsuario'])){
 
 $professor = Usuario::acharUsuario($_GET['id']);
 
-if($professor->tipo === "aluno"){
+if($professor->getTipo() === "aluno"){
     header('Location: ../TelaInicial/');
 }
 

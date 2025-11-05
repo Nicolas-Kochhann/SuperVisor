@@ -253,6 +253,10 @@ class Usuario{
         $this->tipo = $tipo;
     }
 
+    public function getTipo(): string{
+        return $this->tipo;
+    }
+
     public function getNome(): string{
         return $this->nome;
     }
