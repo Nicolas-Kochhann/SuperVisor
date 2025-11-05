@@ -14,6 +14,11 @@ if(!isset($_SESSION['idUsuario'])){
 }
 
 $professor = Usuario::acharUsuario($_GET['id']);
+
+if($professor->tipo === "aluno"){
+    header('Location: ../TelaInicial/');
+}
+
 $professorInteresses = $professor->acharInteresses();
 $professorDesinteresses = $professor->acharDesinteresses();
 
