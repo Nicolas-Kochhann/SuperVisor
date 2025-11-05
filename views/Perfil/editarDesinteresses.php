@@ -122,7 +122,7 @@ if(isset($_POST['submit'])){
                 </div>
 
                 <button id="submit" name="submit" class="botao-strong">Salvar alterações</button>
-                <a href="../EscolherInteresses/" class="link-formulario">Voltar</a>
+                <a href="../Perfil/index.php" class="link-formulario">Voltar</a>
             </form>
         </main>
 

@@ -98,7 +98,7 @@ if(isset($_POST['submit'])){
                     
                 </div>
                 <button disabled id="submit" name="submit" class="botao-strong">Salvar alterações</button>
-                <a href="../CriarConta/" class="link-formulario">Voltar</a>
+                <a href="../Perfil/index.php" class="link-formulario">Voltar</a>
             </form>
         </main>
 

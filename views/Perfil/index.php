@@ -40,35 +40,46 @@ if(isset($_POST['botao'])){
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
-        <div class="editarPerfial">
-            
-        <h1>Editar perfil</h1>
-        <form action='index.php'method='POST' enctype="multipart/form-data">
-            <input type="file" name="fotoPerfil" accept=".jpeg, .jpg, .png">
-            <label for="fotoPerfil">Alterar imagem</label>
+    <div class="container-formulario">
+    <form class="formulario-grande editar-perfil-form" action="index.php" method="POST" enctype="multipart/form-data">
+      <h1 class="titulo-formulario-grande">Editar perfil</h1>
 
-            <label for="nome">Nome: </label>
-            <input type="text" name="nome">
+      <div class="foto-container">
+        <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpeg, .jpg, .png">
+        <label for="fotoPerfil" class="link-formulario">Alterar imagem</label>
+      </div>
 
-            <label for="senha">Senha: </label>
-            <input type="password" name="senha">
+      <label for="nome" class="label-form-grande">Nome completo:</label>
+      <input type="text" class="input-form-grande" name="nome" value="<?= htmlspecialchars($user->getNome()) ?>">
 
-            <label for="disponibilidade">Disponível:</label>
-            <input type="radio" id="disponivel" name="disponibilidade" value="disponivel">
-            <label for="disponivel">Sim</label>
+      <label for="senha" class="label-form-grande">Senha:</label>
+      <input type="password" class="input-form-grande" name="senha">
 
-            <input type="radio" id="indisponivel" name="disponibilidade" value="indisponivel">
-            <label for="indisponivel">Não</label>
-
-
-            <a href="editarInteresses.php">Editar interesses</a>
-            <a href="editarDesinteresses.php">Editar desinteresses</a>
-
+      <div class="bloco-info">
+                    <p>A senha deve conter:
+                        <ul class="lista-info">
+                            <li id="tamanho">8 caracteres ou mais</li>
+                            <li id="letra">Pelo menos uma letra</li>
+                            <li id="numero">Pelo menos um número</li>
+                        </ul>
+                    </p>
         </div>
 
-    </div>
+      <div class="disponibilidade-container">
+        <span class="label-form-grande">Disponível:</span>
+        <label><input type="radio" name="disponibilidade" value="disponivel"> Sim</label>
+        <label><input type="radio" name="disponibilidade" value="indisponivel"> Não</label>
+      </div>
 
-    <button name=editarPerfil id=editarPerfil>Finalizar</button>
+      <div class="links-edicao">
+        <a href="editarInteresses.php" class="botao-strong">Editar interesses</a>
+        <a href="editarDesinteresses.php" class="botao-strong">Editar desinteresses</a>
+      </div>
+    </form>
+    <button type="submit" name="editarPerfil" id="editarPerfil" class="botao-strong">Finalizar</button>
+  </div>
+
+</div>
     
 </body>
 </html>
