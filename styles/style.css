@@ -412,3 +412,49 @@ img.showing {
 .admin-header {
   background-color: #051e3a;
 }
+
+.container-view-dados-professor {
+  display: flex;
+  height: 20%;
+  border-bottom: 3px solid #126fd3;
+  padding-bottom: 10px;
+  margin: 0 0 15px 0;
+}
+
+.container-dados-professor {
+  height: 100%;
+  flex: 1;
+  margin: 0 0 0 20px;
+}
+
+.container-dados-professor h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2.2rem;
+}
+
+.container-dados-professor h3 {
+  font-family: "Roboto", sans-serif;
+  margin: 5px 0 0 0;
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.titulo-view {
+  font-family: "Roboto", sans-serif;
+}
+
+.sem-pointer {
+  cursor: default;
+}
+
+.sem-pointer:hover {
+  cursor: default;
+}
+
+.good {
+  background-color: #4fd56e;
+}
+
+.bad {
+  background-color: #e86a6a;
+}
