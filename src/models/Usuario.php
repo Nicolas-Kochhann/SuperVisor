@@ -43,8 +43,8 @@ class Usuario{
     public function setNome(string $nome){
         $this->nome = $nome;
     }
-    public function setImagem(?string $imagem){
-        $this->foto_perfil = $imagem;
+    public function setFotoPerfil(?string $foto_perfil){
+        $this->foto_perfil = $foto_perfil;
     }
     public function setSenha(string $senha){
         $this->senha = $senha;
@@ -184,9 +184,9 @@ class Usuario{
         $conn = new MySQL();
         
         if($mudaSenha){
-            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', status={$this->status} WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', status={$this->status}, imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
         }else{
-            $sql = "UPDATE usuario SET nome='{$this->nome}', status={$this->status} WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', status={$this->status}, imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
         }
         
         return $conn->executa($sql);

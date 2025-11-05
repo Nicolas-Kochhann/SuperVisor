@@ -4,6 +4,7 @@ session_start();
 
 require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
+use Src\models\Uploader;
 
 if (!isset($_SESSION['idUsuario'])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
@@ -14,11 +15,18 @@ if (!isset($_SESSION['idUsuario'])){
 $user = Usuario::acharUsuario($_SESSION['idUsuario']);
 $interesses = $user->acharInteresses();
 $desinteresses = $user->acharDesinteresses();
-if(isset($_POST['botao'])){
-    $user->setNome("");
-    $user->setImagem("");
-    if($user->validarSenha()){ $user->setSenha(""); }
-    $user->setDisponivel("");
+if(isset($_POST['editarPerfil'])){
+  if(!empty($_FILES['fotoPerfil']['tmp_name'])){
+      $savedImage = Uploader::uploadImage($_FILES['fotoPerfil']);
+      if($user->getFotoPerfil() != null){
+        Uploader::deleteImage($user->getFotoPerfil());
+      }
+      $user->setFotoPerfil($savedImage);
+    }
+    $user->setNome($_POST['nome']);
+    $user->setStatus(0);
+    if($user->validarSenha($_POST['senha'])){ $user->setSenha($_POST['senha']); }
+    $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
     $user->atualizar($mudarSenha);
 }
@@ -65,18 +73,26 @@ if(isset($_POST['botao'])){
                     </p>
         </div>
 
-      <div class="disponibilidade-container">
-        <span class="label-form-grande">Disponível:</span>
-        <label><input type="radio" name="disponibilidade" value="disponivel"> Sim</label>
-        <label><input type="radio" name="disponibilidade" value="indisponivel"> Não</label>
-      </div>
+      <?php
+      
+      if($user->getTipo() == 'professor'){
+        echo'
+        <div class="disponibilidade-container">
+          <span class="label-form-grande">Disponível:</span>
+          <label><input type="radio" name="disponibilidade" value="disponivel"> Sim</label>
+          <label><input type="radio" name="disponibilidade" value="indisponivel"> Não</label>
+        </div>
+        ';
+      }
+
+      ?>
 
       <div class="links-edicao">
         <a href="editarInteresses.php" class="botao-strong">Editar interesses</a>
         <a href="editarDesinteresses.php" class="botao-strong">Editar desinteresses</a>
       </div>
+      <button type="submit" name="editarPerfil" id="editarPerfil" class="botao-strong">Finalizar</button>
     </form>
-    <button type="submit" name="editarPerfil" id="editarPerfil" class="botao-strong">Finalizar</button>
   </div>
 
 </div>
