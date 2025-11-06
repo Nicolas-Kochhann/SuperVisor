@@ -74,7 +74,7 @@ if(isset($_POST['submit'])){
                                     <label class="interesse-checkbox-label" for="'.$i->getIdInteresse().'">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
                                     </div>
                                 ';
-                            } else if (in_array($i->getIdInteresse(), $usuario->acharInteresses())){
+                            } else if (in_array($i->getIdInteresse(), $usuario->acharDesinteresses())){
                                 continue;
                             } else {
                                 echo'

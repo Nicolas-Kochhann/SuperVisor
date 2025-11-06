@@ -1,4 +1,8 @@
 <?php 
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 
@@ -29,6 +33,7 @@ if(isset($_POST['editarPerfil'])){
     $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
     $user->atualizar($mudarSenha);
+    header('Location: ../TelaInicial/');
 }
 
 ?>
