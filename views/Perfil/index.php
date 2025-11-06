@@ -36,6 +36,9 @@ if(isset($_POST['editarPerfil'])){
     header('Location: ../TelaInicial/');
 }
 
+$foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -60,9 +63,9 @@ if(isset($_POST['editarPerfil'])){
 
 
       <div class="avatar-container">
-        <img id="previewFoto" src="../../resources/images/foto_perfil_padrao.svg" alt="Foto de perfil" class="foto-perfil">
+        <img id="previewFoto" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil" class="foto-perfil">
         <button type="button" class="camera-btn" onclick="document.getElementById('fotoPerfil').click()">📷</button>
-        <input type="file" id="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
+        <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
       </div>
 
       <button type="button" class="botao-excluir">Excluir imagem</button>
@@ -102,7 +105,8 @@ if(isset($_POST['editarPerfil'])){
         <a href="EditarInteresses/" class="botao-strong">Editar interesses</a>
         <a href="EditarDesinteresses/" class="botao-strong">Editar desinteresses</a>
       </div>
-      <button type="submit" name="editarPerfil" id="editarPerfil" class="botao-strong">Finalizar</button>
+      <button type="submit" name="editarPerfil" id="submit" class="botao-strong">Finalizar</button>
+      <a class="link-formulario" href="../TelaInicial">Cancelar</a>
     </form>
   </div>
 
