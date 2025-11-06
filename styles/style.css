@@ -48,8 +48,9 @@ body {
 }
 
 .cabecalho-link-botao {
-  background-color: #06b42e;
+  background-color: #343575;
   padding: 5px 10px;
+  color: #fff;
 }
 
 .container-formulario {
@@ -547,4 +548,12 @@ img.showing {
   gap: 20px;
   margin: 25px 0;
 }
+
+.list-legend-green{
+  color: #06b42e;
+}
+.list-legend-red{
+  color: #cf0d0d;
+}
+
 

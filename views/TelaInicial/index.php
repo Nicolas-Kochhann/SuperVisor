@@ -44,19 +44,23 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
     <div class="container">
         
         <header class="cabecalho">
+            
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            <a class="cabecalho-link-botao" href="../Perfil/index.php">Editar Perfil</a>
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
+
         </header>
 
         <main class="container-listagem">
 
-            <a href="../Perfil/index.php">Editar Perfil</a>
+            
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
             <h3 class="titulo2">Encontre orientadores</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php
-
+            echo"<p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br>
+            <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>";
             foreach($professores as $professor){
                 if(count($professor->acharInteresses()) < 3){
                     continue;
