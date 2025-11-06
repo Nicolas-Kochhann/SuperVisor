@@ -53,19 +53,25 @@ if(isset($_POST['editarPerfil'])){
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
             <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
         </header>
+        
     <div class="container-formulario">
-    <form class="formulario-grande editar-perfil-form" action="index.php" method="POST" enctype="multipart/form-data">
-      <h1 class="titulo-formulario-grande">Editar perfil</h1>
+      <form class="formulario-grande editar-perfil-form" action="index.php" method="POST" enctype="multipart/form-data">
+        <h1 class="titulo-formulario-grande">Editar perfil</h1>
 
-      <div class="foto-container">
-        <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpeg, .jpg, .png">
-        <label for="fotoPerfil" class="link-formulario">Alterar imagem</label>
+
+      <div class="avatar-container">
+        <img id="previewFoto" src="../../resources/images/foto_perfil_padrao.svg" alt="Foto de perfil" class="foto-perfil">
+        <button type="button" class="camera-btn" onclick="document.getElementById('fotoPerfil').click()">📷</button>
+        <input type="file" id="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
       </div>
 
-      <label for="nome" class="label-form-grande">Nome completo:</label>
+      <button type="button" class="botao-excluir">Excluir imagem</button>
+
+
+      <label for="nome" class="label-form-grande obrigatorio">Nome completo:</label>
       <input type="text" class="input-form-grande" name="nome" value="<?= htmlspecialchars($user->getNome()) ?>">
 
-      <label for="senha" class="label-form-grande">Senha:</label>
+      <label for="senha" class="label-form-grande obrigatorio">Senha:</label>
       <input type="password" class="input-form-grande" name="senha">
 
       <div class="bloco-info">
@@ -101,6 +107,17 @@ if(isset($_POST['editarPerfil'])){
   </div>
 
 </div>
+<script>
+  function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+      const output = document.getElementById('previewFoto');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
     
 </body>
 </html>
+

@@ -458,3 +458,93 @@ img.showing {
 .bad {
   background-color: #e86a6a;
 }
+
+.editar-perfil-form {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 40px 60px;
+  width: 600px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.avatar-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+}
+
+.foto-perfil {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  transition: transform 0.3s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.03);
+}
+
+.camera-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.camera-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+#fotoPerfil {
+  display: none;
+}
+
+.botao-excluir {
+  background: none;
+  border: none;
+  color: #126fd3;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.lista-info {
+  margin-left: 20px;
+  font-size: 0.9rem;
+}
+
+.disponibilidade-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.disponibilidade-container label {
+  color: #333;
+  font-weight: 500;
+}
+
+.disponibilidade-container input[type="radio"] {
+  accent-color: #126fd3; 
+}
+
+.links-edicao {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 25px 0;
+}
+
