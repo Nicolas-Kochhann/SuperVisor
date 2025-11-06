@@ -185,9 +185,12 @@ CREATE TABLE `professor_solicitacao` (
 
 CREATE TABLE `solicitacao` (
   `idSolicitacao` int(11) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `descricao` varchar(500) DEFAULT NULL,
+  `empresa` varchar(255) NOT NULL,
+  `areaAtuacao` varchar(500) NOT NULL,
+  `tipoEstagio` varchar(50) NOT NULL,
   `carga_horaria_semanal` int(11) DEFAULT NULL,
+  `turno` varchar(50) DEFAULT NULL,
+  `obs` TEXT DEFAULT NULL,
   `idAluno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

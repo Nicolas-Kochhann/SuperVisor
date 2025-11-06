@@ -76,10 +76,12 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
       <label for="nome" class="label-form-grande obrigatorio">Nome completo:</label>
       <input type="text" class="input-form-grande" name="nome" value="<?= htmlspecialchars($user->getNome()) ?>">
 
-      <label for="senha" class="label-form-grande obrigatorio">Senha:</label>
-      <input type="password" class="input-form-grande" name="senha">
-
-      <div class="bloco-info">
+      <label for="senha" class="label-form-grande obrigatorio">Senha</label>
+                <div class="password-container">
+                    <input class="input-form-grande" type="password" name="senha" id="senha" required>
+                    <img class="show-password" id="show-password" src="../../resources/images/eye.svg" alt="show passwd">
+                </div>
+                <div class="bloco-info">
                     <p>A senha deve conter:
                         <ul class="lista-info">
                             <li id="tamanho">8 caracteres ou mais</li>
@@ -87,7 +89,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                             <li id="numero">Pelo menos um número</li>
                         </ul>
                     </p>
-        </div>
+                </div>
 
       <?php
       
@@ -123,7 +125,11 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
     reader.readAsDataURL(event.target.files[0]);
   }
 </script>
-    
+
+<script src="../../scripts/verificaSenha.js"></script>
+<script src="../../scripts/mostraSenha.js"></script>
+
+
 </body>
 </html>
 

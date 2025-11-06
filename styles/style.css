@@ -556,4 +556,19 @@ img.showing {
   color: #cf0d0d;
 }
 
+.text-info{
+  font-family: "Roboto", sans-serif;
+  color: #8b8b8b;
+  margin: 0 0 15px 0;
+}
 
+textarea{
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 200px;
+}
+
+.multi-input-box{
+  display: flex;
+  gap: 10px;
+}

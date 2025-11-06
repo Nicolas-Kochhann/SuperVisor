@@ -54,6 +54,5 @@ class Interesse{
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
-
     
 }
