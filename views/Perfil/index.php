@@ -48,7 +48,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SuperVisor</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <link rel="icon" href="../../resourcesE" class="botao-strong"/images/favicon.ico">
+    <link rel="icon" href="../../resources/images/favicon.ico">
 </head>
 <body>
 <div class="container">
