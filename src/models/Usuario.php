@@ -184,12 +184,19 @@ class Usuario{
         $conn = new MySQL();
         
         if($mudaSenha){
-            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', status={$this->status}, imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
         }else{
-            $sql = "UPDATE usuario SET nome='{$this->nome}', status={$this->status}, imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
         }
         
         return $conn->executa($sql);
+    }
+
+    public function removerFotoPerfil(): bool {
+        $conn = new MySQL();
+        $sql = 'UPDATE usuario SET imagem=NULL WHERE idUsuario='.$this->idUsuario;
+        $result = $conn->executa($sql);
+        return $result;
     }
 
     public function cadastrarInteresses(array $interesses): void{

@@ -28,7 +28,6 @@ if(isset($_POST['editarPerfil'])){
       $user->setFotoPerfil($savedImage);
     }
     $user->setNome($_POST['nome']);
-    $user->setStatus(0);
     if($user->validarSenha($_POST['senha'])){ $user->setSenha($_POST['senha']); }
     $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
@@ -36,8 +35,11 @@ if(isset($_POST['editarPerfil'])){
     header('Location: ../TelaInicial/');
 }
 
-$foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+if($user->getFotoPerfil() === ""){
+  $user->setFotoPerfil(null);
+}
 
+$foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 
 ?>
 
@@ -68,7 +70,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
         <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
       </div>
 
-      <a class="botao-excluir">Excluir imagem</a>
+      <a class="link-formulario" href="excluirImagem.php">Excluir imagem</a>
 
 
       <label for="nome" class="label-form-grande obrigatorio">Nome completo:</label>
