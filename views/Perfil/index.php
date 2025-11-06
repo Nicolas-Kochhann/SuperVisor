@@ -105,7 +105,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
         <a href="EditarInteresses/" class="botao-strong">Editar interesses</a>
         <a href="EditarDesinteresses/" class="botao-strong">Editar desinteresses</a>
       </div>
-      <button type="submit" name="editarPerfil" id="submit" class="botao-strong" disabled>Finalizar</button>
+      <button type="submit" name="editarPerfil" id="submit" class="botao-strong">Finalizar</button>
       <a class="link-formulario" href="../TelaInicial">Cancelar</a>
     </form>
   </div>
@@ -121,7 +121,6 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
     reader.readAsDataURL(event.target.files[0]);
   }
 </script>
-<script  src="../../scripts/requeridosPreenchidos.js"></script>
     
 </body>
 </html>
