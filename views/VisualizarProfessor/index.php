@@ -69,12 +69,6 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                     <label class="interesse-checkbox-label sem-pointer good">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
                     </div>
                     ';
-                } else if(in_array($professorInteresseId, $usuarioDesinteresses)){
-                   echo'
-                    <div class="container-checkbox-interesse">
-                    <label class="interesse-checkbox-label sem-pointer bad">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
-                    </div>
-                    '; 
                 } else {
                     echo'
                     <div class="container-checkbox-interesse">
@@ -87,6 +81,7 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             ?> 
             </div>
 
+
             <?php
             if (count($professorDesinteresses) > 0) {
                 echo '
@@ -95,13 +90,7 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 
                 foreach ($professorDesinteresses as $professorDesinteresseId) {
                     $i = Interesse::acharInteresse($professorDesinteresseId);
-                    if (in_array($professorDesinteresseId, $usuarioDesinteresses)) {
-                        echo '
-                        <div class="container-checkbox-interesse">
-                        <label class="interesse-checkbox-label sem-pointer good">' . $i->getDescricao() . '</label>
-                        </div>
-                        ';
-                    } else if (in_array($professorDesinteresseId, $usuarioInteresses)) {
+                    if (in_array($professorDesinteresseId, $usuarioInteresses)) {
                         echo '
                         <div class="container-checkbox-interesse">
                         <label class="interesse-checkbox-label sem-pointer bad">' . $i->getDescricao() . '</label>
