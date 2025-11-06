@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+// Quando o submit tá setado, joga pra página de selecionar professores
+// Isso provavelmente vai ser um inferno de fazer
+// Boa sorte back enzos 👌
+
 ?>
 
 <!DOCTYPE html>
@@ -18,40 +24,47 @@
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
         </header>
 
-        <main class="container-criar-solicitacao">
-            <form class="form-criar-solicitacao" action="index.php" method="POST">
+        <main class="container-formulario">
+            <form class="formulario-grande" action="index.php" method="POST">
                 <h2 class="titulo1">Criar Solicitação de Orientação</h2>
-                <p>Tudo que você preencher aqui será visível para os professores selecionados.</p>
+                <p class="text-info">Tudo que você preencher aqui será visível para os professores selecionados.</p>
 
-                <label for="empresa">Nome da Empresa</label>
-                <input type="text" name="empresa" id="empresa" required>
+                <label for="empresa" class="label-form-grande obrigatorio">Nome da Empresa</label>
+                <input class="input-form-grande" type="text" name="empresa" id="empresa" required>
                 
-                <label for="area-atuacao">Área de Atuação</label>
-                <input type="text" name="area-atuacao" id="area-atuacao" required>
-
-                <label for="tipo-estagio">Tipo de Estágio</label>
-                <select name="tipo-estagio" id="tipo-estagio" required>
-                    <option value="obrigatorio">Obrigatório</option>
-                    <option value="nao-obrigatorio">Não Obrigatório</option>
-                    <option value="nao-sei">Não Sei</option>
-                </select>
-
+                <label for="area-atuacao" class="label-form-grande obrigatorio">Área de Atuação</label>
+                <input class="input-form-grande" type="text" name="area-atuacao" id="area-atuacao" required>
+                
                 <span class="multi-input-box">
-                    <label for="carga-horaria">Carga Horária Semanal</label>
-                    <input type="number" name="carga-horaria" id="carga-horaria">
-
-                    <label for="turno">Turno</label>
-                    <select name="turno" id="turno">
-                        <option value="manha">Manhã</option>
-                        <option value=""></option>
-                    </select>
+                    <div style="flex:1">
+                        <label for="tipo-estagio" class="label-form-grande obrigatorio">Tipo de Estágio</label>
+                        <select class="input-form-grande" name="tipo-estagio" id="tipo-estagio" required>
+                            <option value="obrigatorio">Obrigatório</option>
+                            <option value="nao-obrigatorio">Não Obrigatório</option>
+                            <option value="nao-sei">Não Sei</option>
+                        </select>
+                    </div>
+                    <div style="flex:1">
+                        <label for="turno" class="label-form-grande">Turno do Estágio</label>
+                        <select class="input-form-grande" name="turno" id="turno">
+                            <option value="">Não Sei</option>
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                        </select>
+                    </div>
                 </span>
 
-                <label for="obs">Obs.</label>
-                <textarea name="obs" id="obs">-</textarea>
+                <label for="carga-horaria" class="label-form-grande">Carga Horária Semanal</label>
+                <input class="input-form-grande" style="width:10ch" type="number" name="carga-horaria" id="carga-horaria" min="1" max="30">
+
+                <label for="obs" class="label-form-grande">Obs.</label>
+                <textarea class="input-form-grande" name="obs" id="obs"></textarea>
+
+                <button disabled class="botao-strong" id="submit">Escolher Professores</button>
             </form>
         </main>
 
     </div>
+    <script src="../../scripts/requeridosPreenchidos.js"></script>
 </body>
 </html>
