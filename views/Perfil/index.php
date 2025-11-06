@@ -68,7 +68,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
         <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
       </div>
 
-      <button type="button" class="botao-excluir">Excluir imagem</button>
+      <a class="botao-excluir">Excluir imagem</a>
 
 
       <label for="nome" class="label-form-grande obrigatorio">Nome completo:</label>
