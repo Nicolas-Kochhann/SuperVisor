@@ -50,7 +50,7 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 
         <main class="container-listagem" style="width:50%;">
             <div class="container-view-dados-professor">
-                <img class="foto-redonda-listagem" src="../../resources/images/<?= $foto_perfil ?>" alt="Foto de perfil">
+                <img class="foto-redonda-listagem" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil">
                 <span class="container-dados-professor">
                     <h2><?= $professor->getNome() ?></h2>
                     <h3><?= $professor->getEmail() ?></h3>
