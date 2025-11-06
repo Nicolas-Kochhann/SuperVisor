@@ -58,7 +58,34 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             </div>
 
             <h2 class="titulo-view">Interesses</h2>
+            <div class="bloco-interesses" style="margin:0 0 20px 0">
+            <?php
 
+            foreach($professorInteresses as $professorInteresseId){
+                $i = Interesse::acharInteresse($professorInteresseId);
+                if(in_array($professorInteresseId, $usuarioInteresses)){
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label sem-pointer good">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    ';
+                } else if(in_array($professorInteresseId, $usuarioDesinteresses)){
+                   echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label sem-pointer bad">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                } else {
+                    echo'
+                    <div class="container-checkbox-interesse">
+                    <label class="interesse-checkbox-label sem-pointer">'.$i->getDescricao().'</label> <!--Aqui vai o nome da tag ao invés de texto de exemplo-->
+                    </div>
+                    '; 
+                }
+            }
+
+            ?> 
+            </div>
 
             <?php
             if (count($professorDesinteresses) > 0) {
