@@ -58,9 +58,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 
             <button class="menu-btn" id="menu-btn">☰</button>
 
-            <aside class="menu" id="menu">
-                <a href="../TelaInicial/index.php">Voltar ao inicio</a>
-            </aside>
+            <?php require __DIR__."/../nav.php"; ?>
             
         </header>
 
