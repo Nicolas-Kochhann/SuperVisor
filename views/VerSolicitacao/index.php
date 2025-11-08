@@ -15,6 +15,12 @@ if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
     exit();
+    
+}
+if($_SESSION["tipo"]!="professor"){
+   $_SESSION["error"] = "É necessário ser um professor.";
+    header("location: ../TelaInicial/");
+    exit();     
 }
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
@@ -53,7 +59,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
             <button class="menu-btn" id="menu-btn">☰</button>
 
             <aside class="menu" id="menu">
-                <a href="../VerSolicitacao/index.php">Ver minhas solicitações</a>
+                <a href="../TelaInicial/index.php">Voltar ao inicio</a>
             </aside>
             
         </header>
