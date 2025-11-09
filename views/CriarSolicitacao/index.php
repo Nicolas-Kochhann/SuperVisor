@@ -6,6 +6,10 @@ session_start();
 // Isso provavelmente vai ser um inferno de fazer
 // Boa sorte back enzos 👌
 
+if (isset($_POST["submit"])) {
+    header("Location: ./EscolherProfessores/");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +64,7 @@ session_start();
                 <label for="obs" class="label-form-grande">Obs.</label>
                 <textarea class="input-form-grande" name="obs" id="obs"></textarea>
 
-                <button disabled class="botao-strong" id="submit">Escolher Professores</button>
+                <button disabled class="botao-strong" id="submit" name="submit">Escolher Professores</button>
             </form>
         </main>
 

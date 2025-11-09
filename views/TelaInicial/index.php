@@ -64,8 +64,8 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php
-            echo"<p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br>
-            <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>";
+            echo"<p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br> 
+            <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>"; // pq caralhos isso tá em um eco??????????????
             foreach($professores as $professor){
                 if(count($professor->acharInteresses()) < 3){
                     continue;
