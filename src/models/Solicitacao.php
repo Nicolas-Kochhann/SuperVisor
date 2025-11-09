@@ -15,12 +15,15 @@ class Solicitacao{
     private $turno;
     private $obs;
     private $idAluno;
+    private $data;
 
-    public function __construct($empresa, $areaAtuacao, $tipoEstagio, $idAluno){
+
+    public function __construct($empresa, $areaAtuacao, $tipoEstagio, $idAluno, $data){
         $this->empresa = $empresa;
         $this->areaAtuacao = $areaAtuacao;
         $this->tipoEstagio = $tipoEstagio;
         $this->idAluno = $idAluno;
+        $this->data = $data;
     }
 
     public function getIdSolicitacao(){
@@ -46,6 +49,9 @@ class Solicitacao{
     }
     public function getIdAluno(){
         return $this->idAluno;
+    }
+    public function getData(){
+        return $this->data;
     }
 
     public function setIdSolicitacao($idSolicitacao){

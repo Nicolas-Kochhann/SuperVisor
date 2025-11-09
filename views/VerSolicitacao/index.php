@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 require __DIR__."/../../vendor/autoload.php";
 
 use Src\models\Usuario;
+use Src\models\Solicitacao;
 
 session_start();
 
@@ -17,23 +18,16 @@ if(!isset($_SESSION["idUsuario"])){
     exit();
     
 }
+/*
 if($_SESSION["tipo"]!="professor"){
    $_SESSION["error"] = "É necessário ser um professor.";
     header("location: ../TelaInicial/");
     exit();     
 }
-
+*/
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
-$professores = Usuario::listarProfessores();
-
-foreach($professores as $professor){
-    $professor->calcularInteressesEmComum($usuarioLogado->acharInteresses());
-    $professor->calcularDesinteressesEmComum($usuarioLogado->acharInteresses());
-}
-
-
-usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
+$solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
 
 ?>
 
@@ -67,28 +61,27 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 
             
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-            <h3 class="titulo2">Encontre orientadores</h3>
+            <h3 class="titulo2">Solicitações</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php
-            echo"<p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br>
-            <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>";
-            foreach($professores as $professor){
-                if(count($professor->acharInteresses()) < 3){
-                    continue;
-                }
-                $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-                echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
-                        <a class='link-perfil-listagem' href='../VisualizarProfessor/?id={$professor->getIdUsuario()}'> <!-- LINK DO PERFIL DO PROFESSOR NO href -->
-                        <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
-                        <p class='texto-listagem'>{$professor->getNome()}</p> <!-- NOME DO PROFESSOR -->
+            
+            foreach($solicitacoes as $solicitacao){
+                $aluno = Usuario::acharUsuario($solicitacao->getIdAluno());
+                $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+    
+                echo "<div class='item-listagem'>
+                        <a class='link-perfil-listagem' href='../VisualizarAluno/?id={$aluno->getIdUsuario()}'>
+                            <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno'>
+                            <p class='texto-listagem'>{$aluno->getNome()}</p>
                         </a>
                         <div class='container-contadores-listagem'> 
-                            <span class='contador-interesses-listagem'>{$professor->getInteressesEmComum()}</span> <!-- NUM DE INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
-                            <span class='contador-desinteresses-listagem'>{$professor->getDesinteressesEmComum()}</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
+                            <span class='contador-interesses-listagem'>{$aluno->getInteressesEmComum()}</span>
+                            <span class='contador-desinteresses-listagem'>{$aluno->getDesinteressesEmComum()}</span>
                         </div>
                     </div>";
             }
+
 
             ?> 
 

@@ -252,6 +252,23 @@ class Usuario{
         return $desinteresses;
     }
 
+    public function acharSolicitacaoPeloProfessor() : array{
+        $conn = new MySQL();    
+        $sql = "SELECT s.* FROM solicitacao s
+            INNER JOIN professor_solicitacao ps 
+            ON s.idSolicitacao = ps.idSolicitacao
+            WHERE ps.idProfessor = {$this->idUsuario}
+            ORDER BY s.data desc;";
+        $resultado = $conn->consulta($sql);
+        $solicitacao = [];
+        foreach($resultado as $r){
+            $s = new Solicitacao($r['empresa'], $r['areaAtuacao'], $r['tipoEstagio'], $r['idAluno'], $r['data']);
+
+            $solicitacao[] = $s;
+        }
+        return $solicitacao;
+    }    
+
     public function setStatus(int $status): void{
         $this->status = $status;
     }
