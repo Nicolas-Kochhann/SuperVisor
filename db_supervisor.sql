@@ -191,6 +191,7 @@ CREATE TABLE `solicitacao` (
   `carga_horaria_semanal` int(11) DEFAULT NULL,
   `turno` varchar(50) DEFAULT NULL,
   `obs` TEXT DEFAULT NULL,
+  `data` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `idAluno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

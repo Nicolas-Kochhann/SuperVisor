@@ -1,13 +1,27 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require __DIR__."/../../vendor/autoload.php";
+use Src\Models\Solicitacao;
 
 session_start();
 
 // Quando o submit tá setado, joga pra página de selecionar professores
 // Isso provavelmente vai ser um inferno de fazer
 // Boa sorte back enzos 👌
+// fuck you asshole 👹👹
 
 if (isset($_POST["submit"])) {
-    header("Location: ./EscolherProfessores/");
+
+    $s = new Solicitacao($_POST['empresa'], $_POST['area-atuacao'], $_POST['tipo-estagio'], $_SESSION['idUsuario']);
+
+    $s->setCargaHorariaSemanal($_POST['carga-horaria']);
+    $s->setTurno($_POST['turno']);
+    $s->setObs($_POST['obs']);
+    
+    header("Location: ./EscolherProfessores/index.php?idSolicitacao={$s->cadastrar()}");
 }
 
 ?>
