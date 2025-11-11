@@ -70,6 +70,14 @@ class Solicitacao{
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
+    
+    public static function relacionarProfessor(int $idProf, int $idSol, string $status):int{
+        $conn = new MySQL();
+        $sql = "INSERT INTO professor_solicitacao(idProfessor, idSolicitacao, status)
+                VALUES({$idProf}, {$idSol}, '{$status}')";
+        $conn->executa($sql);
+        return $conn->getUltimoIdInserido();
+    }
 
     public function delete(): void{
         $conn = new MySQL();

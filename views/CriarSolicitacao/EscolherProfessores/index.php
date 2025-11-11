@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require __DIR__."/../../../vendor/autoload.php";
 
 use Src\models\Usuario;
+use Src\models\Solicitacao;
 
 session_start();
 
@@ -29,7 +30,10 @@ foreach($professores as $professor){
 usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
 
 if(isset($_POST['submit'])){
-    
+    foreach($_POST['professores'] as $prof){
+        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], "pendente");
+    }
+    header("Location: ../../TelaInicial/index.php");
 }
 
 ?>
@@ -53,7 +57,7 @@ if(isset($_POST['submit'])){
         <main class="container-listagem">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
-            <form style="height:calc(100% - 70px)" action="index.php" method="POST">
+            <form style="height:calc(100% - 70px)" action="index.php?idSolicitacao=<?=$_GET['idSolicitacao']?>" method="POST">
 
             <div class="container-bloco-listagem-scrollavel">
                 <?php
@@ -66,8 +70,8 @@ if(isset($_POST['submit'])){
                     }
                     $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                     echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
-                            <input class='input-selecionar-convite' type='checkbox' name='profesores[]' id='1' value='{$professor->getIdUsuario()}'> 
-                            <label for='1' class='container-item-listagem item-listagem-clicavel'>
+                            <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
+                            <label for='{$professor->getIdUsuario()}' class='container-item-listagem item-listagem-clicavel'>
                                 <div class='item-listagem'>
                                     <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
                                     <p class='texto-listagem'>{$professor->getNome()}</p> <!-- NOME DO PROFESSOR -->
