@@ -62,25 +62,23 @@ if(isset($_POST['submit'])){
             <div class="container-bloco-listagem-scrollavel">
                 <?php
                 
-                echo"<p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br> 
-                <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>"; // pq caralhos isso tá em um eco??????????????
                 foreach($professores as $professor){
                     if(count($professor->acharInteresses()) < 3){
                         continue;
                     }
                     $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-                    echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
+                    echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                             <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
                             <label for='{$professor->getIdUsuario()}' class='container-item-listagem item-listagem-clicavel'>
                                 <div class='item-listagem'>
-                                    <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
+                                    <img class='foto-redonda-listagem' src='../../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
                                     <p class='texto-listagem'>{$professor->getNome()}</p> <!-- NOME DO PROFESSOR -->
+                                    <div class='container-contadores-listagem'> 
+                                        <span class='contador-interesses-listagem'>{$professor->getInteressesEmComum()}</span> <!-- NUM DE INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
+                                        <span class='contador-desinteresses-listagem'>{$professor->getDesinteressesEmComum()}</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
+                                    </div>
                                 </div>
                             </label>
-                            <div class='container-contadores-listagem'> 
-                                <span class='contador-interesses-listagem'>{$professor->getInteressesEmComum()}</span> <!-- NUM DE INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
-                                <span class='contador-desinteresses-listagem'>{$professor->getDesinteressesEmComum()}</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
-                            </div>
                         </div>";
                 }
                 
