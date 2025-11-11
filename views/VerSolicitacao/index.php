@@ -18,13 +18,13 @@ if(!isset($_SESSION["idUsuario"])){
     exit();
     
 }
-/*
+
 if($_SESSION["tipo"]!="professor"){
    $_SESSION["error"] = "É necessário ser um professor.";
     header("location: ../TelaInicial/");
     exit();     
 }
-*/
+
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
 $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
