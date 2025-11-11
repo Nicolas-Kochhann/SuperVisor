@@ -1,4 +1,40 @@
 <?php
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require __DIR__."/../../../vendor/autoload.php";
+
+use Src\models\Usuario;
+use Src\models\Solicitacao;
+
+session_start();
+
+if(!isset($_SESSION["idUsuario"])){
+    $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
+    header("location: ../Login/");
+    exit();
+}
+
+$usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
+
+$professores = Usuario::listarProfessores();
+
+foreach($professores as $professor){
+    $professor->calcularInteressesEmComum($usuarioLogado->acharInteresses());
+    $professor->calcularDesinteressesEmComum($usuarioLogado->acharInteresses());
+}
+
+
+usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
+
+if(isset($_POST['submit'])){
+    foreach($_POST['professores'] as $prof){
+        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], "pendente");
+    }
+    header("Location: ../../TelaInicial/index.php");
+}
 
 ?>
 
@@ -21,18 +57,33 @@
         <main class="container-listagem">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
-            <form style="height:calc(100% - 70px)" action="index.php" method="POST">
+            <form style="height:calc(100% - 70px)" action="index.php?idSolicitacao=<?=$_GET['idSolicitacao']?>" method="POST">
 
             <div class="container-bloco-listagem-scrollavel">
-                <div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
-                    <input class="input-selecionar-convite" type="checkbox" name="1" id="1">
-                    <label for="1" class="container-item-listagem item-listagem-clicavel">
-                        <div class='item-listagem'>
-                            <img class='foto-redonda-listagem' src='../../../resources/images/placeholders/professor.png' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
-                            <p class='texto-listagem'>Conrad von Hötzendorf</p> <!-- NOME DO PROFESSOR -->
-                        </div>
-                    </label>
-                </div>
+                <?php
+                
+                foreach($professores as $professor){
+                    if(count($professor->acharInteresses()) < 3){
+                        continue;
+                    }
+                    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+                    echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
+                            <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
+                            <label for='{$professor->getIdUsuario()}' class='container-item-listagem item-listagem-clicavel'>
+                                <div class='item-listagem'>
+                                    <img class='foto-redonda-listagem' src='../../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
+                                    <p class='texto-listagem'>{$professor->getNome()}</p> <!-- NOME DO PROFESSOR -->
+                                    <div class='container-contadores-listagem'> 
+                                        <span class='contador-interesses-listagem'>{$professor->getInteressesEmComum()}</span> <!-- NUM DE INTERESSES EM COMUM COM O USUÁRIO LOGADO -->
+                                        <span class='contador-desinteresses-listagem'>{$professor->getDesinteressesEmComum()}</span> <!-- n sei o que escrever aqui, O CONTRÁRIO DO OUTRO span -->
+                                    </div>
+                                </div>
+                            </label>
+                        </div>";
+                }
+                
+                ?>
+               
             </div>
             <div style="width:100%; display:flex; flex-direction:line-reverse">
                 <button disabled style="margin: 0 0 0 auto; padding:10px; text-decoration:underline" class="botao-strong" name="submit" id="submit">Enviar Solicitação</button>

@@ -1,13 +1,42 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require __DIR__."/../../vendor/autoload.php";
+use Src\models\Solicitacao;
 
 session_start();
 
 // Quando o submit tá setado, joga pra página de selecionar professores
 // Isso provavelmente vai ser um inferno de fazer
 // Boa sorte back enzos 👌
+// fuck you asshole 👹👹
 
 if (isset($_POST["submit"])) {
-    header("Location: ./EscolherProfessores/");
+    /*
+    echo $_POST['empresa'];
+    echo "<br>";
+    echo $_POST['area-atuacao'];
+    echo "<br>";
+    echo $_POST['tipo-estagio'];
+    echo "<br>";
+    echo $_POST['carga-horaria'];
+    echo "<br>";
+    echo $_POST['turno'];
+    echo "<br>";
+    echo $_POST['obs'];
+    echo "<br>";
+    */
+    
+    $s = new Solicitacao($_POST['empresa'], $_POST['area-atuacao'], $_POST['tipo-estagio'], $_SESSION['idUsuario']);
+
+    $s->setCargaHorariaSemanal($x = $_POST['carga-horaria']== "" ? "NULL" : (int) $_POST['carga-horaria']);
+    $s->setTurno($_POST['turno']);
+    $s->setObs($x = $_POST['obs'] == "" ? "NULL" : "'" . $_POST['obs'] . "'");
+    
+    header("Location: ./EscolherProfessores/index.php?idSolicitacao={$s->cadastrar()}");
+    
 }
 
 ?>
@@ -51,7 +80,7 @@ if (isset($_POST["submit"])) {
                     <div style="flex:1">
                         <label for="turno" class="label-form-grande">Turno do Estágio</label>
                         <select class="input-form-grande" name="turno" id="turno">
-                            <option value="">Não Sei</option>
+                            <option value="nao-sei">Não Sei</option>
                             <option value="manha">Manhã</option>
                             <option value="tarde">Tarde</option>
                         </select>
@@ -59,7 +88,7 @@ if (isset($_POST["submit"])) {
                 </span>
 
                 <label for="carga-horaria" class="label-form-grande">Carga Horária Semanal</label>
-                <input class="input-form-grande" style="width:10ch" type="number" name="carga-horaria" id="carga-horaria" min="1" max="30">
+                <input class="input-form-grande" style="width:10ch" type="number" name="carga-horaria" id="carga-horaria" min="1" max="30" value=null>
 
                 <label for="obs" class="label-form-grande">Obs.</label>
                 <textarea class="input-form-grande" name="obs" id="obs"></textarea>
