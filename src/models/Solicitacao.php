@@ -11,9 +11,9 @@ class Solicitacao{
     private string $empresa;
     private string $areaAtuacao;
     private string $tipoEstagio;
-    private int $carga_horaria_semanal;
+    private ?string $carga_horaria_semanal;
     private string $turno;
-    private string $obs;
+    private ?string $obs;
     private int $idAluno;
 
 
@@ -55,18 +55,18 @@ class Solicitacao{
     public function setTurno($turno){
         $this->turno = $turno;
     }
-    public function setObs($obs){
+    public function setObs(?string $obs){
         $this->obs = $obs;
     }
 
-    public function setCargaHorariaSemanal($carga_horaria_semanal){
+    public function setCargaHorariaSemanal(?string $carga_horaria_semanal){
         $this->carga_horaria_semanal = $carga_horaria_semanal;
     }
 
     public function cadastrar(): int{
         $conn = new MySQL();     
-        $sql = "INSERT INTO solicitacao(empresa, areaAtuacao, tipoEstagio, carga_horaria_semanal, turno, obs, idAluno) 
-                VALUES('{$this->empresa}', '{$this->areaAtuacao}', '{$this->tipoEstagio}', {$this->carga_horaria_semanal}, '{$this->turno}', '{$this->obs}', {$this->idAluno})";
+        $sql = "INSERT INTO solicitacao(empresa, areaAtuacao, tipoEstagio, carga_horaria_semanal, turno, idAluno, obs) 
+                VALUES('{$this->empresa}', '{$this->areaAtuacao}', '{$this->tipoEstagio}', {$this->carga_horaria_semanal}, '{$this->turno}', {$this->idAluno}, {$this->obs})";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
