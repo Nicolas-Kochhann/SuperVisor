@@ -31,7 +31,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 
 if(isset($_POST['submit'])){
     foreach($_POST['professores'] as $prof){
-        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], "pendente");
+        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], 2);
     }
     header("Location: ../../TelaInicial/index.php");
 }

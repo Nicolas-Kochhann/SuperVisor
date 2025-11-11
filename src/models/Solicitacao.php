@@ -11,7 +11,7 @@ class Solicitacao{
     private string $empresa;
     private string $areaAtuacao;
     private string $tipoEstagio;
-    private ?string $carga_horaria_semanal;
+    private ?int $carga_horaria_semanal;
     private string $turno;
     private ?string $obs;
     private int $idAluno;
@@ -59,19 +59,21 @@ class Solicitacao{
         $this->obs = $obs;
     }
 
-    public function setCargaHorariaSemanal(?string $carga_horaria_semanal){
+    public function setCargaHorariaSemanal(?int $carga_horaria_semanal){
         $this->carga_horaria_semanal = $carga_horaria_semanal;
     }
 
     public function cadastrar(): int{
-        $conn = new MySQL();     
+        $conn = new MySQL();
+        $carga_horaria_semanal = $this->carga_horaria_semanal ?? 'NULL';
+        $obs = $this->obs ?? 'NULL';   
         $sql = "INSERT INTO solicitacao(empresa, areaAtuacao, tipoEstagio, carga_horaria_semanal, turno, idAluno, obs) 
-                VALUES('{$this->empresa}', '{$this->areaAtuacao}', '{$this->tipoEstagio}', {$this->carga_horaria_semanal}, '{$this->turno}', {$this->idAluno}, {$this->obs})";
+                VALUES('{$this->empresa}', '{$this->areaAtuacao}', '{$this->tipoEstagio}', {$carga_horaria_semanal}, '{$this->turno}', {$this->idAluno}, {$obs})";
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
     
-    public static function relacionarProfessor(int $idProf, int $idSol, string $status):int{
+    public static function relacionarProfessor(int $idProf, int $idSol, string $status /* 0 = recusada, 1 = aceita, 2 = pendente */):int{
         $conn = new MySQL();
         $sql = "INSERT INTO professor_solicitacao(idProfessor, idSolicitacao, status)
                 VALUES({$idProf}, {$idSol}, '{$status}')";
