@@ -11,11 +11,12 @@ class Solicitacao{
     private string $empresa;
     private string $areaAtuacao;
     private string $tipoEstagio;
-    private ?string $carga_horaria_semanal;
+    private ?int $carga_horaria_semanal;
     private string $turno;
     private ?string $obs;
     private int $idAluno;
-
+    private String $data;
+    private string $status;
 
     public function __construct($empresa, $areaAtuacao, $tipoEstagio, $idAluno){
         $this->empresa = $empresa;
@@ -48,6 +49,12 @@ class Solicitacao{
     public function getIdAluno():int{
         return $this->idAluno;
     }
+    public function getData():String{
+        return $this->data;
+    }
+    public function getStatus():String{
+        return $this->status;
+    }
 
     public function setIdSolicitacao($idSolicitacao){
         $this->idSolicitacao = $idSolicitacao;
@@ -62,6 +69,12 @@ class Solicitacao{
     public function setCargaHorariaSemanal(?string $carga_horaria_semanal){
         $this->carga_horaria_semanal = $carga_horaria_semanal;
     }
+    public function setData($data){
+        $this->data = $data;
+    }
+    public function setStatus($status){
+        $this->status = $status;
+    }     
 
     public function cadastrar(): int{
         $conn = new MySQL();     
@@ -78,6 +91,61 @@ class Solicitacao{
         $conn->executa($sql);
         return $conn->getUltimoIdInserido();
     }
+    public function verStatus(int $idProfessor): string {
+    $conn = new MySQL();
+
+    $sql = "SELECT idProfessor, status FROM professor_solicitacao 
+            WHERE idSolicitacao = {$this->idSolicitacao}";
+    $resultado = $conn->consulta($sql);
+
+    if (empty($resultado)) {
+        return "Pendente";
+    }
+
+    $statusProfessorAtual = null; // status do professor logado
+    $algumAceitou = false;        // se outro professor aceitou
+    $todosPendentes = true;       // se todos ainda estão pendentes
+
+    foreach ($resultado as $r) {
+        $status = (int)$r['status'];
+
+        // Verifica se algum status é diferente de pendente
+        if ($status !== 0) {
+            $todosPendentes = false;
+        }
+
+        // Guarda o status do professor atual
+        if ((int)$r['idProfessor'] === $idProfessor) {
+            $statusProfessorAtual = $status;
+        }
+
+        // Verifica se algum outro professor aceitou
+        if ((int)$r['idProfessor'] !== $idProfessor && $status === 1) {
+            $algumAceitou = true;
+        }
+    }
+
+    // Regras de decisão final
+    if ($todosPendentes) {
+        return "Pendente";
+    }
+
+    if ($statusProfessorAtual === 1) {
+        return "Aceito";
+    }
+
+    if ($statusProfessorAtual === 2) {
+        return "Recusado";
+    }
+
+    if ($algumAceitou) {
+        return "Finalizado";
+    }
+
+    // Caso não caia em nenhum caso específico
+    return "Pendente";
+}
+
 
     public function delete(): void{
         $conn = new MySQL();

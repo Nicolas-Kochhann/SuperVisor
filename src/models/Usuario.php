@@ -244,7 +244,7 @@ class Usuario{
     public function acharDesinteresses(): array{
         $conn = new MySQL();
         $sql = "SELECT idInteresse FROM usuario_desinteresse WHERE idUsuario={$this->idUsuario}";
-        $resultado = $conn->consulta($sql);
+        $resultado = $conn->consulta(sql: $sql);
         $desinteresses = [];
         foreach($resultado as $r){
             $desinteresses[] = $r['idInteresse'];
@@ -262,8 +262,9 @@ class Usuario{
         $resultado = $conn->consulta($sql);
         $solicitacao = [];
         foreach($resultado as $r){
-            $s = new Solicitacao($r['empresa'], $r['areaAtuacao'], $r['tipoEstagio'], $r['idAluno'], $r['data']);
-
+            $s = new Solicitacao($r['empresa'], $r['areaAtuacao'], $r['tipoEstagio'], $r['idAluno']);
+            $s->setData($r['data']);
+            $s->setIdSolicitacao($r['idSolicitacao']);
             $solicitacao[] = $s;
         }
         return $solicitacao;

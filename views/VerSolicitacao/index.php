@@ -61,7 +61,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
 
             
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-            <h3 class="titulo2">Solicitações</h3>
+            <h3 class="titulo2">Veja suas Solicitações!</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php
@@ -69,16 +69,19 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
             foreach($solicitacoes as $solicitacao){
                 $aluno = Usuario::acharUsuario($solicitacao->getIdAluno());
                 $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-    
+                $data = new DateTime($solicitacao->getData());
                 echo "<div class='item-listagem'>
                         <a class='link-perfil-listagem' href='../VisualizarAluno/?id={$aluno->getIdUsuario()}'>
                             <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno'>
+                            
                             <p class='texto-listagem'>{$aluno->getNome()}</p>
                         </a>
-                        <div class='container-contadores-listagem'> 
-                            <span class='contador-interesses-listagem'>{$aluno->getInteressesEmComum()}</span>
-                            <span class='contador-desinteresses-listagem'>{$aluno->getDesinteressesEmComum()}</span>
+                        <div>
+                        <p class='texto-listagem'>".date_format($data,"d/m/Y ")."</p>
+                        <p class='texto-listagem'>Estágio {$solicitacao->getTipoEstagio()} em {$solicitacao->getEmpresa()}</p>
                         </div>
+                        <p class='status-listagem'> ". $solicitacao->verStatus($_SESSION['idUsuario'])."</p>
+
                     </div>";
             }
 
