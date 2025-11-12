@@ -652,4 +652,6 @@ textarea {
 
 .container-bloco-listagem-scrollavel {
   height: 90%;
+  max-height: 90%;
+  overflow-y: scroll;
 }
