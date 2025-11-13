@@ -672,3 +672,39 @@ textarea {
   display: flex;
   gap: 15px;
 }
+
+.texto-visualizar-solicitacao{
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.botao-aceitar{
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background-color: #12d322;
+  border: solid 1px black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
+.botao-aceitar:hover{
+  background-color: #11ad1e;
+  cursor: pointer;
+}
+
+.botao-negar{
+  padding: 5px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background-color: #d31f12;
+  border: solid 1px black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
+.botao-negar:hover{
+  background-color: #a5180e;
+  cursor: pointer;
+}
