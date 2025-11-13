@@ -31,9 +31,9 @@ if (isset($_POST["submit"])) {
     
     $s = new Solicitacao($_POST['empresa'], $_POST['area-atuacao'], $_POST['tipo-estagio'], $_SESSION['idUsuario']);
 
-    $s->setCargaHorariaSemanal($x = $_POST['carga-horaria']== "" ? "NULL" : (int) $_POST['carga-horaria']);
+    $s->setCargaHorariaSemanal($_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria']);
     $s->setTurno($_POST['turno']);
-    $s->setObs($x = $_POST['obs'] == "" ? "NULL" : "'" . $_POST['obs'] . "'");
+    $s->setObs($_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'");
     
     header("Location: ./EscolherProfessores/index.php?idSolicitacao={$s->cadastrar()}");
     

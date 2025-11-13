@@ -4,14 +4,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require __DIR__."/../../../vendor/autoload.php";
+require __DIR__ . "/../../../vendor/autoload.php";
 
 use Src\models\Usuario;
 use Src\models\Solicitacao;
 
 session_start();
 
-if(!isset($_SESSION["idUsuario"])){
+if (!isset($_SESSION["idUsuario"])) {
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
     exit();
@@ -21,17 +21,19 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
 $professores = Usuario::listarProfessores();
 
-foreach($professores as $professor){
+foreach ($professores as $professor) {
     $professor->calcularInteressesEmComum($usuarioLogado->acharInteresses());
     $professor->calcularDesinteressesEmComum($usuarioLogado->acharInteresses());
 }
 
 
-usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
+usort($professores, function ($a, $b) {
+    return $b->getInteressesEmComum() <=> $a->getInteressesEmComum();
+});
 
-if(isset($_POST['submit'])){
-    foreach($_POST['professores'] as $prof){
-        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], "pendente");
+if (isset($_POST['submit'])) {
+    foreach ($_POST['professores'] as $prof) {
+        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], 2);
     }
     header("Location: ../../TelaInicial/index.php");
 }
@@ -40,6 +42,7 @@ if(isset($_POST['submit'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +50,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="icon" href="../../../resources/images/favicon.ico">
 </head>
+
 <body>
     <div class="container">
 
@@ -57,17 +61,17 @@ if(isset($_POST['submit'])){
         <main class="container-listagem">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
-            <form style="height:calc(100% - 70px)" action="index.php?idSolicitacao=<?=$_GET['idSolicitacao']?>" method="POST">
+            <form style="height:calc(100% - 70px)" action="index.php?idSolicitacao=<?= $_GET['idSolicitacao'] ?>" method="POST">
 
-            <div class="container-bloco-listagem-scrollavel">
-                <?php
-                
-                foreach($professores as $professor){
-                    if(count($professor->acharInteresses()) < 3){
-                        continue;
-                    }
-                    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-                    echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
+                <div class="container-bloco-listagem-scrollavel">
+                    <?php
+
+                    foreach ($professores as $professor) {
+                        if (count($professor->acharInteresses()) < 3) {
+                            continue;
+                        }
+                        $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+                        echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                             <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
                             <label for='{$professor->getIdUsuario()}' class='container-item-listagem item-listagem-clicavel'>
                                 <div class='item-listagem'>
@@ -80,14 +84,14 @@ if(isset($_POST['submit'])){
                                 </div>
                             </label>
                         </div>";
-                }
-                
-                ?>
-               
-            </div>
-            <div style="width:100%; display:flex; flex-direction:line-reverse">
-                <button disabled style="margin: 0 0 0 auto; padding:10px; text-decoration:underline" class="botao-strong" name="submit" id="submit">Enviar Solicitação</button>
-            </div>
+                    }
+
+                    ?>
+
+                </div>
+                <div style="width:100%; display:flex; flex-direction:line-reverse">
+                    <button disabled style="margin: 10px 0 0 auto; padding:10px; text-decoration:underline" class="botao-strong" name="submit" id="submit">Enviar Solicitação</button>
+                </div>
             </form>
         </main>
 
@@ -104,4 +108,5 @@ if(isset($_POST['submit'])){
         checkboxes.forEach(cb => cb.addEventListener('change', updateButtonState));
     </script>
 </body>
+
 </html>
