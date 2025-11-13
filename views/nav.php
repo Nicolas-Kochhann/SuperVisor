@@ -6,9 +6,11 @@
         echo "<a href='../CriarSolicitacao/index.php' >Nova Solicitacao</a>
         <a href='../TelaInicial/index.php' >Tela Inicial</a>";
     }
+
     
     ?>
     <a href="../Perfil/index.php">Editar Perfil</a>
     <a href="../Logout/">Sair</a>     
     
 </aside>
+

@@ -672,3 +672,9 @@ textarea {
   display: flex;
   gap: 15px;
 }
+
+.menu .ativo {
+    color: #aaa;
+    cursor: default;
+    text-decoration: none;
+}
