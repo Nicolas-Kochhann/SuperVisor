@@ -69,7 +69,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                 $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                 $data = new DateTime($solicitacao->getData());
                 echo "<div class='item-listagem'>
-                        <a class='link-perfil-listagem' style='flex:1' href='../VerSolicitacao/?id={$solicitacao->getIdSolicitacao()}'>
+                        <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebido/?id={$solicitacao->getIdSolicitacao()}'>
                             <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno'>
                             <span>
                                 <div class='caixa-nome-data'>
