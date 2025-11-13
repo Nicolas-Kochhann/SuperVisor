@@ -28,14 +28,15 @@ if (isset($_POST["submit"])) {
     echo $_POST['obs'];
     echo "<br>";
     */
-    
-    $s = new Solicitacao($_POST['empresa'], $_POST['area-atuacao'], $_POST['tipo-estagio'], $_SESSION['idUsuario']);
 
-    $s->setCargaHorariaSemanal($_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria']);
-    $s->setTurno($_POST['turno']);
-    $s->setObs($_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'");
+    $_SESSION['solicitacao']['empresa'] = $_POST['empresa'];
+    $_SESSION['solicitacao']['area-atuacao'] = $_POST['area-atuacao'];
+    $_SESSION['solicitacao']['tipo-estagio'] = $_POST['tipo-estagio'];
+    $_SESSION['solicitacao']['carga-horaria'] = $_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria'];
+    $_SESSION['solicitacao']['turno'] = $_POST['turno'];
+    $_SESSION['solicitacao']['obs'] = $_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'";
     
-    header("Location: ./EscolherProfessores/index.php?idSolicitacao={$s->cadastrar()}");
+    header("Location: ./EscolherProfessores/index.php");
     
 }
 
