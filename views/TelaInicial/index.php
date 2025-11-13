@@ -16,6 +16,11 @@ if(!isset($_SESSION["idUsuario"])){
     header("location: ../Login/");
     exit();
 }
+if($_SESSION["tipo"]=="professor"){
+   $_SESSION["error"] = "É necessário ser um aluno.";
+    header("location: ../ListarSolicitacao/");
+    exit();     
+}
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
