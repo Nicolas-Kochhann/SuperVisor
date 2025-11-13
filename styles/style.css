@@ -406,7 +406,6 @@ img.showing {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 3px;
   color: #0649b4;
   font-style: none;
@@ -653,11 +652,11 @@ textarea {
 .container-bloco-listagem-scrollavel {
   height: 90%;
 }
+
 .status-listagem {
   height: 100%;
   background-color: #005bbc;
   color: #fff;
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -665,4 +664,9 @@ textarea {
   font-size: 1.6rem;
   border: 3px solid #005bbc5f;
   border-radius: 10px;
+}
+
+.caixa-nome-data{
+  display: flex;
+  gap: 15px;
 }
