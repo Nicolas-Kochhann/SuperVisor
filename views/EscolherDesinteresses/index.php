@@ -33,7 +33,7 @@ if(isset($_POST['submit'])){
         $usuario->cadastrarDesinteresses($desinteresses);
         //$usuario->atualizar();
         unset($_SESSION['cadastro']);
-        header("Location: ../index/");
+        header("Location: ../index.php");
         
     } else {
         $nome = $_SESSION['cadastro']['nome'];
