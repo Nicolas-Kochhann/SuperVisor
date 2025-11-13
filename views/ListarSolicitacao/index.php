@@ -46,8 +46,6 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
         <header class="cabecalho">
             <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            <a class="cabecalho-link-botao" href="../Perfil/index.php">Editar Perfil</a>
-            <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
             </div>
 
             <button class="menu-btn" id="menu-btn">☰</button>
