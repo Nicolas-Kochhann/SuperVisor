@@ -112,7 +112,7 @@ class Solicitacao{
         $status = (int)$r['status'];
 
         // Verifica se algum status é diferente de pendente
-        if ($status !== 0) {
+        if ($status !== 2) {
             $todosPendentes = false;
         }
 
@@ -136,7 +136,7 @@ class Solicitacao{
         return "Aceito";
     }
 
-    if ($statusProfessorAtual === 2) {
+    if ($statusProfessorAtual === 0) {
         return "Recusado";
     }
 

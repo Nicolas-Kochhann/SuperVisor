@@ -33,7 +33,7 @@ usort($professores, function ($a, $b) {
 
 if (isset($_POST['submit'])) {
     foreach ($_POST['professores'] as $prof) {
-        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], 2);
+        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], status: 2);
     }
     header("Location: ../../TelaInicial/index.php");
 }
