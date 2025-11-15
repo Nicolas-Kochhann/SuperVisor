@@ -169,4 +169,36 @@ class Solicitacao{
         return $conn->executa($sql);
     }
 
+
+
+public static function listarSolicitacoesAluno(int $idAluno): array {
+    $conn = new MySQL();
+    $sql = "SELECT DISTINCT s.idSolicitacao, s.empresa, s.tipoEstagio, s.data, sp.status
+            FROM solicitacao s
+            JOIN professor_solicitacao sp ON s.idSolicitacao = sp.idSolicitacao
+            WHERE s.idAluno = {$idAluno}
+            ORDER BY s.data DESC";
+            
+    
+    $resultados = $conn->consulta($sql);
+
+    $lista = [];
+    foreach ($resultados as $linha) {
+        $solicitacao = new Solicitacao(
+            $linha['empresa'],
+            '', 
+            $linha['tipoEstagio'],
+            $idAluno
+        );
+        $solicitacao->setIdSolicitacao($linha['idSolicitacao']);
+        $solicitacao->setData($linha['data']);
+        $solicitacao->setStatus($linha['status']);
+        $lista[] = $solicitacao;
+    }
+
+    return $lista;  
 }
+
+}
+
+
