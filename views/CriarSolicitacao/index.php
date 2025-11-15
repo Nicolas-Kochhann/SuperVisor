@@ -28,14 +28,15 @@ if (isset($_POST["submit"])) {
     echo $_POST['obs'];
     echo "<br>";
     */
-    
-    $s = new Solicitacao($_POST['empresa'], $_POST['area-atuacao'], $_POST['tipo-estagio'], $_SESSION['idUsuario']);
 
-    $s->setCargaHorariaSemanal($_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria']);
-    $s->setTurno($_POST['turno']);
-    $s->setObs($_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'");
+    $_SESSION['solicitacao']['empresa'] = $_POST['empresa'];
+    $_SESSION['solicitacao']['area-atuacao'] = $_POST['area-atuacao'];
+    $_SESSION['solicitacao']['tipo-estagio'] = $_POST['tipo-estagio'];
+    $_SESSION['solicitacao']['carga-horaria'] = $_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria'];
+    $_SESSION['solicitacao']['turno'] = $_POST['turno'];
+    $_SESSION['solicitacao']['obs'] = $_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'";
     
-    header("Location: ./EscolherProfessores/index.php?idSolicitacao={$s->cadastrar()}");
+    header("Location: ./EscolherProfessores/index.php");
     
 }
 
@@ -54,7 +55,14 @@ if (isset($_POST["submit"])) {
     <div class="container">
         
         <header class="cabecalho">
+            <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            
+            </div>
+
+            <button class="menu-btn" id="menu-btn">☰</button>
+
+            <?php require __DIR__."/../nav.php"; ?>
         </header>
 
         <main class="container-formulario">
@@ -99,5 +107,13 @@ if (isset($_POST["submit"])) {
 
     </div>
     <script src="../../scripts/requeridosPreenchidos.js"></script>
+    <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+        menu.classList.toggle('ativo');
+    });
+</script>
 </body>
 </html>

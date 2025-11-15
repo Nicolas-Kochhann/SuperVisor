@@ -32,8 +32,21 @@ usort($professores, function ($a, $b) {
 });
 
 if (isset($_POST['submit'])) {
+    $s = new Solicitacao(
+        $_SESSION['solicitacao']['empresa'], 
+        $_SESSION['solicitacao']['area-atuacao'], 
+        $_SESSION['solicitacao']['tipo-estagio'], 
+        $_SESSION['idUsuario']
+    );
+
+    $s->setCargaHorariaSemanal($_SESSION['solicitacao']['carga-horaria']);
+    $s->setTurno($_SESSION['solicitacao']['turno']);
+    $s->setObs(obs: $_SESSION['solicitacao']['obs']);
+
+    $solicitacaoId = $s->cadastrar();
+
     foreach ($_POST['professores'] as $prof) {
-        Solicitacao::relacionarProfessor($prof, $_GET['idSolicitacao'], 2);
+        Solicitacao::relacionarProfessor($prof, $solicitacaoId, status: 2);
     }
     header("Location: ../../TelaInicial/index.php");
 }
@@ -61,7 +74,7 @@ if (isset($_POST['submit'])) {
         <main class="container-listagem">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
-            <form style="height:calc(100% - 70px)" action="index.php?idSolicitacao=<?= $_GET['idSolicitacao'] ?>" method="POST">
+            <form style="height:calc(100% - 70px)" action="index.php" method="POST">
 
                 <div class="container-bloco-listagem-scrollavel">
                     <?php

@@ -46,8 +46,6 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
         <header class="cabecalho">
             <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            <a class="cabecalho-link-botao" href="../Perfil/index.php">Editar Perfil</a>
-            <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
             </div>
 
             <button class="menu-btn" id="menu-btn">☰</button>
@@ -71,7 +69,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                 $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                 $data = new DateTime($solicitacao->getData());
                 echo "<div class='item-listagem'>
-                        <a class='link-perfil-listagem' style='flex:1' href='../VisualizarAluno/?id={$aluno->getIdUsuario()}'>
+                        <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebido/?id={$solicitacao->getIdSolicitacao()}'>
                             <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno'>
                             <span>
                                 <div class='caixa-nome-data'>

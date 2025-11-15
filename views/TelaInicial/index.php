@@ -16,6 +16,11 @@ if(!isset($_SESSION["idUsuario"])){
     header("location: ../Login/");
     exit();
 }
+if($_SESSION["tipo"]=="professor"){
+   $_SESSION["error"] = "É necessário ser um aluno.";
+    header("location: ../ListarSolicitacao/");
+    exit();     
+}
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
@@ -46,8 +51,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
         <header class="cabecalho">
             <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            <a class="cabecalho-link-botao" href="../Perfil/index.php">Editar Perfil</a>
-            <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
+            
             </div>
 
             <button class="menu-btn" id="menu-btn">☰</button>

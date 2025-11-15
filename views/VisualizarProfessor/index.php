@@ -44,8 +44,14 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
     <div class="container">
 
         <header class="cabecalho">
+            <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            <a class="cabecalho-link-botao" href="../Logout/">Sair</a>
+            
+            </div>
+
+            <button class="menu-btn" id="menu-btn">☰</button>
+
+            <?php require __DIR__."/../nav.php"; ?>
         </header>
 
         <main class="container-listagem" style="width:50%;">
@@ -112,6 +118,14 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
         </main>
 
     </div>
+    <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+        menu.classList.toggle('ativo');
+    });
+</script>
 </body>
 
 </html>
