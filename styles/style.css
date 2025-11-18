@@ -678,3 +678,39 @@ textarea {
     cursor: default;
     text-decoration: none;
 }
+
+.solicitacoes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solicitacao-card {
+    width: 700px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-estagio {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.status {
+    margin-left: 20px;
+    white-space: nowrap; /* impede quebrar linha */
+}
+
+.negrito{
+    font-weight: bold;
+
+}
+
+
+

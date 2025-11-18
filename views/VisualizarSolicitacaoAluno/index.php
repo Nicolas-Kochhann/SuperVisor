@@ -44,14 +44,34 @@ $solicitacoesUsuario = Solicitacao::listarSolicitacoesAluno($_SESSION['idUsuario
     <div class="solicitacoes-container">
         <?php foreach ($solicitacoesUsuario as $s): ?>
             <div class="solicitacao-card">
-                <p><strong>Empresa:</strong> <?= $s->getEmpresa(); ?></p>
-                <p><strong>Tipo de Estágio:</strong> <?= $s->getTipoEstagio(); ?></p>
-                <p><strong>Data:</strong> <?= date('d/m/Y', strtotime($s->getData())); ?></p>
-                <p><strong>Status:</strong> 
-                    <span class="status-<?= strtolower($s->getStatus()); ?>">
-                        <?= $s->getStatus(); ?>
-                    </span>
-                </p>
+            <div class="info-estagio">
+            <span class="negrito">
+                <?php
+                if ($s->getTipoEstagio() === 'nao-sei') {
+                    echo "Estágio em {$s->getEmpresa()}";
+                } else if ($s->getTipoEstagio() === 'nao-obrigatorio') {
+                    echo "Estágio não obrigatório em {$s->getEmpresa()}";
+                } else {
+                    echo "Estágio obrigatório na {$s->getEmpresa()}";
+                    
+                }
+                ?>
+            </span>
+                <?= date('d/m/Y', strtotime($s->getData())); ?>
+            </div>
+                
+
+                <div class="status">
+                 <?php 
+                    if ($s->getStatus() === 0) {
+                        echo "<span style='color: red;'>Recusado</span>";
+                    } elseif ($s->getStatus() === 1) {
+                        echo "<span style='color: green;'>Aceito</span>";
+                    } else {
+                        echo "<span style='color: blue;'>Pendente</span>";
+                    }
+                    ?>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
