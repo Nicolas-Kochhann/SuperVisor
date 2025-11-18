@@ -84,7 +84,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 
       <label for="senha" class="label-form-grande obrigatorio">Senha</label>
                 <div class="password-container">
-                    <input class="input-form-grande" type="password" name="senha" id="senha" required>
+                    <input class="input-form-grande" type="password" name="senha" id="senha">
                     <img class="show-password" id="show-password" src="../../resources/images/eye.svg" alt="show passwd">
                 </div>
                 <div class="bloco-info">
