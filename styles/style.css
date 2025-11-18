@@ -666,15 +666,15 @@ textarea {
   border-radius: 10px;
 }
 
-.caixa-nome-data{
+.caixa-nome-data {
   display: flex;
   gap: 15px;
 }
 
 .menu .ativo {
-    color: #aaa;
-    cursor: default;
-    text-decoration: none;
+  color: #aaa;
+  cursor: default;
+  text-decoration: none;
 }
 
 .solicitacoes-container {
@@ -684,31 +684,63 @@ textarea {
 }
 
 .solicitacao-card {
-    width: 700px;
-    margin: 10px 0;
-    padding: 10px;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 700px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .info-estagio {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
 
 .status {
-    margin-left: 20px;
-    white-space: nowrap; /* impede quebrar linha */
+  margin-left: 20px;
+  white-space: nowrap; /* impede quebrar linha */
 }
 
-.negrito{
-    font-weight: bold;
-
+.negrito {
+  font-weight: bold;
 }
 
+.texto-visualizar-solicitacao {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3rem;
+  margin: 7px 0;
+}
 
+.botao-negar {
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background-color: #e73737;
+  border: solid 1px black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3rem;
+}
 
+.botao-negar:hover {
+  cursor: pointer;
+  background-color: #c02c2c;
+}
+
+.botao-aceitar {
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  color: white;
+  background-color: #33b22c;
+  border: solid 1px black;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3rem;
+}
+
+.botao-aceitar:hover {
+  cursor: pointer;
+  background-color: #239f1c;
+}
