@@ -69,6 +69,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                 $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                 $data = new DateTime($solicitacao->getData());
                 $tipoEst = "";
+                $s = $solicitacao->verStatus($_SESSION['idUsuario']);
                 if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
                     $tipoEst = ' não obrigatório';
                 }else if ($solicitacao->getTipoEstagio() == 'obrigatorio'){
@@ -87,7 +88,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                         </a>
                         <div>
                         </div>
-                        <p class='status-listagem'> ". $solicitacao->verStatus($_SESSION['idUsuario'])."</p>
+                        <p class='status-listagem'> ".$s."</p>
 
                     </div>";
             }
