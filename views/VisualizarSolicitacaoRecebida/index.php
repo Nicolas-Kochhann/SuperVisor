@@ -93,12 +93,18 @@ if(isset($_POST['botao'])){
             <p class="texto-visualizar-solicitacao">Carga Horária: <?=$solicitacao->getCargaHorariaSemanal()?></p>
             <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
             <p class="texto-visualizar-solicitacao">Obs.: <?=$solicitacao->getObs()?></p>
-            <div style="width: 100%; position:absolute; bottom:20px; display: flex; flex-direction: row-reverse; gap: 10px">
-                <form action="../VisualizarSolicitacaoRecebida/index.php?id=<?=$_GET['id']?>" method="post">
-                    <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
-                    <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
-                </form>
-            </div>
+            <?php
+            if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
+                echo'
+                    <div style="width: 100%; position:absolute; bottom:20px; display: flex; flex-direction: row-reverse; gap: 10px">
+                        <form action="../VisualizarSolicitacaoRecebida/index.php?id='.$_GET['id'].' method="post">
+                            <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
+                            <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
+                        </form>
+                    </div>
+                ';  }
+            ?>
+            
         </main>
 
     </div>
