@@ -14,11 +14,15 @@ $erro = '';
 # Cadastro de Conta do Aluno
 if(isset($_POST['submit'])){
     if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){
-        $_SESSION['cadastro']['nome'] = $_POST['nome'];
-        $_SESSION['cadastro']['email'] = $_POST['email'];
-        $_SESSION['cadastro']['foto_perfil'] = null;
-        $_SESSION['cadastro']['senha'] = $_POST['senha'];
-        header('Location: ../EscolherInteresses/');
+        if(str_ends_with($_POST['email'] , "@aluno.feliz.ifrs.edu.br")){
+            $_SESSION['cadastro']['nome'] = $_POST['nome'];
+            $_SESSION['cadastro']['email'] = $_POST['email'];
+            $_SESSION['cadastro']['foto_perfil'] = null;
+            $_SESSION['cadastro']['senha'] = $_POST['senha'];
+            header('Location: ../EscolherInteresses/'); 
+        } else {
+            $erro = 'Para cadastrar professor é necessário ser Administrador';
+        }
     } else {
         $erro = 'Email ou senha inválida';
     }

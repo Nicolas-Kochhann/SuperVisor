@@ -268,7 +268,21 @@ class Usuario{
             $solicitacao[] = $s;
         }
         return $solicitacao;
-    }    
+    }
+
+    public function acharSolicitacoesDoAluno() : array{
+        $conn = new MySQL();    
+        $sql = "SELECT * FROM solicitacao WHERE idAluno = {$this->idUsuario} ORDER BY data desc";
+        $resultado = $conn->consulta($sql);
+        $solicitacao = [];
+        foreach($resultado as $r){
+            $s = new Solicitacao($r['empresa'], $r['areaAtuacao'], $r['tipoEstagio'], $r['idAluno']);
+            $s->setData($r['data']);
+            $s->setIdSolicitacao($r['idSolicitacao']);
+            $solicitacao[] = $s;
+        }
+        return $solicitacao;
+    }
 
     public function setStatus(int $status): void{
         $this->status = $status;
