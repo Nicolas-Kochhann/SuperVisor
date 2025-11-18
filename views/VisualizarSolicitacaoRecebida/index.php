@@ -97,7 +97,7 @@ if(isset($_POST['botao'])){
             if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
                 echo'
                     <div style="width: 100%; position:absolute; bottom:20px; display: flex; flex-direction: row-reverse; gap: 10px">
-                        <form action="../VisualizarSolicitacaoRecebida/index.php?id='.$_GET['id'].' method="post">
+                        <form action="index.php?id='. $solicitacao->getIdSolicitacao() .'" method="post">
                             <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
                             <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
                         </form>
