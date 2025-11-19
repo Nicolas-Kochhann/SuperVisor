@@ -71,9 +71,9 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                 $tipoEst = "";
                 $s = $solicitacao->verStatus($_SESSION['idUsuario']);
                 if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
-                    $tipoEst = ' não obrigatório';
+                    $tipoEst = 'não obrigatório';
                 }else if ($solicitacao->getTipoEstagio() == 'obrigatorio'){
-                    $tipoEst = " obrigatório";
+                    $tipoEst = "obrigatório";
                 }
                 echo "<div class='item-listagem'>
                         <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebida/?id={$solicitacao->getIdSolicitacao()}'>
@@ -83,12 +83,21 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                                     <p class='texto-listagem'>{$aluno->getNome()}</p>
                                     <p class='texto-listagem' style='color:#505050'>".date_format($data,"d/m/Y ")."</p>
                                 </div>
-                                <p class='texto-listagem' style='color:black'>Estágio{$tipoEst} em {$solicitacao->getEmpresa()}</p>
+                                <p class='texto-listagem' style='color  :black'>Estágio {$tipoEst} em {$solicitacao->getEmpresa()}</p>
                             </span>
                         </a>
                         <div>
                         </div>
-                        <p class='status-listagem'> ".$s."</p>
+                        <p class='status-listagem'";
+                        if($s=='Aceito'){
+                            echo "style= color:green";
+                        }else if($s=='Recusado'){
+                            echo "style= color:red";
+                        }
+                        else if($s=='Pendente'){
+                            echo "style= color:orange";
+                        }
+                        echo"> ".$solicitacao->verStatus($_SESSION['idUsuario'])."</p>
 
                     </div>";
             }

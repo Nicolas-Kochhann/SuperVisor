@@ -81,7 +81,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
                                     <p class='texto-listagem'>{$aluno->getNome()}</p>
                                     <p class='texto-listagem' style='color:#505050'>".date_format($data,"d/m/Y ")."</p>
                                 </div>
-                                <p class='texto-listagem' style='color:black'>Estágio{$tipoEst} em {$solicitacao->getEmpresa()}</p>
+                                <p class='texto-listagem' style='color:black'>Estágio {$tipoEst} em {$solicitacao->getEmpresa()}</p>
                             </span>
                         </a>
                         <div>

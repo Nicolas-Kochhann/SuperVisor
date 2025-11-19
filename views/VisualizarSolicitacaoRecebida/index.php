@@ -90,7 +90,7 @@ if(isset($_POST['botao'])){
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
             <p class="texto-visualizar-solicitacao">Área de Atuação: <?=$solicitacao->getAreaAtuacao()?></p>
             <p class="texto-visualizar-solicitacao">Tipo de Estágio: <?= $tipoEst?></p>
-            <p class="texto-visualizar-solicitacao">Carga Horária: <?=$solicitacao->getCargaHorariaSemanal()?></p>
+            <p class="texto-visualizar-solicitacao">Carga Horária: <?=$solicitacao->getCargaHorariaSemanal()?> horas semanais</p>
             <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
             <p class="texto-visualizar-solicitacao">Obs.: <?=$solicitacao->getObs()?></p>
             <?php
