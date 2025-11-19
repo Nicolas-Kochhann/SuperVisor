@@ -56,7 +56,7 @@ if(isset($_POST['botao'])){
     }else{
         $solicitacao->setStatus(0);
     }
-    $solicitacao->atualizarStatus();
+    $solicitacao->atualizarStatus($_SESSION['idUsuario']);
 }
 ?>
 

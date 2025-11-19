@@ -37,13 +37,13 @@ class Solicitacao{
     public function getTipoEstagio():string{
         return $this->tipoEstagio;
     }
-    public function getCargaHorariaSemanal():int{
+    public function getCargaHorariaSemanal(): ?int{
         return $this->carga_horaria_semanal;
     }
     public function getTurno():string{
         return $this->turno;
     }
-    public function getObs():string{
+    public function getObs(): ?string{
         return $this->obs;
     }
     public function getIdAluno():int{
@@ -172,11 +172,11 @@ class Solicitacao{
         return $conn->executa($sql);
     }
 
-    public function atualizarStatus(): bool{
+    public function atualizarStatus($idProfessor): bool{
         $conn = new MySQL();
         $sql = "UPDATE professor_solicitacao SET
         status = '{$this->status}'
-        WHERE idSolicitacao = {$this->idSolicitacao}";
+        WHERE idSolicitacao = {$this->idSolicitacao} AND idProfessor = {$idProfessor}";
         return $conn->executa($sql);
     }
 

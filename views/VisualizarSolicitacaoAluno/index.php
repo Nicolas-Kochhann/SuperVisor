@@ -15,7 +15,7 @@ use Src\models\Usuario;
 use Src\models\Solicitacao;
 
 $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
-$solicitacoesUsuario = Solicitacao::listarSolicitacoesAluno($_SESSION['idUsuario']);
+$solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
 ?>
 
 <!DOCTYPE html>
