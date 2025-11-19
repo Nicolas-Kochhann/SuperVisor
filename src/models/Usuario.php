@@ -49,6 +49,9 @@ class Usuario{
     public function setSenha(string $senha){
         $this->senha = $senha;
     }
+    public function getDisponivel(): bool{
+        return $this->disponivel;
+    }
 
     public function getInteressesEmComum(): int{
         return $this->interreses_em_comum;
@@ -97,12 +100,13 @@ class Usuario{
     
     public static function acharUsuario(int $idUsuario) : ?Usuario{
         $conn = new MySQL();
-        $sql = "SELECT nome, imagem, email, senha, tipo FROM usuario WHERE idUsuario={$idUsuario}";
+        $sql = "SELECT nome, imagem, email, senha, tipo, disponivel FROM usuario WHERE idUsuario={$idUsuario}";
         $resultado = $conn->consulta($sql);
         if(count($resultado) === 1){
             $u = new Usuario($resultado[0]['nome'], $resultado[0]['imagem'], $resultado[0]['email'], $resultado[0]['senha']);
             $u->setIdUsuario($idUsuario);
             $u->setTipo($resultado[0]['tipo']);
+            $u->setDisponivel($resultado[0]['disponivel']);
             return $u;
         }
         return null;
@@ -184,9 +188,9 @@ class Usuario{
         $conn = new MySQL();
         
         if($mudaSenha){
-            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', imagem='{$this->foto_perfil}', disponivel=" . ($this->disponivel ? 1 : 0) . " WHERE idUsuario={$this->idUsuario}";
         }else{
-            $sql = "UPDATE usuario SET nome='{$this->nome}', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', imagem='{$this->foto_perfil}', disponivel=" . ($this->disponivel ? 1 : 0) . " WHERE idUsuario={$this->idUsuario}";
         }
         
         return $conn->executa($sql);
