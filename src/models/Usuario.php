@@ -23,7 +23,7 @@ class Usuario{
     private string $data_hora_cadastro;
     private int $interreses_em_comum = 0;
     private int $desinteresses_em_comum = 0;
-    private bool $disponivel;
+    private int $disponivel;
     private int $status; // 0 - ativo / 1 - pendente / 2 - inativo
 
     public function __construct($nome, $foto_perfil, $email, $senha){
@@ -39,7 +39,7 @@ class Usuario{
         $this->idUsuario = $idUsuario;
     }
 
-    public function setDisponivel(bool $disponivel){
+    public function setDisponivel(int $disponivel){
         $this->disponivel = $disponivel;
     }
     public function setNome(string $nome){
@@ -188,7 +188,7 @@ class Usuario{
         if($mudaSenha){
             $sql = "UPDATE usuario SET nome='{$this->nome}', senha='".password_hash($this->senha, PASSWORD_BCRYPT)."', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
         }else{
-            $sql = "UPDATE usuario SET nome='{$this->nome}', imagem='{$this->foto_perfil}' WHERE idUsuario={$this->idUsuario}";
+            $sql = "UPDATE usuario SET nome='{$this->nome}', imagem='{$this->foto_perfil}', disponivel={$this->disponivel} WHERE idUsuario={$this->idUsuario}";
         }
         
         return $conn->executa($sql);

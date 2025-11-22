@@ -29,7 +29,7 @@ if(isset($_POST['editarPerfil'])){
     }
     $user->setNome($_POST['nome']);
     if($user->validarSenha($_POST['senha'])){ $user->setSenha($_POST['senha']); }
-    $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
+    $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? 1 : 0);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
     $user->atualizar($mudarSenha);
     header('Location: ../TelaInicial/');
@@ -100,13 +100,24 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
       <?php
       
       if($user->getTipo() == 'professor'){
-        echo'
-        <div class="disponibilidade-container">
-          <span class="label-form-grande">Disponível:</span>
-          <label><input type="radio" name="disponibilidade" value="disponivel"> Sim</label>
-          <label><input type="radio" name="disponibilidade" value="indisponivel"> Não</label>
-        </div>
-        ';
+        if($_SESSION['disponivel'] === 1){
+          echo'
+            <div class="disponibilidade-container">
+              <span class="label-form-grande">Disponível:</span>
+              <label><input checked type="radio" name="disponibilidade" value="disponivel"> Sim</label>
+              <label><input type="radio" name="disponibilidade" value="indisponivel"> Não</label>
+            </div>
+          ';
+        } else {
+          echo'
+            <div class="disponibilidade-container">
+              <span class="label-form-grande">Disponível:</span>
+              <label><input type="radio" name="disponibilidade" value="disponivel"> Sim</label>
+              <label><input checked type="radio" name="disponibilidade" value="indisponivel"> Não</label>
+            </div>
+          ';
+        }
+        
       }
 
       ?>

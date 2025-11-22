@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 require_once __DIR__."/../../vendor/autoload.php";
@@ -7,9 +11,6 @@ if (!isset($_SESSION['idUsuario'])) {
     header("location:index.php");
     exit;
 }
-
-require_once __DIR__."/../../Src/models/Usuario.php";
-require_once __DIR__."/../../Src/models/Solicitacao.php";
 
 use Src\models\Usuario;
 use Src\models\Solicitacao;
@@ -40,7 +41,7 @@ $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
             <?php require __DIR__."/../nav.php"; ?>
         </header>
 <body>
-    <?php if ($solicitacoesUsuario): ?>
+    <?php if (isset($solicitacoesUsuario)): ?>
     <div class="solicitacoes-container">
         <?php foreach ($solicitacoesUsuario as $s): ?>
             <div class="solicitacao-card">
