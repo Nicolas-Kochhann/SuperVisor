@@ -102,6 +102,7 @@ if (isset($_POST["submit"])) {
                 <textarea class="input-form-grande" name="obs" id="obs"></textarea>
 
                 <button disabled class="botao-strong" id="submit" name="submit">Escolher Professores</button>
+                <a class="link-formulario" href="../TelaInicial">Cancelar</a>
             </form>
         </main>
 
