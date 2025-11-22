@@ -28,7 +28,9 @@ class Usuario{
 
     public function __construct($nome, $foto_perfil, $email, $senha){
         $this->nome = $nome;
-        $this->foto_perfil = $foto_perfil;
+        if ($foto_perfil !== "") {
+            $this->foto_perfil = $foto_perfil;
+        }
         $this->email = $email;
         $this->senha = $senha;
     }

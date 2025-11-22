@@ -715,7 +715,15 @@ textarea {
   margin: 7px 0;
 }
 
+.container-botoes-solicitacao {
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+}
+
 .botao-negar {
+  flex: 1;
   padding: 10px;
   margin: 10px 0 10px 0;
   color: white;
@@ -731,6 +739,7 @@ textarea {
 }
 
 .botao-aceitar {
+  flex: 1;
   padding: 10px;
   margin: 10px 0 10px 0;
   color: white;
