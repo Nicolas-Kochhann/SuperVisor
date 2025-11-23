@@ -50,6 +50,12 @@ if (isset($_POST['submit'])) {
     }
     header("Location: ../../TelaInicial/index.php");
 }
+$foto_perfil = "";
+if($professor->getFotoPerfil()!= null or $professor->getFotoPerfil()!=""){
+    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+}else{
+    $foto_perfil = 'foto_perfil_padrao.svg';
+}
 
 ?>
 
@@ -83,7 +89,6 @@ if (isset($_POST['submit'])) {
                         if (count($professor->acharInteresses()) < 3) {
                             continue;
                         }
-                        $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                         echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                             <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
                             <label for='{$professor->getIdUsuario()}' class='container-item-listagem item-listagem-clicavel'>

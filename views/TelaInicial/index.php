@@ -34,6 +34,12 @@ foreach($professores as $professor){
 
 usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
 
+$foto_perfil = "";
+if($professor->getFotoPerfil()!= null or $professor->getFotoPerfil()!=""){
+    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+}else{
+    $foto_perfil = 'foto_perfil_padrao.svg';
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +80,7 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
                 if(count($professor->acharInteresses()) < 3){
                     continue;
                 }
-                $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+                
                 echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                         <a class='link-perfil-listagem' href='../VisualizarProfessor/?id={$professor->getIdUsuario()}'> <!-- LINK DO PERFIL DO PROFESSOR NO href -->
                         <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto de um professor'> <!-- FOTO DE PERFIL DO PROFESSOR NO src -->
