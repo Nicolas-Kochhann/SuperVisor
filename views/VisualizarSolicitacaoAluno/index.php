@@ -105,7 +105,14 @@ if(isset($_POST['excluir'])){
         <main class="container-listagem" style="position:relative; width: 50%;">
             <form style="display: flex" action="index.php?id=<?= $solicitacao->getIdSolicitacao()?>" method="post">
                 <h2 class="titulo1">Solicitação de Orientação</h2>
-                <button class="botao-excluir-solicitacao" name="excluir">Excluir</button>
+                <?php
+                
+                if(!$solicitacao->verificarSeSolicitacaoFoiAceita()){
+                    echo '<button class="botao-excluir-solicitacao" name="excluir">Excluir</button>';
+                }
+
+                ?>                
+                
             </form>
             <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('d/m/Y') ?></h3>
             <hr>

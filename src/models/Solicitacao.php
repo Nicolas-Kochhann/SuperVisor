@@ -271,6 +271,27 @@ class Solicitacao{
         return $lista;  
     }
 
+    public function verificarSeSolicitacaoFoiAceita(): bool {
+        /*
+
+        Verifica se a solicitação já foi aceita por algum professor.
+
+        */
+
+        $conn = new MySQL();
+        $sql = "SELECT status FROM professor_solicitacao WHERE idSolicitacao={$this->idSolicitacao}";
+        $resultados = $conn->consulta($sql);
+
+        foreach($resultados as $resultado){
+            if($resultado['status'] == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
+
+
 
 
