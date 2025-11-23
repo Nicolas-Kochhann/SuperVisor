@@ -172,12 +172,31 @@ class Solicitacao{
         return $conn->executa($sql);
     }
 
-    public function atualizarStatus($idProfessor): bool{
+    public function atualizarStatus($idProfessor): void{
+        /*
+
+        Atualiza o status da solicitação.
+        Caso status = 1 (aceita), adiciona as informaçõe na tabela estagio.
+
+        */
+
         $conn = new MySQL();
         $sql = "UPDATE professor_solicitacao SET
         status = '{$this->status}'
         WHERE idSolicitacao = {$this->idSolicitacao} AND idProfessor = {$idProfessor}";
-        return $conn->executa($sql);
+        $conn->executa($sql);
+
+        if($this->status == 1){
+            $sql = "SELECT idAluno, empresa FROM solicitacao
+                    WHERE idSolicitacao = {$this->idSolicitacao}";
+            $resultado = $conn->consulta($sql);
+
+            $empresa = $resultado[0]['empresa'];
+            $idAluno = $resultado[0]['idAluno'];
+
+            $sql = "INSERT INTO estagio(empresa, idAluno, idProfessor) VALUES('{$empresa}', {$idAluno}, {$idProfessor})";
+            $conn->executa($sql);
+        }     
     }
 
     public function acharProfessoresSolicitacao($idSolicitacao): array{
