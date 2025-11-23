@@ -16,7 +16,6 @@ if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
     exit();
-    
 }
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
@@ -29,6 +28,7 @@ if ($_SESSION["idUsuario"] != $solicitacao->getIdAluno()) {
 }
 
 $data = new DateTime($solicitacao->getData());
+
 $tipoEst = "";
 if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
     $tipoEst = 'Não obrigatório';
@@ -98,7 +98,10 @@ usort($professores, function($a, $b) {
         </header>
 
         <main class="container-listagem" style="position:relative; width: 50%;">
-            <h2 class="titulo1">Solicitação de Orientação</h2>
+            <div style="display: flex">
+                <h2 class="titulo1">Solicitação de Orientação</h2>
+                <button class="botao-excluir-solicitacao">Excluir</button>
+            </div>
             <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('d/m/Y') ?></h3>
             <hr>
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>

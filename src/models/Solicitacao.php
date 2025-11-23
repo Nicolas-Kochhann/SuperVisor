@@ -182,7 +182,7 @@ class Solicitacao{
 
     public function acharProfessoresSolicitacao($idSolicitacao): array{
         $conn = new MySQL();
-        $sql = "SELECT u.nome, u.imagem,ps.status
+        $sql = "SELECT u.nome, u.imagem, ps.status
                 FROM `professor_solicitacao` ps
                 JOIN usuario u ON u.idUsuario = ps.idProfessor
                 WHERE ps.idSolicitacao = {$idSolicitacao}";

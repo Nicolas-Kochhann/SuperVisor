@@ -763,3 +763,38 @@ textarea {
   overflow-y: scroll;
   padding: 5px;
 }
+
+.botao-excluir-solicitacao {
+  font-size: 1.1em;
+  margin: 0 0 0 auto;
+  padding: 10px;
+  color: red;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.2s ease-in-out;
+}
+
+.botao-excluir-solicitacao::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-out;
+}
+
+.botao-excluir-solicitacao:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.botao-excluir-solicitacao:hover::before {
+  transform: translateX(0);
+}
