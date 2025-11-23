@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+if (!function_exists('str_ends_with')) {
+    function str_ends_with(string $haystack, string $needle): bool
+    {
+        $needle_len = strlen($needle);
+        return ($needle_len === 0 || 0 === substr_compare($haystack, $needle, -$needle_len));
+    }
+}
+
 // Mostra todos os erros na tela
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

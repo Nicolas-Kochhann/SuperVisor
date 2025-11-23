@@ -13,7 +13,7 @@ session_start();
 
 if (!isset($_SESSION["idUsuario"])) {
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
-    header("location: ../Login/");
+    header("location: ../../Login/");
     exit();
 }
 
