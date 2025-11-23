@@ -1,21 +1,55 @@
 <?php
-session_start();
 
-require_once __DIR__."/../../vendor/autoload.php";
+// Mostra todos os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-if (!isset($_SESSION['idUsuario'])) {
-    header("location:index.php");
-    exit;
-}
-
-require_once __DIR__."/../../Src/models/Usuario.php";
-require_once __DIR__."/../../Src/models/Solicitacao.php";
+require __DIR__."/../../vendor/autoload.php";
 
 use Src\models\Usuario;
 use Src\models\Solicitacao;
 
-$usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
+session_start();
+
+if(!isset($_SESSION["idUsuario"])){
+    $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
+    header("location: ../Login/");
+    exit();
+    
+}
+
+$usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
+
 $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
+
+$data = new DateTime($solicitacao->getData());
+$tipoEst = "";
+if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
+    $tipoEst = 'Não obrigatório';
+}else if ($solicitacao->getTipoEstagio() == 'obrigatorio'){
+    $tipoEst = "Obrigatório";
+}else {
+    $tipoEst = 'Não sei';
+}
+
+$turno = "";
+if($solicitacao->getTurno() == 'manha'){
+    $turno = 'Manhã';
+}else if ($solicitacao->getTurno() == 'tarde'){
+    $turno = "Tarde";
+}else {
+    $turno = 'Não sei';
+}
+
+if(isset($_POST['botao'])){
+    if($_POST['botao'] == 'aceitar'){
+        $solicitacao->setStatus(1);
+    }else{
+        $solicitacao->setStatus(0);
+    }
+    $solicitacao->atualizarStatus($_SESSION['idUsuario']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,57 +63,48 @@ $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
 </head>
 <body>
     <div class="container">
-        
+
         <header class="cabecalho">
             <div class="div-cabecalho">
             <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            
             </div>
 
             <button class="menu-btn" id="menu-btn">☰</button>
 
             <?php require __DIR__."/../nav.php"; ?>
         </header>
-<body>
-    <?php if ($solicitacoesUsuario): ?>
-    <div class="solicitacoes-container">
-        <?php foreach ($solicitacoesUsuario as $s): ?>
-            <div class="solicitacao-card">
-            <div class="info-estagio">
-            <span class="negrito">
+
+        <main class="container-listagem" style="position:relative; width: 50%;">
+            <h2 class="titulo1">Solicitação de Orientação</h2>
+            <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('Y-m-d') ?></h3>
+            <hr>
+            <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
+            <p class="texto-visualizar-solicitacao">Área de Atuação: <?=$solicitacao->getAreaAtuacao()?></p>
+            <p class="texto-visualizar-solicitacao">Tipo de Estágio: <?= $tipoEst?></p>
+            <p class="texto-visualizar-solicitacao">Carga Horária: 
                 <?php
-                if ($s->getTipoEstagio() === 'nao-sei') {
-                    echo "Estágio em {$s->getEmpresa()}";
-                } else if ($s->getTipoEstagio() === 'nao-obrigatorio') {
-                    echo "Estágio não obrigatório em {$s->getEmpresa()}";
-                } else {
-                    echo "Estágio obrigatório na {$s->getEmpresa()}";
-                    
-                }
-                ?>
-            </span>
-                <?= date('d/m/Y', strtotime($s->getData())); ?>
-            </div>
-                
-
-                <div class="status">
-                 <?php 
-                    if ($s->getStatus() === 0) {
-                        echo "<span style='color: red;'>Recusado</span>";
-                    } elseif ($s->getStatus() === 1) {
-                        echo "<span style='color: green;'>Aceito</span>";
+                    if (null !== $solicitacao->getCargaHorariaSemanal()) {
+                        echo "{$solicitacao->getCargaHorariaSemanal()} horas semanais";
                     } else {
-                        echo "<span style='color: blue;'>Pendente</span>";
+                        echo "não informado";
                     }
-                    ?>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <?php else: ?>
-        <p>Nenhuma solicitação cadastrada ainda.</p>
-    <?php endif; ?>
+                ?>
+            </p>
+            <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
+            <?php
+                if (null !== $solicitacao->getObs()) {
+                    echo "<p class='texto-visualizar-solicitacao'>Obs.: {$solicitacao->getObs()}</p>";
+                }
+            ?>
 
-<script>
+            <div style="width: 100%; margin-top:50px; bottom:20px; position:absolute; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
+                <a style="font-size:23px" class="link-formulario" href="../MinhasSolicitacoes">Retornar</a>
+            </div>
+        </main>
+
+    </div>
+    <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
 
@@ -87,6 +112,5 @@ $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
         menu.classList.toggle('ativo');
     });
 </script>
-
 </body>
 </html>

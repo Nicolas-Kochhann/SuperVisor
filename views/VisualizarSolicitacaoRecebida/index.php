@@ -90,7 +90,42 @@ if(isset($_POST['botao'])){
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
             <p class="texto-visualizar-solicitacao">Área de Atuação: <?=$solicitacao->getAreaAtuacao()?></p>
             <p class="texto-visualizar-solicitacao">Tipo de Estágio: <?= $tipoEst?></p>
-            <p class="texto-visualizar-solicitacao">Carga Horária: <?=$solicitacao->getCargaHorariaSemanal()?> horas semanais</p>
+            <p class="texto-visualizar-solicitacao">Carga Horária: 
+                <?php
+                    if (null !== $solicitacao->getCargaHorariaSemanal()) {
+                        echo "{$solicitacao->getCargaHorariaSemanal()} horas semanais";
+                    } else {
+                        echo "não informado";
+                    }
+                ?>
+            </p>
+            <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
+            <?php
+                if (null !== $solicitacao->getObs()) {
+                    echo "<p class='texto-visualizar-solicitacao'>Obs.: {$solicitacao->getObs()}</p>";
+                }
+            ?>
+            
+            <?php
+            if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
+                echo'
+                    <div class="container-botoes-solicitacao">
+                        <form style="flex: 1; display: flex; gap: 10px;" action="index.php?id='. $solicitacao->getIdSolicitacao() .'" method="post">
+                            <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
+                            <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
+                        </form>
+                    </div>
+                ';  
+            } 
+            if ($solicitacao->verStatus($_SESSION['idUsuario']) == "Recusado"){
+                echo'
+                    <div class="container-botoes-solicitacao">
+                        <h1>PORRAs</h1>
+                    </div>
+                ';  
+            }
+            
+            ?>
             <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
             <p class="texto-visualizar-solicitacao">Obs.: <?=$solicitacao->getObs()?></p>
             <?php
