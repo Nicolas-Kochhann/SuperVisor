@@ -753,3 +753,13 @@ textarea {
   cursor: pointer;
   background-color: #239f1c;
 }
+
+.container-bloco-listagem-visualizar-solicitacao {
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow-y: scroll;
+  padding: 5px;
+}

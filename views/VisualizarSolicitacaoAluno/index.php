@@ -42,14 +42,31 @@ if($solicitacao->getTurno() == 'manha'){
     $turno = 'Não sei';
 }
 
-if(isset($_POST['botao'])){
-    if($_POST['botao'] == 'aceitar'){
-        $solicitacao->setStatus(1);
-    }else{
-        $solicitacao->setStatus(0);
+$professores = $solicitacao->acharProfessoresSolicitacao($_GET['id']);
+
+usort($professores, function($a, $b) {
+    $statusA = $a['status'];
+    $statusB = $b['status'];
+
+    // Joga a aceita pra cima
+    if ($statusA === "1" && $statusB !== "1") {
+        return -1;
     }
-    $solicitacao->atualizarStatus($_SESSION['idUsuario']);
-}
+    if ($statusA !== "1" && $statusB === "1") {
+        return 1;
+    }
+
+    // Joga as recusadas para baixo
+    if ($statusA === "0" && $statusB !== "0") {
+        return 1;
+    }
+    if ($statusA !== "0" && $statusB === "0") {
+        return -1;
+    }
+
+    return strcmp($statusA, $statusB);
+});
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +94,7 @@ if(isset($_POST['botao'])){
 
         <main class="container-listagem" style="position:relative; width: 50%;">
             <h2 class="titulo1">Solicitação de Orientação</h2>
-            <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('Y-m-d') ?></h3>
+            <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('d/m/Y') ?></h3>
             <hr>
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
             <p class="texto-visualizar-solicitacao">Área de Atuação: <?=$solicitacao->getAreaAtuacao()?></p>
@@ -98,9 +115,42 @@ if(isset($_POST['botao'])){
                 }
             ?>
 
-            <div style="width: 100%; margin-top:50px; bottom:20px; position:absolute; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
-                <a style="font-size:23px" class="link-formulario" href="../MinhasSolicitacoes">Retornar</a>
+            <div class="container-bloco-listagem-visualizar-solicitacao" >
+                <?php
+                foreach ($professores as $professor) {
+                    //var_dump($professor);
+                    //die();
+                    
+                    $foto_perfil = $professor["imagem"] ?? 'foto_perfil_padrao.svg';
+                    $status = Solicitacao::traduzirStatus($professor['status']);
+                    
+                    switch ($professor['status']) {
+                        case 0:
+                            $cor = 'red';
+                            break;
+                        
+                        case 1:
+                            $cor = 'green';
+                            break;
+                        
+                        case 2:
+                            $cor = 'orange';
+                            break;
+                        
+                        default:
+                            $cor = 'black';
+                            break;
+                    }
+
+                    echo "<div class='item-listagem'> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM --> 
+                                <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto de um professor'>
+                                <p class='texto-listagem'>{$professor["nome"]}</p>
+                                <p style='margin: 0 15px 0 auto; color: {$cor}' class='texto-listagem'>{$status}</p>
+                        </div>";
+                }
+                ?>
             </div>
+            
         </main>
 
     </div>

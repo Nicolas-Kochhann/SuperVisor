@@ -85,7 +85,7 @@ if(isset($_POST['botao'])){
 
         <main class="container-listagem" style="position:relative; width: 50%;">
             <h2 class="titulo1">Solicitação recebida</h2>
-            <h3 class="titulo2" style="margin: 0 0 10px 0">de <?=$aluno->getNome()?> | 12/12/25</h3>
+            <h3 class="titulo2" style="margin: 0 0 10px 0">de <?=$aluno->getNome()?> | <?= $data->format('d/m/Y') ?></h3>
             <hr>
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
             <p class="texto-visualizar-solicitacao">Área de Atuação: <?=$solicitacao->getAreaAtuacao()?></p>
@@ -105,29 +105,7 @@ if(isset($_POST['botao'])){
                     echo "<p class='texto-visualizar-solicitacao'>Obs.: {$solicitacao->getObs()}</p>";
                 }
             ?>
-            
-            <?php
-            if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
-                echo'
-                    <div class="container-botoes-solicitacao">
-                        <form style="flex: 1; display: flex; gap: 10px;" action="index.php?id='. $solicitacao->getIdSolicitacao() .'" method="post">
-                            <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
-                            <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
-                        </form>
-                    </div>
-                ';  
-            } 
-            if ($solicitacao->verStatus($_SESSION['idUsuario']) == "Recusado"){
-                echo'
-                    <div class="container-botoes-solicitacao">
-                        <h1>PORRAs</h1>
-                    </div>
-                ';  
-            }
-            
-            ?>
-            <p class="texto-visualizar-solicitacao">Turno: <?=$turno?></p>
-            <p class="texto-visualizar-solicitacao">Obs.: <?=$solicitacao->getObs()?></p>
+        
             <?php
             if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
                 echo'

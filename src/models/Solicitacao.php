@@ -180,6 +180,42 @@ class Solicitacao{
         return $conn->executa($sql);
     }
 
+    public function acharProfessoresSolicitacao($idSolicitacao): array{
+        $conn = new MySQL();
+        $sql = "SELECT u.nome, u.imagem,ps.status
+                FROM `professor_solicitacao` ps
+                JOIN usuario u ON u.idUsuario = ps.idProfessor
+                WHERE ps.idSolicitacao = {$idSolicitacao}";
+        
+        $resultado = $conn->consulta($sql);
+
+        return($resultado);
+    }
+
+    public static function traduzirStatus(int $num) : string{
+        /*
+
+        Traduz um número de status para uma string legível.
+        0 = recusada, 1 = aceita, 2 = pendente
+
+        */
+
+        switch ($num) {
+            case 0:
+                return "Recusada";
+            
+            case 1:
+                return "Aceita";
+            
+            case 2:
+                return "Pendente";
+            
+            default:
+                return "Desconhecido";
+        }
+
+    }
+
     public static function acharSolicitacaoPorId(int $idSol): Solicitacao{
         $conn = new MySQL();
         $sql = "SELECT s.idAluno, s.empresa, s.tipoEstagio, s.data, s.areaAtuacao, s.carga_horaria_semanal, s.turno, s.obs , sp.status
