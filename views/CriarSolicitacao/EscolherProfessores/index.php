@@ -65,13 +65,13 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class="container">
+    <div style="overflow-y: hidden;" class="container">
 
         <header class="cabecalho">
             <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
         </header>
 
-        <main class="container-listagem">
+        <main class="container-listagem-solicitacao">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
             <form style="height:calc(100% - 70px)" action="index.php" method="POST">
@@ -103,6 +103,7 @@ if (isset($_POST['submit'])) {
 
                 </div>
                 <div style="width:100%; display:flex; flex-direction:line-reverse">
+                    <a style="font-size:23px; align-content:center" class="link-formulario" href="..">Retornar</a>
                     <button disabled style="margin: 10px 0 0 auto; padding:10px; text-decoration:underline" class="botao-strong" name="submit" id="submit">Enviar Solicitação</button>
                 </div>
             </form>

@@ -25,8 +25,12 @@ $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
 $usuarioInteresses = $usuario->acharInteresses();
 $usuarioDesinteresses = $usuario->acharDesinteresses();
 
-$foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-
+$foto_perfil = "";
+if($professor->getFotoPerfil()!= null or $professor->getFotoPerfil()!=""){
+    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+}else{
+    $foto_perfil = 'foto_perfil_padrao.svg';
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +70,6 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             <h2 class="titulo-view">Interesses</h2>
             <div class="bloco-interesses" style="margin:0 0 20px 0">
             <?php
-
             foreach($professorInteresses as $professorInteresseId){
                 $i = Interesse::acharInteresse($professorInteresseId);
                 if(in_array($professorInteresseId, $usuarioInteresses)){
@@ -114,7 +117,9 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
                 echo '</div>';
             }
             ?>
-
+            <div style="width: 100%; margin-top:50px; bottom:20px; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
+                <a style="font-size:23px" class="link-formulario" href="../ListarSolicitacao">Retornar</a>
+            </div>
         </main>
 
     </div>

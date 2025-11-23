@@ -104,7 +104,9 @@ if(isset($_POST['botao'])){
                         </form>
                     </div>
                     
-                ';  }
+                ';  }else{
+                    echo"<p class='texto-visualizar-solicitacao'>Resposta: ".$solicitacao->verStatus($_SESSION['idUsuario'])."";
+                }
             ?>
             <div style="width: 100%; margin-top:50px; bottom:20px; position:absolute; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
                 <a style="font-size:23px" class="link-formulario" href="../ListarSolicitacao">Retornar</a>
