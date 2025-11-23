@@ -23,6 +23,11 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
 $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
 
+if ($_SESSION["idUsuario"] != $solicitacao->getIdAluno()) {
+    $_SESSION["erro"] = "Acesso negado.";
+    header("Location: ../TelaInicial/");
+}
+
 $data = new DateTime($solicitacao->getData());
 $tipoEst = "";
 if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
