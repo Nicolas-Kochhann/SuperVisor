@@ -96,15 +96,19 @@ if(isset($_POST['botao'])){
             <?php
             if($solicitacao->verStatus($_SESSION['idUsuario']) == "Pendente"){
                 echo'
-                    <div style="width: 100%; position:absolute; bottom:20px; display: flex; flex-direction: row-reverse; gap: 10px">
+                    
+                    <div style="width: 100%; margin-top:50px; bottom:20px; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
                         <form action="index.php?id='. $solicitacao->getIdSolicitacao() .'" method="post">
-                            <button type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
-                            <button type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
+                            <button style="width: 20vw;" type="submit" class="botao-negar" name="botao" value="negar">Rejeitar</button>
+                            <button style="width: 20vw;" type="submit" class="botao-aceitar" name="botao" value="aceitar">Aceitar</button>
                         </form>
                     </div>
+                    
                 ';  }
             ?>
-            
+            <div style="width: 100%; margin-top:50px; bottom:20px; position:absolute; display: flex; flex-direction: column-reverse; gap: 10px; align-items: center;">
+                <a style="font-size:23px" class="link-formulario" href="../ListarSolicitacao">Retornar</a>
+            </div>
         </main>
 
     </div>
