@@ -72,6 +72,11 @@ usort($professores, function($a, $b) {
     return strcmp($statusA, $statusB);
 });
 
+if(isset($_POST['excluir'])){
+    $solicitacao->delete();
+    header('Location: ../TelaInicial');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -98,10 +103,10 @@ usort($professores, function($a, $b) {
         </header>
 
         <main class="container-listagem" style="position:relative; width: 50%;">
-            <div style="display: flex">
+            <form style="display: flex" action="index.php?id=<?= $solicitacao->getIdSolicitacao()?>" method="post">
                 <h2 class="titulo1">Solicitação de Orientação</h2>
-                <button class="botao-excluir-solicitacao">Excluir</button>
-            </div>
+                <button class="botao-excluir-solicitacao" name="excluir">Excluir</button>
+            </form>
             <h3 class="titulo2" style="margin: 0 0 10px 0">criada no dia <?= $data->format('d/m/Y') ?></h3>
             <hr>
             <p class="texto-visualizar-solicitacao">Empresa: <?=$solicitacao->getEmpresa()?></p>
