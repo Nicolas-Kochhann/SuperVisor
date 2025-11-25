@@ -67,8 +67,10 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
             <h3 class="titulo2">Encontre orientadores</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
-                <p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p> <br> 
-                <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>
+                <div>
+                    <p class='list-legend-green'>*Indica os interesses comuns entre você e o professor</p>
+                    <p class='list-legend-red'>*Indica seus interesses que o professor está desinteressado</p>
+                </div>
             <?php
              
             foreach($professores as $professor){

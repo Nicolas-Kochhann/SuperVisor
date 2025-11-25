@@ -9,6 +9,7 @@
     }   
     ?>  
     
+    <a href="billyorg.com/2025/projeto/grupo4/index.php?id=<?= $_SESSION['idUsuario'] ?>">AAGIS</a>
     <a href="../Perfil/index.php">Editar Perfil</a>
     <a href="../Logout/">Sair</a>  
 </aside>
