@@ -4,17 +4,19 @@ namespace Src\models;
 
 use RuntimeException;
 
-class Uploader{
+class Uploader
+{
 
-    public static function uploadImage(array $file, string $dir = "/../../resources/users/"){
-        $baseDir = __DIR__.$dir;
+    public static function uploadImage(array $file, string $dir = "/../../resources/users/")
+    {
+        $baseDir = __DIR__ . $dir;
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
             throw new RuntimeException("Failed to upload: {$file['name']}");
         }
 
         $type = mime_content_type($file['tmp_name']);
-        if (!in_array($type, ['image/jpeg', 'image/png', 'image/jpg'])) {
+        if (!in_array($type, ['image/jpeg', 'image/png', 'image/jpg', 'image/avif'])) {
             throw new RuntimeException("Invalid file type: {$file['name']}");
         }
 
@@ -29,14 +31,14 @@ class Uploader{
         return $newName;
     }
 
-    public static function deleteImage(string $file){
+    public static function deleteImage(string $file)
+    {
         $dir = __DIR__ . "/../../resources/users/";
-        
+
         $filePath = $dir . (string)$file;
 
         if (is_file($filePath)) {
             unlink($filePath);
         }
     }
-
 }

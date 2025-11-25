@@ -422,8 +422,9 @@ img.showing {
 }
 
 .foto-redonda-listagem {
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 100vh;
   margin: 0 5px 0 0;
 }
