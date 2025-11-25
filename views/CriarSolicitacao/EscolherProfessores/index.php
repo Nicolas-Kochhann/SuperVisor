@@ -41,12 +41,12 @@ if (isset($_POST['submit'])) {
 
     $s->setCargaHorariaSemanal($_SESSION['solicitacao']['carga-horaria']);
     $s->setTurno($_SESSION['solicitacao']['turno']);
-    $s->setObs(obs: $_SESSION['solicitacao']['obs']);
+    $s->setObs($_SESSION['solicitacao']['obs']);
 
     $solicitacaoId = $s->cadastrar();
 
     foreach ($_POST['professores'] as $prof) {
-        Solicitacao::relacionarProfessor($prof, $solicitacaoId, status: 2);
+        Solicitacao::relacionarProfessor($prof, $solicitacaoId, 2);
     }
     header("Location: ../../TelaInicial/index.php");
 }
@@ -81,6 +81,10 @@ if (isset($_POST['submit'])) {
 
                     foreach ($professores as $professor) {
                         if (count($professor->acharInteresses()) < 3) {
+                            continue;
+                        }
+
+                        if ($professor->getDisponivel() === false) {
                             continue;
                         }
 

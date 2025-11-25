@@ -74,7 +74,7 @@ usort($professores, function($a, $b) {
 
 if(isset($_POST['excluir'])){
     $solicitacao->delete();
-    header('Location: ../TelaInicial');
+    header('Location: ../MinhasSolicitacoes');
 }
 
 ?>
