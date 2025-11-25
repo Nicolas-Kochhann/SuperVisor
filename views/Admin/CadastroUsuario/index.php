@@ -67,6 +67,7 @@ if(isset($_POST['submit'])){
                 <div class="password-container">
                     <input class="input-form-grande" type="password" name="senha" id="senha" required>
                     <img class="show-password" id="show-password" src="../../../resources/images/eye.svg" alt="show passwd">
+                    <button type="button" onclick="gerarSenhaAleatoria()">Gerar senha aleatoria</button>
                 </div>
                 <div class="bloco-info">
                     <p>A senha deve conter:
@@ -86,6 +87,7 @@ if(isset($_POST['submit'])){
     </div>
     <script src="../../../scripts/verificaSenha.js"></script>
     <script src="../../../scripts/mostraSenha.js"></script>
+    <script src="../../../scripts/gerarSenhaAleatoria.js"></script>
     <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');

@@ -39,7 +39,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
     <link rel="stylesheet" href="../../styles/style.css">
     <link rel="icon" href="../../resources/images/favicon.ico">
 </head>
-<body>
+<body onload="setTimeout(esconderPopup, 5000);">
     <div class="container">
         
         <header class="cabecalho">
@@ -108,9 +108,18 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
             -->
 
             </div>
-            
         </main>
+        <?php
+
+        echo "<div class='popup'>Solicitação excluida</div>";
+
+        if(isset($_POST["recemExcluido"])){
+            echo "<div id='popup' class='popup'>Solicitação excluida</div>";
+        }
+
+        ?>
     </div>
+    <script src="../../../esconderPopUp.js"></script>
     <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');

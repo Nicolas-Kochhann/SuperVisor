@@ -826,3 +826,18 @@ textarea {
   background-color: #0000001a;
   color: #0649b4;
 }
+
+.popup{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  background: #333;
+  color: white;
+
+  font-family: "Roboto", sans-serif;
+}
+
+.hide{
+  display: none !important;
+}
