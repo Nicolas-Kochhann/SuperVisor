@@ -77,7 +77,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
                 }
                 echo "<div class='item-listagem'>
                         <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebida/?id={$solicitacao->getIdSolicitacao()}'>
-                            <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno'>
+                            <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno' style='height: 70px; width: 70px; border-radius: 50%; object-fit: cover;'>
                             <span>
                                 <div class='caixa-nome-data'>
                                     <p class='texto-listagem'>{$aluno->getNome()}</p>

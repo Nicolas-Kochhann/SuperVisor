@@ -71,7 +71,7 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 
 
       <div class="avatar-container">
-        <img id="previewFoto" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil" class="foto-perfil">
+        <img id="previewFoto" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil" class="foto-perfil" style="height:140px; width:140px;">
         <button type="button" class="camera-btn" onclick="document.getElementById('fotoPerfil').click()">📷</button>
         <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
       </div>
