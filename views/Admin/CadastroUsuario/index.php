@@ -38,7 +38,14 @@ if(isset($_POST['submit'])){
     <div class="container">
 
         <header class="cabecalho admin-header">
+            <div class="div-cabecalho">
             <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            
+            </div>
+
+            <button class="menu-btn" id="menu-btn">☰</button>
+
+            <?php require __DIR__."/../../nav.php"; ?>
         </header>
 
         <main class="container-formulario admin-container">
@@ -72,12 +79,20 @@ if(isset($_POST['submit'])){
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <button disabled id="submit" name="submit" class="botao-strong">Cadastrar</button>
-                <a href="../Login" class="link-formulario">Voltar</a>
+                <a href="../TelaInicial" class="link-formulario">Voltar</a>
             </form>
         </main>
 
     </div>
     <script src="../../../scripts/verificaSenha.js"></script>
     <script src="../../../scripts/mostraSenha.js"></script>
+    <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+        menu.classList.toggle('ativo');
+    });
+</script>
 </body>
 </html>

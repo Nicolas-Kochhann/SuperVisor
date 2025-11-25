@@ -180,7 +180,7 @@ img.show-password:hover {
 }
 
 img.showing {
-  filter: drop-shadow(0 0 3px #06b42e);
+  filter: drop-shadow(0 0 3px #06a8b4);
 }
 
 .obrigatorio::before {
@@ -803,4 +803,26 @@ textarea {
 
 .botao-excluir-solicitacao:hover::before {
   transform: translateX(0);
+}
+
+.grid-admin{
+  display: grid;
+  grid-template-rows: 30px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.item-admin{
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.item-admin:hover{
+  cursor: pointer;
+  background-color: #0000001a;
+  color: #0649b4;
 }

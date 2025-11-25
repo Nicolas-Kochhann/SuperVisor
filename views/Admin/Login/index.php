@@ -12,7 +12,7 @@ $msg = "";
 
 if(isset($_POST['submit'])){
     if(Admin::autenticar($_POST['email'],$_POST['senha'])){
-        header("location: ../CadastroUsuario/");
+        header("location: ../TelaInicial/");
     } else {
         $msg="E-mail ou senha incorretos!";        
     }
@@ -61,11 +61,5 @@ if(isset($_POST['submit'])){
     </div>
     <script src="../../../scripts/mostraSenha.js"></script>
     <script src="../../../scripts/requeridosPreenchidos.js"></script>
-    <script>
-        if (performance.navigation.type === 1) {
-            const msgEl = document.querySelector('.texto-obrigatorio:last-of-type');
-            if (msgEl) msgEl.textContent = "";
-        }
-    </script>
 </body>
 </html>
