@@ -11,9 +11,9 @@
         echo "<a href='../Perfil/index.php'>Editar Perfil</a>";
         echo "<a href='billyorg.com/2025/projeto/grupo4/index.php?id={$_SESSION['idUsuario']}'>AAGIS</a>";
         echo "<a href='../Logout/'>Sair</a>";
+    } else {
+        echo "<a href='../../Logout/'>Sair</a>";
     }
-    ?>  
+    ?> 
     
-    
-    <a href="../../Logout/">Sair</a>  
 </aside>

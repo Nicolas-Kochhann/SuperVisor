@@ -23,6 +23,10 @@ body {
   height: 100vh;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -805,14 +809,14 @@ textarea {
   transform: translateX(0);
 }
 
-.grid-admin{
+.grid-admin {
   display: grid;
   grid-template-rows: 30px;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.item-admin{
+.item-admin {
   font-family: "Roboto Mono", monospace;
   font-size: 1.3em;
   padding: 10px;
@@ -821,19 +825,26 @@ textarea {
   color: black;
 }
 
-.item-admin:hover{
+.item-admin:hover {
   cursor: pointer;
   background-color: #0000001a;
   color: #0649b4;
 }
 
-.popup{
-  position: absolute;
-  bottom: 0;
-  right: 0;
+.popup {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
   padding: 10px;
-  background: #333;
-  color: white;
+  color: red;
+  border: 1px solid red;
+  border-left: 3px solid red;
 
   font-family: "Roboto", sans-serif;
+  font-size: 1.3em;
+  transition: transform 0.4s ease;
+}
+
+.esconder {
+  transform: translateX(300px);
 }

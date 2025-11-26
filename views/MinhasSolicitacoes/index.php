@@ -109,16 +109,19 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
 
             </div>
         </main>
+        
+    </div>
+
         <?php
 
-        echo "<div id='popup' class='popup'>Solicitação excluida</div>";
 
-        if(isset($_POST["recemExcluido"])){
-            echo "<div id='popup' class='popup'>Solicitação excluida</div>";
+        if(isset($_SESSION["recemExcluido"]) and $_SESSION["recemExcluido"] === true){
+            echo "<div id='popup' class='popup esconder'>Solicitação excluida</div>";
+            $_SESSION["recemExcluido"] = false;
         }
 
         ?>
-    </div>
+
     <script src="../../scripts/esconderPopUp.js"></script>
     <script>
     const menuBtn = document.getElementById('menu-btn');

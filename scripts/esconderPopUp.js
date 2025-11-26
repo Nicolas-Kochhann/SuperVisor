@@ -1,6 +1,7 @@
-function esconderPopup(){
-    const popup = document.getElementById('popup');
-    popup.remove();
+function managePopup() {
+  const popup = document.getElementById("popup");
+  popup.classList.toggle("esconder");
 }
 
-setTimeout(esconderPopup, 5000);
+setTimeout(managePopup, 300);
+setTimeout(managePopup, 3000);
