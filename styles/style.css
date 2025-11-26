@@ -836,9 +836,9 @@ textarea {
   bottom: 15px;
   right: 15px;
   padding: 10px;
-  color: red;
-  border: 1px solid red;
-  border-left: 3px solid red;
+  color: #0649b4;
+  border: 1px solid #0649b4;
+  border-left: 3px solid #0649b4;
 
   font-family: "Roboto", sans-serif;
   font-size: 1.3em;
