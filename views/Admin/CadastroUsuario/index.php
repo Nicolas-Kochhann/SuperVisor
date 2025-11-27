@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
                             <li id="numero">Pelo menos um número</li>
                         </ul>
                     </p>
-                    <button type="button" onclick="gerarSenhaAleatoria()">Gerar senha aleatoria</button>
+                    <button class="botao-strong" style="margin: 5px 0 0 0" type="button" onclick="gerarSenhaAleatoria()">Gerar senha aleatoria</button>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <button disabled id="submit" name="submit" class="botao-strong">Cadastrar</button>
