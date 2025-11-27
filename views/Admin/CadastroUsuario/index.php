@@ -12,7 +12,7 @@ require __DIR__."/../../../vendor/autoload.php";
 $erro = '';
 $sucesso = '';
 
-if (!isset($_SESSION["idUsuario"])) {
+if (!isset($_SESSION["idAdmin"])) {
     $_SESSION["error"] = "É necessário fazer login primeiro.";
     header("Location: ../../Login");
     exit();
