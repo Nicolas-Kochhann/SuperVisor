@@ -12,6 +12,12 @@ require __DIR__."/../../../vendor/autoload.php";
 $erro = '';
 $sucesso = '';
 
+if (!isset($_SESSION["idUsuario"])) {
+    $_SESSION["error"] = "É necessário fazer login primeiro.";
+    header("Location: ../../Login");
+    exit();
+}
+
 # Manda a conta pro banco
 if(isset($_POST['submit'])){
     if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){

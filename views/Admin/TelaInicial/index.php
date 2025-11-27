@@ -13,6 +13,12 @@ use Src\models\Admin;
 
 $msg = ""; 
 
+if (!isset($_SESSION["idUsuario"])) {
+    $_SESSION["error"] = "É necessário fazer login primeiro.";
+    header("Location: ../../Login");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
