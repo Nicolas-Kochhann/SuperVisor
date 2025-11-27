@@ -67,7 +67,6 @@ if(isset($_POST['submit'])){
                 <div class="password-container">
                     <input class="input-form-grande" type="password" name="senha" id="senha" required>
                     <img class="show-password" id="show-password" src="../../../resources/images/eye.svg" alt="show passwd">
-                    <button type="button" onclick="gerarSenhaAleatoria()">Gerar senha aleatoria</button>
                 </div>
                 <div class="bloco-info">
                     <p>A senha deve conter:
@@ -77,6 +76,7 @@ if(isset($_POST['submit'])){
                             <li id="numero">Pelo menos um número</li>
                         </ul>
                     </p>
+                    <button type="button" onclick="gerarSenhaAleatoria()">Gerar senha aleatoria</button>
                 </div>
                 <p class="texto-obrigatorio">* indica algo obrigatório</p>
                 <button disabled id="submit" name="submit" class="botao-strong">Cadastrar</button>

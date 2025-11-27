@@ -24,7 +24,7 @@ function checkPassword() {
   return hasNumber && hasLetter && hasLength;
 }
 
-senhaInput.addEventListener("input", checkPassword);
+senhaInput.addEventListener("change", checkPassword);
 
 function checkForm() {
   // Check if all required inputs are filled

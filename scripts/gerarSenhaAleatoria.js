@@ -9,3 +9,4 @@ function gerarSenhaAleatoria(){
     const senhaInput = document.getElementById('senha');
     senhaInput.value = senha;
 }
+
