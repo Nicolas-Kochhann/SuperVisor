@@ -28,7 +28,7 @@ class Usuario{
 
     public function __construct($nome, $foto_perfil, $email, $senha){
         $this->nome = $nome;
-        if ($foto_perfil !== "") {
+        if (trim($foto_perfil) !== "") {
             $this->foto_perfil = $foto_perfil;
         }
         $this->email = $email;
@@ -218,7 +218,7 @@ class Usuario{
 
     public function removerFotoPerfil(): bool {
         $conn = new MySQL();
-        $sql = 'UPDATE usuario SET imagem=NULL WHERE idUsuario='.$this->idUsuario;
+        $sql = "UPDATE usuario SET imagem = NULL WHERE idUsuario = {$this->idUsuario}";
         $result = $conn->executa($sql);
         return $result;
     }
