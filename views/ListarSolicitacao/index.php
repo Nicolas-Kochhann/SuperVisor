@@ -47,50 +47,52 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
 
         <main class="container-listagem">
             
-
-            
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-            <h3 class="titulo2">Veja suas Solicitações!</h3>
+            <h3 class="titulo2">Veja suas solicitações</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php
             
-            foreach($solicitacoes as $solicitacao){
-                $aluno = Usuario::acharUsuario($solicitacao->getIdAluno());
-                $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-                $data = new DateTime($solicitacao->getData());
-                $tipoEst = "";
-                $s = $solicitacao->verStatus($_SESSION['idUsuario']);
-                if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
-                    $tipoEst = 'não obrigatório';
-                }else if ($solicitacao->getTipoEstagio() == 'obrigatorio'){
-                    $tipoEst = "obrigatório";
-                }
-                echo "<div class='item-listagem'>
-                        <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebida/?id={$solicitacao->getIdSolicitacao()}'>
-                            <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno' style='height: 70px; width: 70px; border-radius: 50%; object-fit: cover;'>
-                            <span>
-                                <div class='caixa-nome-data'>
-                                    <p class='texto-listagem'>{$aluno->getNome()}</p>
-                                    <p class='texto-listagem' style='color:#505050'>".date_format($data,"d/m/Y ")."</p>
-                                </div>
-                                <p class='texto-listagem' style='color  :black'>Estágio {$tipoEst} em {$solicitacao->getEmpresa()}</p>
-                            </span>
-                        </a>
-                        <div>
-                        </div>
-                        <p class='status-listagem'";
-                        if($s=='Aceito'){
-                            echo "style= color:green";
-                        }else if($s=='Recusado'){
-                            echo "style= color:red";
-                        }
-                        else if($s=='Pendente'){
-                            echo "style= color:orange";
-                        }
-                        echo"> ".$solicitacao->verStatus($_SESSION['idUsuario'])."</p>
+            if (count($solicitacoes) !== 0) {
+                foreach($solicitacoes as $solicitacao){
+                    $aluno = Usuario::acharUsuario($solicitacao->getIdAluno());
+                    $foto_perfil = $aluno->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+                    $data = new DateTime($solicitacao->getData());
+                    $tipoEst = "";
+                    $s = $solicitacao->verStatus($_SESSION['idUsuario']);
+                    if($solicitacao->getTipoEstagio() == 'nao-obrigatorio'){
+                        $tipoEst = 'não obrigatório';
+                    }else if ($solicitacao->getTipoEstagio() == 'obrigatorio'){
+                        $tipoEst = "obrigatório";
+                    }
+                    echo "<div class='item-listagem'>
+                            <a class='link-perfil-listagem' style='flex:1' href='../VisualizarSolicitacaoRecebida/?id={$solicitacao->getIdSolicitacao()}'>
+                                <img class='foto-redonda-listagem' src='../../resources/users/{$foto_perfil}' alt='Foto do aluno' style='height: 70px; width: 70px; border-radius: 50%; object-fit: cover;'>
+                                <span>
+                                    <div class='caixa-nome-data'>
+                                        <p class='texto-listagem'>{$aluno->getNome()}</p>
+                                        <p class='texto-listagem' style='color:#505050'>".date_format($data,"d/m/Y ")."</p>
+                                    </div>
+                                    <p class='texto-listagem' style='color  :black'>Estágio {$tipoEst} em {$solicitacao->getEmpresa()}</p>
+                                </span>
+                            </a>
+                            <div>
+                            </div>
+                            <p class='status-listagem'";
+                            if($s=='Aceito'){
+                                echo "style= color:green";
+                            }else if($s=='Recusado'){
+                                echo "style= color:red";
+                            }
+                            else if($s=='Pendente'){
+                                echo "style= color:orange";
+                            }
+                            echo"> ".$solicitacao->verStatus($_SESSION['idUsuario'])."</p>
 
-                    </div>";
+                        </div>";
+                }
+            } else {
+                echo "<p class='titulo2' style='margin: 15px 0 0 0; font-style: italic'>Nenhuma solicitação recebida.</p>";
             }
 
 
