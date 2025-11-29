@@ -118,7 +118,7 @@ class Usuario{
         $conn = new MySQL();    
         $sql = "SELECT idUsuario, nome, imagem, email, senha, disponivel 
             FROM usuario 
-            WHERE tipo = 'professor' AND disponivel = 1
+            WHERE tipo = 'professor'
             ORDER BY disponivel DESC, nome ASC";
         $resultado = $conn->consulta($sql);
         $professores = [];

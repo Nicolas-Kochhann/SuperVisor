@@ -833,7 +833,7 @@ textarea {
 
 .popup {
   position: fixed;
-  bottom: 15px;
+  top: 85px;
   right: 15px;
   padding: 10px;
   color: #0649b4;
@@ -841,7 +841,7 @@ textarea {
   border-left: 3px solid #0649b4;
 
   font-family: "Roboto", sans-serif;
-  font-size: 1.3em;
+  font-size: 1.5em;
   transition: transform 0.4s ease;
 }
 
