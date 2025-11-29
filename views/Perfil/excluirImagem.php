@@ -17,5 +17,6 @@ if(!$foto_perfil){
 Uploader::deleteImage($foto_perfil);
 
 $usuario->removerFotoPerfil();
+$_SESSION["imagem"] = null;
 
 header('Location: index.php');

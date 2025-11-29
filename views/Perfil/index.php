@@ -29,6 +29,7 @@ if(isset($_POST['editarPerfil'])){
           Uploader::deleteImage($user->getFotoPerfil());
         }
         $user->setFotoPerfil($savedImage);
+        $_SESSION["imagem"] = $user->getFotoPerfil();
     }
     $user->setNome($_POST['nome']);
     if(Usuario::validarSenha($_POST['senha'])){$user->setSenha($_POST['senha']);}
