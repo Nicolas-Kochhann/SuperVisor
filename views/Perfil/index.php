@@ -32,7 +32,11 @@ if(isset($_POST['editarPerfil'])){
     $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
     $user->atualizar($mudarSenha);
+
+    $_SESSION['pop-up']['mensagem'] = "Perfil atualizado";
+
     header('Location: ../TelaInicial/');
+    exit();
 }
 
 if($user->getFotoPerfil() === ""){
@@ -132,6 +136,18 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
   </div>
 
 </div>
+
+<?php
+
+
+  if(isset($_SESSION["pop-up"])){
+    echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+    unset($_SESSION["pop-up"]);
+  }
+
+  
+?>
+<script src="../../scripts/esconderPopUp.js"></script>
 <script>
   function previewImage(event) {
     const reader = new FileReader();

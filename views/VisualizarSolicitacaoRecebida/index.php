@@ -53,10 +53,14 @@ if($solicitacao->getTurno() == 'manha'){
 if(isset($_POST['botao'])){
     if($_POST['botao'] == 'aceitar'){
         $solicitacao->setStatus(1);
+        $_SESSION['pop-up']['mensagem'] = "Solicitação aceita";
     }else{
         $solicitacao->setStatus(0);
+        $_SESSION['pop-up']['mensagem'] = "Solicitação recusada";
     }
     $solicitacao->atualizarStatus($_SESSION['idUsuario']);
+    
+    
 }
 ?>
 
@@ -127,6 +131,15 @@ if(isset($_POST['botao'])){
         </main>
 
     </div>
+    <?php
+
+    if(isset($_SESSION["pop-up"])){
+        echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+        unset($_SESSION["pop-up"]);
+    }
+
+    ?>
+    <script src="../../scripts/esconderPopUp.js"></script>
     <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');

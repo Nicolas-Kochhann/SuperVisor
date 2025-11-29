@@ -25,6 +25,8 @@ if(isset($_POST['submit'])){
         $usuario->removerInteresses($usuario->acharInteresses());
         $usuario->cadastrarInteresses($_POST['interesses']);
 
+        $_SESSION['pop-up']['mensagem'] = "Interesses atualizados";
+
         header('Location: ../');
 
     } else {

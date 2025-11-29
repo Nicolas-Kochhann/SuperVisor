@@ -32,6 +32,8 @@ if(isset($_POST['submit'])){
         $usuario->cadastrarDesinteresses($desinteresses);
         //$usuario->atualizar();
 
+        $_SESSION['pop-up']['mensagem'] = "Desinteresses atualizados";
+
         header("Location: ../");
         
     }

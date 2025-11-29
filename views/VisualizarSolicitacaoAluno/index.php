@@ -74,7 +74,7 @@ usort($professores, function($a, $b) {
 
 if(isset($_POST['excluir'])){
     $solicitacao->delete();
-    $_SESSION['recemExcluido'] = true;
+    $_SESSION['pop-up']['mensagem'] = "Solicitação excluida";
     header('Location: ../MinhasSolicitacoes');
 }
 

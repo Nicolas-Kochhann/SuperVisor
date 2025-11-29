@@ -115,9 +115,9 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
         <?php
 
 
-        if(isset($_SESSION["recemExcluido"]) and $_SESSION["recemExcluido"] === true){
-            echo "<div id='popup' class='popup esconder'>Solicitação excluida</div>";
-            $_SESSION["recemExcluido"] = false;
+        if(isset($_SESSION["pop-up"])){
+            echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+            unset($_SESSION["pop-up"]);
         }
 
         ?>

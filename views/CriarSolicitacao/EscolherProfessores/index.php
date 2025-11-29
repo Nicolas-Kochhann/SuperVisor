@@ -48,7 +48,10 @@ if (isset($_POST['submit'])) {
     foreach ($_POST['professores'] as $prof) {
         Solicitacao::relacionarProfessor($prof, $solicitacaoId, 2);
     }
-    header("Location: ../../TelaInicial/index.php");
+
+    $_SESSION['pop-up']['mensagem'] = "Solicitação criada";
+
+    header("Location: ../../MinhasSolicitacoes/");
 }
 
 ?>
