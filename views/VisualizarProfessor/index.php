@@ -58,17 +58,17 @@ if ($professor->getDisponivel()) {
                 <img class="foto-redonda-listagem" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil">
                 <span class="container-dados-professor">
                     <div style="display: flex; gap: 10px">
-                        <h2><?= $professor->getNome() ?> /</h2>
+                        <h2><?= $professor->getNome() ?> |</h2>
                         <h2 style="color:<?= $disponivel[1] ?>"><?= $disponivel[0] ?></h2>
                     </div>
-                    <h3><?= $professor->getEmail() ?></h3>
+                    <h3>Professor | <?= $professor->getEmail() ?></h3>
                 </span>
             </div>
             <div style="margin: 0 0 15px 0">
-                <p class='list-legend-green'>*Indica os interesses em comum entre você e o professor</p>
-                <p class='list-legend-red'>*Indica seus interesses que o professor marcou como desinteresse</p>
+                <p class='list-legend-green'>*Interesses em comum entre você e o professor</p>
+                <p class='list-legend-red'>*Interesses seus que o professor marcou como desinteresse</p>
             </div>
-            <h2 class="titulo-view">Interesses</h2>
+            <h2 class="titulo-view">Interesses do Professor</h2>
             <div class="bloco-interesses" style="margin:0 0 20px 0">
             <?php
             foreach($professorInteresses as $professorInteresseId){
@@ -95,7 +95,7 @@ if ($professor->getDisponivel()) {
             <?php
             if (count($professorDesinteresses) > 0) {
                 echo '
-                <h2 class="titulo-view">Desinteresses</h2>
+                <h2 class="titulo-view">Desinteresses do Professor</h2>
                 <div class="bloco-interesses" style="margin:0">';
 
                 foreach ($professorDesinteresses as $professorDesinteresseId) {
