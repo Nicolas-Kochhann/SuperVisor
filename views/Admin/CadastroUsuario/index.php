@@ -20,12 +20,16 @@ if (!isset($_SESSION["idAdmin"])) {
 
 # Manda a conta pro banco
 if(isset($_POST['submit'])){
-    if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){
-        $usuario = new Usuario($_POST['nome'], null, $_POST['email'], $_POST['senha']);
-        $usuario->cadastrar();
-        $sucesso = "Usuário cadastrado!";
+    if($_POST['nome']){
+        if(Usuario::validarEmail($_POST['email']) and Usuario::validarSenha($_POST['senha'])){
+            $usuario = new Usuario($_POST['nome'], null, $_POST['email'], $_POST['senha']);
+            $usuario->cadastrar();
+            $sucesso = "Usuário cadastrado!";
+        } else {
+            $erro = 'Email ou senha inválida';
+        }
     } else {
-        $erro = 'Email ou senha inválida';
+        $erro = "O campo nome deve estar preenchido";
     }
 }
 
