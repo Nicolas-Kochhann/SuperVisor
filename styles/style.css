@@ -41,10 +41,9 @@ body {
   background-color: #126fd3;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
+  flex-direction: row;
   gap: 10px;
   border-bottom: 3px solid #005bbc;
-  justify-content: space-between;
 }
 .div-cabecalho {
   height: 100%;
@@ -57,7 +56,6 @@ body {
 
 .logo-cabecalho {
   height: 100%;
-  margin: 0 10px;
 }
 
 .cabecalho-link-botao {
@@ -74,11 +72,20 @@ body {
 
 .menu-btn {
   font-size: 26px;
-  margin-left: 30px;
+  font-family: "Roboto", sans-serif;
   background: none;
   border: none;
   cursor: pointer;
   color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+
+.menu-btn:hover {
+  cursor: pointer;
 }
 
 /* MENU SUSPENSO */

@@ -52,14 +52,18 @@ if ($professor->getDisponivel()) {
     <div class="container">
 
         <header class="cabecalho">
-            <div class="div-cabecalho">
-            <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            
+
+            <div class="menu-btn" id="menu-btn" href="../Perfil" class="container-mini-perfil">
+                <img style="height:100%" class='foto-redonda-listagem' src='../../resources/users/<?= $_SESSION["imagem"] ?? 'foto_perfil_padrao.svg'?>'>
+                <p><?= $_SESSION["nome"] ?></p>
             </div>
 
-            <button class="menu-btn" id="menu-btn">☰</button>
-
             <?php require __DIR__."/../nav.php"; ?>
+
+            <div class="div-cabecalho">
+                <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+            </div>
+
         </header>
 
         <main class="container-listagem" style="width:50%;">
