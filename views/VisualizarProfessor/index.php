@@ -25,12 +25,7 @@ $usuario = Usuario::acharUsuario($_SESSION['idUsuario']);
 $usuarioInteresses = $usuario->acharInteresses();
 $usuarioDesinteresses = $usuario->acharDesinteresses();
 
-$foto_perfil = "";
-if($professor->getFotoPerfil()!= null or $professor->getFotoPerfil()!=""){
-    $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
-}else{
-    $foto_perfil = 'foto_perfil_padrao.svg';
-}
+$foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +61,10 @@ if($professor->getFotoPerfil()!= null or $professor->getFotoPerfil()!=""){
                     <h3><?= $professor->getEmail() ?></h3>
                 </span>
             </div>
-
+            <div>
+                <p class='list-legend-green'>*Indica os interesses em comum entre você e o professor</p>
+                <p class='list-legend-red'>*Indica seus interesses que o professor marcou como desinteresse</p>
+            </div>
             <h2 class="titulo-view">Interesses</h2>
             <div class="bloco-interesses" style="margin:0 0 20px 0">
             <?php
