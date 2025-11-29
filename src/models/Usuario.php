@@ -193,6 +193,8 @@ class Usuario{
             $this->tipo = "aluno";
         }else if (str_ends_with($this->email, "@feliz.ifrs.edu.br")){
             $this->tipo = "professor";
+        }else if ($this->nome === ''){
+            throw new RuntimeException('O campo nome não pode estar vazio', 103);
         } else {
             throw new RuntimeException('Email ou senha inválidos', 102);
         }

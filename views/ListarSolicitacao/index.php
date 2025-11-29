@@ -122,6 +122,16 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
             
         </main>
     </div>
+        <?php
+
+        if(isset($_SESSION["pop-up"])){
+            echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+            unset($_SESSION["pop-up"]);
+        }
+
+        ?>
+
+    <script src="../../scripts/esconderPopUp.js"></script>
     <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');

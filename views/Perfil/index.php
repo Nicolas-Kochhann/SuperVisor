@@ -10,6 +10,8 @@ require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
 use Src\models\Uploader;
 
+$erro = '';
+
 if (!isset($_SESSION['idUsuario'])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
@@ -20,23 +22,29 @@ $user = Usuario::acharUsuario($_SESSION['idUsuario']);
 $interesses = $user->acharInteresses();
 $desinteresses = $user->acharDesinteresses();
 if(isset($_POST['editarPerfil'])){
-  if(!empty($_FILES['fotoPerfil']['tmp_name'])){
-      $savedImage = Uploader::uploadImage($_FILES['fotoPerfil']);
-      if($user->getFotoPerfil() != null){
-        Uploader::deleteImage($user->getFotoPerfil());
-      }
-      $user->setFotoPerfil($savedImage);
+  if($_POST['nome']){
+    if(!empty($_FILES['fotoPerfil']['tmp_name'])){
+        $savedImage = Uploader::uploadImage($_FILES['fotoPerfil']);
+        if($user->getFotoPerfil() != null){
+          Uploader::deleteImage($user->getFotoPerfil());
+        }
+        $user->setFotoPerfil($savedImage);
     }
     $user->setNome($_POST['nome']);
     if(Usuario::validarSenha($_POST['senha'])){$user->setSenha($_POST['senha']);}
     $user->setDisponivel($_POST['disponibilidade'] == "disponivel" ? true : false);
     $mudarSenha = $_POST['senha'] == "" ? false : true; 
+      
     $user->atualizar($mudarSenha);
 
     $_SESSION['pop-up']['mensagem'] = "Perfil atualizado";
 
     header('Location: ../TelaInicial/');
     exit();
+
+  } else {
+    $erro = 'O campo nome deve estar preenchido';
+  }
 }
 
 if($user->getFotoPerfil() === ""){
@@ -81,7 +89,6 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
       </div>
 
       <a class="link-formulario" href="excluirImagem.php">Excluir imagem</a>
-
 
       <label for="nome" class="label-form-grande obrigatorio">Nome completo:</label>
       <input type="text" class="input-form-grande" name="nome" value="<?= htmlspecialchars($user->getNome()) ?>">
@@ -130,6 +137,13 @@ $foto_perfil = $user->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
         <a href="EditarInteresses/" class="botao-strong">Editar interesses</a>
         <a href="EditarDesinteresses/" class="botao-strong">Editar desinteresses</a>
       </div>
+      <?php
+
+      if($erro){
+        echo "<span class='bloco-erro'>$erro</span>";
+      }
+
+      ?>      
       <button type="submit" name="editarPerfil" id="submit" class="botao-strong">Finalizar</button>
       <a class="link-formulario" href="../TelaInicial">Cancelar</a>
     </form>
