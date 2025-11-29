@@ -26,6 +26,15 @@ $usuarioInteresses = $usuario->acharInteresses();
 $usuarioDesinteresses = $usuario->acharDesinteresses();
 
 $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+
+if ($professor->getDisponivel()) {
+    $disponivel[0] = "Disponível";
+    $disponivel[1] = "green";
+} else {
+    $disponivel[0] = "Indisponível";
+    $disponivel[1] = "red";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +66,14 @@ $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
             <div class="container-view-dados-professor">
                 <img class="foto-redonda-listagem" src="../../resources/users/<?= $foto_perfil ?>" alt="Foto de perfil">
                 <span class="container-dados-professor">
-                    <h2><?= $professor->getNome() ?></h2>
+                    <div style="display: flex; gap: 10px">
+                        <h2><?= $professor->getNome() ?> /</h2>
+                        <h2 style="color:<?= $disponivel[1] ?>"><?= $disponivel[0] ?></h2>
+                    </div>
                     <h3><?= $professor->getEmail() ?></h3>
                 </span>
             </div>
-            <div>
+            <div style="margin: 0 0 15px 0">
                 <p class='list-legend-green'>*Indica os interesses em comum entre você e o professor</p>
                 <p class='list-legend-red'>*Indica seus interesses que o professor marcou como desinteresse</p>
             </div>

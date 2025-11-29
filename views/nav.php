@@ -4,8 +4,7 @@
         if($_SESSION["tipo"]=="professor"){
             echo"<a href='../ListarSolicitacao/'>Ver minhas solicitações</a>";
         }else{
-            echo "<a href='../MinhasSolicitacoes'>Ver minhas solicitações</a>
-            <a href='../CriarSolicitacao/index.php' >Nova Solicitação</a>
+            echo "<a href='../MinhasSolicitacoes'>Minhas solicitações</a>
             <a href='../TelaInicial/index.php'>Ver Professores</a>";
         }   
         echo "<a href='../Perfil/index.php'>Editar Perfil</a>";

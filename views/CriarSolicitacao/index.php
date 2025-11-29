@@ -8,26 +8,7 @@ use Src\models\Solicitacao;
 
 session_start();
 
-// Quando o submit tá setado, joga pra página de selecionar professores
-// Isso provavelmente vai ser um inferno de fazer
-// Boa sorte back enzos 👌
-// fuck you asshole 👹👹
-
 if (isset($_POST["submit"])) {
-    /*
-    echo $_POST['empresa'];
-    echo "<br>";
-    echo $_POST['area-atuacao'];
-    echo "<br>";
-    echo $_POST['tipo-estagio'];
-    echo "<br>";
-    echo $_POST['carga-horaria'];
-    echo "<br>";
-    echo $_POST['turno'];
-    echo "<br>";
-    echo $_POST['obs'];
-    echo "<br>";
-    */
 
     $_SESSION['solicitacao']['empresa'] = $_POST['empresa'];
     $_SESSION['solicitacao']['area-atuacao'] = $_POST['area-atuacao'];
@@ -102,7 +83,7 @@ if (isset($_POST["submit"])) {
                 <textarea class="input-form-grande" name="obs" id="obs"></textarea>
 
                 <button disabled class="botao-strong" id="submit" name="submit">Escolher Professores</button>
-                <a class="link-formulario" href="../TelaInicial">Cancelar</a>
+                <a class="link-formulario" href="../MinhasSolicitacoes">Cancelar</a>
             </form>
         </main>
 
