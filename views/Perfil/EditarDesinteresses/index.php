@@ -52,9 +52,7 @@ if(isset($_POST['submit'])){
 <body>
     <div class="container">
 
-        <header class="cabecalho">
-            <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-        </header>
+        <?php require __DIR__."/../../header.php"; ?>
 
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">

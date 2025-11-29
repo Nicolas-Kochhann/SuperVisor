@@ -49,20 +49,10 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
 <body>
     <div class="container">
         
-        <header class="cabecalho">
-            <div class="div-cabecalho">
-            <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            
-            </div>
-
-            <button class="menu-btn" id="menu-btn">☰</button>
-
-            <?php require __DIR__."/../nav.php"; ?>
-        </header>
+        <?php require __DIR__."/../header.php"; ?>
 
         <main class="container-listagem">
             
-
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
             <h3 class="titulo2">Encontre orientadores</h3>
 
@@ -113,26 +103,18 @@ usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->
         </main>
     </div>
 
-<?php
+    <?php
 
 
-  if(isset($_SESSION["pop-up"])){
-    echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
-    unset($_SESSION["pop-up"]);
-  }
+    if(isset($_SESSION["pop-up"])){
+        echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+        unset($_SESSION["pop-up"]);
+    }
 
-  
-?>   
+    
+    ?>   
 
-<script src="../../scripts/esconderPopUp.js"></script>
-
-<script>
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
-
-    menuBtn.addEventListener('click', () => {
-        menu.classList.toggle('ativo');
-    });
-</script>
+    <script src="../../scripts/esconderPopUp.js"></script>
+    <script src="../../scripts/menuButton.js"></script>
 </body>
 </html>

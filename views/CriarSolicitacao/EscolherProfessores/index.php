@@ -70,8 +70,8 @@ if (isset($_POST['submit'])) {
 <body>
     <div style="overflow-y: hidden;" class="container">
 
-        <header class="cabecalho">
-            <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
+        <header style="flex-direction: row" class="cabecalho">
+            <img style="margin: 0 10px" src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
         </header>
 
         <main class="container-listagem-solicitacao">

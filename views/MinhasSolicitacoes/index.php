@@ -42,16 +42,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacoesDoAluno();
 <body>
     <div class="container">
         
-        <header class="cabecalho">
-            <div class="div-cabecalho">
-            <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            </div>
-
-            <button class="menu-btn" id="menu-btn">☰</button>
-
-            <?php require __DIR__."/../nav.php"; ?>
-            
-        </header>
+        <?php require __DIR__."/../header.php"; ?>
 
         <main class="container-listagem">
             <div style="display: flex">

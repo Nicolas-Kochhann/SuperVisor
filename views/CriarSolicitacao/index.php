@@ -35,16 +35,7 @@ if (isset($_POST["submit"])) {
 <body>
     <div class="container">
         
-        <header class="cabecalho">
-            <div class="div-cabecalho">
-            <img src="../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            
-            </div>
-
-            <button class="menu-btn" id="menu-btn">☰</button>
-
-            <?php require __DIR__."/../nav.php"; ?>
-        </header>
+        <?php require __DIR__."/../header.php"; ?>
 
         <main class="container-formulario">
             <form class="formulario-grande" action="index.php" method="POST">

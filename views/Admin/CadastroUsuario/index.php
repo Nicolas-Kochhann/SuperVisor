@@ -43,16 +43,7 @@ if(isset($_POST['submit'])){
 <body>
     <div class="container">
 
-        <header class="cabecalho admin-header">
-            <div class="div-cabecalho">
-            <img src="../../../resources/images/logo.png" alt="Logo SuperVisor" class="logo-cabecalho">
-            
-            </div>
-
-            <button class="menu-btn" id="menu-btn">☰</button>
-
-            <?php require __DIR__."/../../nav.php"; ?>
-        </header>
+        <?php require __DIR__."/../../headerAdmin.php"; ?>
 
         <main class="container-formulario admin-container">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
