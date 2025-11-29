@@ -92,6 +92,9 @@ if (isset($_POST['submit'])) {
                             }
 
                             $foto_perfil = $professor->getFotoPerfil() ?? 'foto_perfil_padrao.svg';
+                            if ($foto_perfil === "") {
+                                $foto_perfil = null;
+                            }
 
                             echo "<div> <!-- DIV CRIADA PARA CADA ITEM DA LISTAGEM -->
                                 <input class='input-selecionar-convite' type='checkbox' name='professores[]' id='{$professor->getIdUsuario()}' value='{$professor->getIdUsuario()}'> 
