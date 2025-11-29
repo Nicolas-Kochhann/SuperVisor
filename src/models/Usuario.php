@@ -114,12 +114,28 @@ class Usuario{
         return null;
     }
 
-
     public static function listarProfessores() : array{
         $conn = new MySQL();    
         $sql = "SELECT idUsuario, nome, imagem, email, senha, disponivel 
             FROM usuario 
-            WHERE tipo = 'professor'
+            WHERE tipo = 'professor' AND disponivel = 1
+            ORDER BY disponivel DESC, nome ASC";
+        $resultado = $conn->consulta($sql);
+        $professores = [];
+        foreach($resultado as $r){
+            $u = new Usuario($r['nome'], $r['imagem'], $r['email'], $r['senha']);
+            $u->setIdUsuario($r['idUsuario']);
+            $u->setDisponivel($r['disponivel']);
+            $professores[] = $u;
+        }
+        return $professores;
+    }
+
+    public static function listarProfessoresDisponiveis() : array{
+        $conn = new MySQL();    
+        $sql = "SELECT idUsuario, nome, imagem, email, senha, disponivel 
+            FROM usuario 
+            WHERE tipo = 'professor' AND disponivel = 1
             ORDER BY disponivel DESC, nome ASC";
         $resultado = $conn->consulta($sql);
         $professores = [];
