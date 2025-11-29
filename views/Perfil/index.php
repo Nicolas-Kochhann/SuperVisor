@@ -40,6 +40,8 @@ if(isset($_POST['editarPerfil'])){
 
     $_SESSION['pop-up']['mensagem'] = "Perfil atualizado";
 
+    $_SESSION['nome'] = $user->getNome();
+
     header('Location: ../TelaInicial/');
     exit();
 
