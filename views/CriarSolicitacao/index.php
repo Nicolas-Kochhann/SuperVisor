@@ -52,10 +52,10 @@ if (isset($_POST["submit"])) {
                     }
                 ?>
 
-                <label for="empresa" class="label-form-grande obrigatorio">Nome da Empresa</label>
+                <label for="empresa" class="label-form-grande obrigatorio">Empresa Ofertante do Estágio</label>
                 <input class="input-form-grande" type="text" name="empresa" id="empresa" required>
                 
-                <label for="area-atuacao" class="label-form-grande obrigatorio">Área de Atuação</label>
+                <label for="area-atuacao" class="label-form-grande obrigatorio">Cargo Oferecido</label>
                 <input class="input-form-grande" type="text" name="area-atuacao" id="area-atuacao" required>
                 
                 <span class="multi-input-box">
