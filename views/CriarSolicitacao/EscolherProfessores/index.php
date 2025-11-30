@@ -31,27 +31,33 @@ usort($professores, function ($a, $b) {
     return $b->getInteressesEmComum() <=> $a->getInteressesEmComum();
 });
 
+$erro = "";
+
 if (isset($_POST['submit'])) {
-    $s = new Solicitacao(
-        $_SESSION['solicitacao']['empresa'], 
-        $_SESSION['solicitacao']['area-atuacao'], 
-        $_SESSION['solicitacao']['tipo-estagio'], 
-        $_SESSION['idUsuario']
-    );
+    if(isset($_POST['professores'])){
+        $s = new Solicitacao(
+            $_SESSION['solicitacao']['empresa'], 
+            $_SESSION['solicitacao']['area-atuacao'], 
+            $_SESSION['solicitacao']['tipo-estagio'], 
+            $_SESSION['idUsuario']
+        );
 
-    $s->setCargaHorariaSemanal($_SESSION['solicitacao']['carga-horaria']);
-    $s->setTurno($_SESSION['solicitacao']['turno']);
-    $s->setObs($_SESSION['solicitacao']['obs']);
+        $s->setCargaHorariaSemanal($_SESSION['solicitacao']['carga-horaria']);
+        $s->setTurno($_SESSION['solicitacao']['turno']);
+        $s->setObs($_SESSION['solicitacao']['obs']);
 
-    $solicitacaoId = $s->cadastrar();
+        $solicitacaoId = $s->cadastrar();
 
-    foreach ($_POST['professores'] as $prof) {
-        Solicitacao::relacionarProfessor($prof, $solicitacaoId, 2);
+        foreach ($_POST['professores'] as $prof) {
+            Solicitacao::relacionarProfessor($prof, $solicitacaoId, 2);
+        }
+
+        $_SESSION['pop-up']['mensagem'] = "Solicitação criada";
+
+        header("Location: ../../MinhasSolicitacoes/");
+    } else {
+        $erro = "Você deve selecionar ao menos 1 professor";
     }
-
-    $_SESSION['pop-up']['mensagem'] = "Solicitação criada";
-
-    header("Location: ../../MinhasSolicitacoes/");
 }
 
 ?>
@@ -77,6 +83,11 @@ if (isset($_POST['submit'])) {
         <main class="container-listagem-solicitacao">
             <h2 class="titulo1">Selecione professores</h2>
             <h3 class="titulo2" style="color:#8b8b8b">Escolha pelo menos 1</h3>
+            <?php
+                if ($erro) {
+                    echo "<span class='bloco-erro'>".$erro."</span>";
+                }
+            ?>           
             <form style="height:calc(100% - 70px)" action="index.php" method="POST">
 
                 <div class="container-bloco-listagem-scrollavel">

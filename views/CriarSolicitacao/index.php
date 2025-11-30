@@ -8,16 +8,21 @@ use Src\models\Solicitacao;
 
 session_start();
 
-if (isset($_POST["submit"])) {
+$erro = '';
 
-    $_SESSION['solicitacao']['empresa'] = $_POST['empresa'];
-    $_SESSION['solicitacao']['area-atuacao'] = $_POST['area-atuacao'];
-    $_SESSION['solicitacao']['tipo-estagio'] = $_POST['tipo-estagio'];
-    $_SESSION['solicitacao']['carga-horaria'] = $_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria'];
-    $_SESSION['solicitacao']['turno'] = $_POST['turno'];
-    $_SESSION['solicitacao']['obs'] = $_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'";
-    
-    header("Location: ./EscolherProfessores/index.php");
+if (isset($_POST["submit"])) {
+    if($_POST['empresa'] and $_POST['area-atuacao']){
+        $_SESSION['solicitacao']['empresa'] = $_POST['empresa'];
+        $_SESSION['solicitacao']['area-atuacao'] = $_POST['area-atuacao'];
+        $_SESSION['solicitacao']['tipo-estagio'] = $_POST['tipo-estagio'];
+        $_SESSION['solicitacao']['carga-horaria'] = $_POST['carga-horaria']== "" ? null : (int)$_POST['carga-horaria'];
+        $_SESSION['solicitacao']['turno'] = $_POST['turno'];
+        $_SESSION['solicitacao']['obs'] = $_POST['obs'] == "" ? null : "'" . $_POST['obs'] . "'";
+        
+        header("Location: ./EscolherProfessores/index.php");
+    } else {
+        $erro = 'Todos os campos obrigatórios (*) devem estar preenchidos';
+    }
     
 }
 
@@ -41,6 +46,11 @@ if (isset($_POST["submit"])) {
             <form class="formulario-grande" action="index.php" method="POST">
                 <h2 class="titulo1">Criar Solicitação de Orientação</h2>
                 <p class="text-info">Tudo que você preencher aqui será visível para os professores selecionados.</p>
+                <?php
+                    if ($erro) {
+                        echo "<span class='bloco-erro'>".$erro."</span>";
+                    }
+                ?>
 
                 <label for="empresa" class="label-form-grande obrigatorio">Nome da Empresa</label>
                 <input class="input-form-grande" type="text" name="empresa" id="empresa" required>
