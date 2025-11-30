@@ -33,21 +33,6 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
 $solicitacao = Solicitacao::acharSolicitacaoPorId($_GET['id']);
 
-$solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
-
-//Verifica se o id da solicitação é de uma solicitação recebida pelo professor.
-$ids = array_column($solicitacoes, "idSolicitacao");
-
-var_dump($ids);
-
-if(!in_array($solicitacao->getIdSolicitacao(), $ids)){
-    header("location: ../TelaInicial/");
-    exit();  
-}
-
-var_dump($solicitacoes);
-
-
 $aluno = Usuario::acharUsuario($solicitacao->getIdAluno());
 
 $data = new DateTime($solicitacao->getData());
