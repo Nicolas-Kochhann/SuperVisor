@@ -138,7 +138,12 @@ if(isset($_POST['excluir'])){
                     //var_dump($professor);
                     //die();
                     
-                    $foto_perfil = $professor["imagem"] ?? 'foto_perfil_padrao.svg';
+                    if (trim($professor["imagem"]) !== "") {
+                        $foto_perfil = $professor["imagem"] ?? 'foto_perfil_padrao.svg';
+                    } else {
+                        $foto_perfil = 'foto_perfil_padrao.svg';
+                    }
+                    
                     $status = Solicitacao::traduzirStatus($professor['status']);
                     
                     switch ($professor['status']) {
