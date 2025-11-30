@@ -12,6 +12,11 @@ if (!isset($_SESSION['idUsuario'])) {
     header('Location: ../Login/');
 }
 
+if(!isset($_GET['id'])){
+    header('Location: ../TelaInicial/');
+    exit();
+}
+
 $professor = Usuario::acharUsuario($_GET['id']);
 
 if ($professor->getTipo() === "aluno") {

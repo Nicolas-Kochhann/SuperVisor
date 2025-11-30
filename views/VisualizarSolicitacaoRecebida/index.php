@@ -1,9 +1,9 @@
 <?php
 
 // Mostra todos os erros na tela
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 require __DIR__."/../../vendor/autoload.php";
 
@@ -15,8 +15,12 @@ session_start();
 if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
+    exit();   
+}
+
+if(!isset($_GET['id'])){
+    header('Location: ../ListarSolicitacao/');
     exit();
-    
 }
 
 if($_SESSION["tipo"]!="professor"){
