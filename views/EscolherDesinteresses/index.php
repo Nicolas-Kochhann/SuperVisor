@@ -33,7 +33,9 @@ if(isset($_POST['submit'])){
         $usuario->cadastrarDesinteresses($desinteresses);
         //$usuario->atualizar();
         unset($_SESSION['cadastro']);
+
         header("Location: ../index.php");
+        exit();
         
     } else {
         $nome = $_SESSION['cadastro']['nome'];
@@ -53,9 +55,11 @@ if(isset($_POST['submit'])){
         $usuario->cadastrarDesinteresses($desinteresses);
 
         session_unset();
-        session_destroy();
+
+        $_SESSION['pop-up']['mensagem'] = "Perfil criado";
 
         header("Location: ../Login/");
+        exit();
     }
 }
 ?>
