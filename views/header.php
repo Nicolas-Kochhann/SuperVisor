@@ -11,7 +11,7 @@
             if($_SESSION["tipo"]=="professor"){
                 echo"<a href='../ListarSolicitacao/'>Ver minhas solicitações</a>";
             }else{
-                echo "<a href='../MinhasSolicitacoes'>Minhas solicitações</a>
+                echo "<a href='../MinhasSolicitacoes'>Minhas Solicitações</a>
                 <a href='../TelaInicial/index.php'>Ver Professores</a>";
             }   
             echo "<a href='../Perfil/index.php'>Editar Perfil</a>";
