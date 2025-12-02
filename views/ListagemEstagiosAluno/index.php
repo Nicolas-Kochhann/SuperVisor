@@ -22,11 +22,11 @@ session_start()
             <table class="tabela-listagem-estagios">
                 <thead>
                     <tr>
-                        <th>Empresa</th>
-                        <th>Orientador</th>
-                        <th>Período</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <th class="header-tabela">Empresa</th>
+                        <th class="header-tabela">Orientador</th>
+                        <th class="header-tabela">Período</th>
+                        <th class="header-tabela">Status</th>
+                        <th class="header-tabela">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +46,8 @@ session_start()
                     <tr>
                         <td>Anselmi</td>
                         <td>Túlio Baségio</td>
-                        <td>04/04/2025 - 01/10/2025</td>
-                        <td>Ativo</td>
+                        <td>COMPLETE O CADASTRO</td>
+                        <td>COMPLETE O CADASTRO</td>
                         <td><span style="display: flex; gap: 10px">
                             <a href="https://billyorg.com/2025/projeto/grupo4/editar.php?idEstagio=">Completar Cadastro</a>
                         </span></td>
