@@ -9,9 +9,11 @@
         <?php
         if (isset($_SESSION["tipo"])) {
             if($_SESSION["tipo"]=="professor"){
-                echo"<a href='../ListarSolicitacao/'>Ver minhas solicitações</a>";
+                echo"<a href='../ListagemEstagiosProfessor/'>Meus Estágios</a>
+                <a href='../ListarSolicitacao/'>Ver minhas solicitações</a>";
             }else{
-                echo "<a href='../MinhasSolicitacoes'>Minhas Solicitações</a>
+                echo "<a href='../ListagemEstagiosAluno'>Meus Estágios</a>
+                <a href='../MinhasSolicitacoes'>Minhas Solicitações</a>
                 <a href='../TelaInicial/index.php'>Ver Professores</a>";
             }   
             echo "<a href='../Perfil/index.php'>Editar Perfil</a>";

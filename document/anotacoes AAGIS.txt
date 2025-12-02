@@ -1,0 +1,19 @@
+if PROFESSOR:
+>> Opção de cadastrar estágio novo (link)
+>> Tabela de estágios
+>>>> Aluno
+>>>> Empresa
+>>>> Período
+>>>> Status
+>>>> Ações {Editar, Visualizar, Documentos}
+
+if ALUNO:
+>> Tabela de estágios
+>>>> Empresa
+>>>> Orientador
+>>>> Período
+>>>> Status
+>>>> Ações {Editar, Visualizar, Documentos, COMPLETAR CADASTRO}
+
+Geral:
+>> Perguntas Frequentes

@@ -891,3 +891,17 @@ textarea {
 .botao-nova-solicitacao:hover::before {
   transform: translateX(0);
 }
+
+.container-listagem-estagios{
+  height: 100%;
+  width: 70%;
+  align-self: center;
+  padding: 20px 0;
+  margin: 0 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.tabela-listagem-estagios{
+  width: 100%;
+}

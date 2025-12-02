@@ -1,6 +1,8 @@
-
 <?php
-require_once __DIR__."/../bd/MySQL.php";
+
+namespace Src\models;
+
+use Src\database\MySQL;
 
 class Estagio{
 
