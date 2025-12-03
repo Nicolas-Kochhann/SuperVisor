@@ -142,6 +142,7 @@ body {
 
 .titulo-formulario-grande {
   width: 100%;
+  transform: skew(-10deg);
   text-align: center;
   margin: 0 0 20px 0;
   font-family: "Roboto Slab", serif;
@@ -892,9 +893,9 @@ textarea {
   transform: translateX(0);
 }
 
-.container-listagem-estagios{
+.container-listagem-estagios {
   height: 100%;
-  width: 70%;
+  width: 80%;
   align-self: center;
   padding: 20px 0;
   margin: 0 10px;
@@ -902,13 +903,15 @@ textarea {
   overflow-x: hidden;
 }
 
-.tabela-listagem-estagios{
+.tabela-listagem-estagios {
   width: 100%;
-  table-layout: fixed;
+  border-collapse: collapse;
+  border-bottom: 1px solid black;
+  margin-top: 15px;
 }
 
-.header-tabela{
-  background-color: #007bff;
+.header-tabela {
+  background-color: #126fd3;
   color: white;
   padding: 10px;
   text-align: left;
@@ -918,3 +921,28 @@ textarea {
   font-family: "Roboto", sans-serif;
 }
 
+.conteudo-tabela {
+  color: black;
+  padding: 10px;
+  text-align: left;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.conteudo1 {
+  background-color: #ffffff;
+}
+
+.conteudo2 {
+  background-color: #ebebeb;
+}
+
+tbody {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.importante {
+  color: red;
+  font-weight: 600;
+}

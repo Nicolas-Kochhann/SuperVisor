@@ -5,7 +5,7 @@
     if (isset($_SESSION['idUsuario'])) {
         header("Location:TelaInicial/");
         if($_SESSION["tipo"]!="professor"){
-            header("location: TelaInicial/");
+            header("location: ListagemEstagiosAluno/");
             exit();     
         }else{
             header("location: ListarSolicitacao/");
