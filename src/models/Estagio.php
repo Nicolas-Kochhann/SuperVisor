@@ -266,26 +266,19 @@ class Estagio{
         return $estagios;
     }
 
-    public static function findallLimit(int $limit, int $offset, ?int $idAluno = null): array {
+    public static function findallLimit(int $limit, int $offset, int $idAluno): array {
         $conexao = new MySQL();
 
         $idUsuarioInt = (int) ($_SESSION['idUsuario']);
-        $tipo = $_SESSION['tipo'] ?? 'aluno';
 
-        if ($tipo === 'professor') {
-            $sql = "SELECT e.*, a.nome AS nomeAluno
-                    FROM estagio e
-                    LEFT JOIN usuario a ON e.idAluno = a.idUsuario
-                    WHERE e.idProfessor = {$idUsuarioInt}
-                    LIMIT {$limit} OFFSET {$offset}";
-        } else {
-            $sql = "SELECT e.*, u.nome AS nomeProfessor 
-                    FROM estagio e 
-                    LEFT JOIN usuario u ON e.idProfessor = u.idUsuario
-                    WHERE e.idAluno = {$idUsuarioInt}";
-        }
+        $sql = "SELECT e.*, a.nome AS nomeAluno
+                FROM estagio e
+                LEFT JOIN usuario a ON e.idAluno = a.idUsuario
+                WHERE e.idProfessor = {$idUsuarioInt}
+                LIMIT {$limit} OFFSET {$offset}";
 
         $resultados = $conexao->consulta($sql);
+
         $estagios = array();
         foreach ($resultados as $resultado) {
             $profNome = $resultado['nomeProfessor'] ?? '';
@@ -311,7 +304,25 @@ class Estagio{
         return $estagios;
     }
 
+    public static function lengthNextPageEstagios(int $limit, int $offset, int $numeroDePaginas) {
+        /*
 
+            Função pra achar o tamanho da próxima página da paginação sem ter o retorno gigantesco
+
+        */
+        $conexao = new MySQL();
+
+        $offset += $numeroDePaginas;
+
+        $idUsuarioInt = (int) ($_SESSION['idUsuario']);
+
+        $sql = "SELECT e.idEstagio
+                FROM estagio e
+                WHERE e.idProfessor = {$idUsuarioInt}
+                LIMIT {$limit} OFFSET {$offset}";
+
+        return count($conexao->consulta($sql));
+    }
 
     public static function find($idEstagio):Estagio{
         $conexao = new MySQL();

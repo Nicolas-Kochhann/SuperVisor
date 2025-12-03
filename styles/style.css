@@ -947,3 +947,30 @@ tbody {
   color: red;
   font-weight: 600;
 }
+
+.botao-tabela {
+  background-color: #126fd3;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  border-radius: 100%;
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 600;
+  border: 1px solid transparent;
+  font-size: 1.2rem;
+}
+
+.botao-tabela:hover {
+  cursor: pointer;
+  background-color: #005bbc;
+}
+
+.botao-tabela:disabled {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+.botao-tabela:disabled:hover {
+  cursor: default;
+}

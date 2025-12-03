@@ -118,6 +118,7 @@ $estagios = Estagio::findall($_SESSION["idUsuario"]);
                     ?>
                 </tbody>
             </table>
+            
         </main>
 
     </div>

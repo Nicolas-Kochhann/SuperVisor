@@ -13,13 +13,23 @@ use Src\models\Estagio;
 
 $limitePorPagina = 15;
 
-$paginaAtual = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$sub = 0;
 
-if ($paginaAtual < 1) {
-    $paginaAtual = 1;
-}
+do {
 
-$offset = ($paginaAtual - 1) * $limitePorPagina;
+    $paginaAtual = (isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int)$_GET['pagina'] : 1) - $sub;
+
+    if ($paginaAtual < 1) {
+        $paginaAtual = 1;
+    }
+
+    $offset = ($paginaAtual - 1) * $limitePorPagina;
+
+    $estagios = Estagio::findallLimit($limitePorPagina, $offset, $_SESSION["idUsuario"]);
+
+    $sub++;
+
+} while (count($estagios) === 0);
 
 if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
@@ -34,8 +44,6 @@ if($_SESSION["tipo"] !== "professor"){
 }
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
-
-$estagios = Estagio::findallLimit($limitePorPagina, $offset, $_SESSION["idUsuario"]);
 
 ?>
 
@@ -55,7 +63,30 @@ $estagios = Estagio::findallLimit($limitePorPagina, $offset, $_SESSION["idUsuari
 
         <main class="container-listagem-estagios">
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-            <h3 class="titulo2">Veja seus estágios</h3>
+            <span style="display:flex; justify-content: space-between">
+                <h3 class="titulo2">Veja seus estágios</h3>
+                <div style="display:flex; gap: 10px; width: 30%; flex-direction: row-reverse">
+                    <?php
+                        $tamanhoProxPag = Estagio::lengthNextPageEstagios($limitePorPagina, $offset, $limitePorPagina);
+                        if ($tamanhoProxPag === 0) {
+                            echo "<button class='botao-tabela' disabled>></button>";
+                        } else {
+                            $proxPag = $paginaAtual + 1;
+                            echo "<button class='botao-tabela' onclick="."window.location.href='./?pagina={$proxPag}'".">></button>";
+                        }
+                        
+                        echo "<p style='height:100%; display:flex; align-items: center; justify-content: center; font-family: Roboto, sans-serif; font-size: 1.3rem'>{$paginaAtual}</p>";
+
+                        if ($paginaAtual === 1) {
+                            echo "<button class='botao-tabela' disabled><</button>";
+                        } else {
+                            $paginaAnterior = $paginaAtual - 1;
+                            echo "<button class='botao-tabela' onclick="."window.location.href='./?pagina={$paginaAnterior}'"."><</button>";
+                        }
+                        
+                    ?>
+                </div>
+            </span>
             <table class="tabela-listagem-estagios">
                 <thead>
                     <tr>
