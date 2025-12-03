@@ -31,7 +31,7 @@ do {
 
     $sub++;
 
-    if (count($estagios) === 0 && $paginaAtual = 1) {
+    if (count($estagios) === 0 && $paginaAtual === 1) {
         $temEstagios = false;
         break;
     }
@@ -71,7 +71,7 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
         <main class="container-listagem-estagios">
             <span style="display:flex; justify-content: space-between;">
                 <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-                <button class="botao-nova-solicitacao" onclick='window.location.href="https:/billyorg.com/2025/projeto/grupo4/cadastro.php"'>+ Novo Estágio</button>
+                <button class="botao-nova-solicitacao" onclick='window.location.href="https:/\/billyorg.com/2025/projeto/grupo4/cadastro.php"'>+ Novo Estágio</button>
             </span>
             <h3 class="titulo2">Veja seus estágios orientados</h3>
             <span style="display:flex; margin-top: 10px">

@@ -21,6 +21,10 @@ do {
 
     $paginaAtual = (isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int)$_GET['pagina'] : 1) - $sub;
 
+    if ($paginaAtual > 1000) {
+        $paginaAtual = 1000;
+    }
+
     if ($paginaAtual < 1) {
         $paginaAtual = 1;
     }
@@ -31,7 +35,7 @@ do {
 
     $sub++;
 
-    if (count($estagios) === 0 && $paginaAtual = 1) {
+    if (count($estagios) === 0 && $paginaAtual === 1) {
         $temEstagios = false;
         break;
     }
@@ -107,7 +111,7 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
                     <thead>
                         <tr>
                             <th style="width:18%" class="header-tabela">Empresa</th>
-                            <th style="width:18%" class="header-tabela">Aluno</th>
+                            <th style="width:18%" class="header-tabela">Orientador</th>
                             <th style="width:35ch" class="header-tabela">Período</th>
                             <th style="width:20ch" class="header-tabela">Status</th>
                             <th class="header-tabela">Ações</th>
@@ -119,7 +123,7 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
                             
                             foreach ($estagios as $estagio) {
                                 $idEstagio = $estagio->getIdEstagio();
-                                $aluno = Usuario::acharUsuario($estagio->getIdAluno());
+                                $aluno = Usuario::acharUsuario($estagio->getIdProfessor());
                                 $dataInicio = new DateTime($estagio->getDataInicio());
                                 $dataFim = new DateTime($estagio->getDataFim());
                                 $statusLabel = Estagio::getStatusLabel($estagio->getStatus());
@@ -140,7 +144,7 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
                                             <td class='conteudo-tabela {$classeLinha} importante'>PENDENTE</td>
                                             <td class='conteudo-tabela {$classeLinha} importante'>PENDENTE</td>
                                             <td class='conteudo-tabela {$classeLinha} importante'><span style='display: flex; gap: 10px'>
-                                                <p>Aguardando aluno concluir cadastro</p>
+                                                <a style='color: red' href='https://billyorg.com/2025/projeto/grupo4/editar.php?idEstagio={$idEstagio}'>Conclua o cadastro do estágio</p>
                                             </span></td>
                                         </tr>
                                     ";
