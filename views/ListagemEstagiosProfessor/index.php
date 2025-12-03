@@ -11,21 +11,31 @@ require __DIR__."/../../vendor/autoload.php";
 use Src\models\Usuario;
 use Src\models\Estagio;
 
+$limitePorPagina = 15;
+
+$paginaAtual = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+if ($paginaAtual < 1) {
+    $paginaAtual = 1;
+}
+
+$offset = ($paginaAtual - 1) * $limitePorPagina;
+
 if(!isset($_SESSION["idUsuario"])){
     $_SESSION["error"] = "É necessário entrar na sua conta antes disso.";
     header("location: ../Login/");
     exit();
 }
 
-if($_SESSION["tipo"]=="professor"){
-   $_SESSION["error"] = "É necessário ser um aluno.";
-    header("location: ../ListarSolicitacao/");
+if($_SESSION["tipo"] !== "professor"){
+   $_SESSION["error"] = "É necessário ser um professor.";
+    header("location: ../ListagemEstagiosAluno/");
     exit();     
 }
 
 $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
 
-$estagios = Estagio::findall($_SESSION["idUsuario"]);
+$estagios = Estagio::findallLimit($limitePorPagina, $offset, $_SESSION["idUsuario"]);
 
 ?>
 
@@ -50,7 +60,7 @@ $estagios = Estagio::findall($_SESSION["idUsuario"]);
                 <thead>
                     <tr>
                         <th style="width:18%" class="header-tabela">Empresa</th>
-                        <th style="width:18%" class="header-tabela">Orientador</th>
+                        <th style="width:18%" class="header-tabela">Aluno</th>
                         <th style="width:30ch" class="header-tabela">Período</th>
                         <th style="width:20ch" class="header-tabela">Status</th>
                         <th class="header-tabela">Ações</th>
@@ -62,7 +72,7 @@ $estagios = Estagio::findall($_SESSION["idUsuario"]);
                         
                         foreach ($estagios as $estagio) {
                             $idEstagio = $estagio->getIdEstagio();
-                            $professor = Usuario::acharUsuario($estagio->getIdProfessor());
+                            $aluno = Usuario::acharUsuario($estagio->getIdAluno());
                             $dataInicio = new DateTime($estagio->getDataInicio());
                             $dataFim = new DateTime($estagio->getDataFim());
                             $statusLabel = Estagio::getStatusLabel($estagio->getStatus());
@@ -79,7 +89,7 @@ $estagios = Estagio::findall($_SESSION["idUsuario"]);
                                 echo "
                                     <tr>
                                         <td class='conteudo-tabela {$classeLinha} importante'>{$estagio->getEmpresa()}</td>
-                                        <td class='conteudo-tabela {$classeLinha} importante'>{$professor->getNome()}</td>
+                                        <td class='conteudo-tabela {$classeLinha} importante'>{$aluno->getNome()}</td>
                                         <td class='conteudo-tabela {$classeLinha} importante'>CADASTRO DE ESTÁGIO PENDENTE</td>
                                         <td class='conteudo-tabela {$classeLinha} importante'>CADASTRO DE ESTÁGIO PENDENTE</td>
                                         <td class='conteudo-tabela {$classeLinha} importante'><span style='display: flex; gap: 10px'>
@@ -92,7 +102,7 @@ $estagios = Estagio::findall($_SESSION["idUsuario"]);
                                 echo "
                                     <tr>
                                         <td class='conteudo-tabela {$classeLinha}'>{$estagio->getEmpresa()}</td>
-                                        <td class='conteudo-tabela {$classeLinha}'>{$professor->getNome()}</td>
+                                        <td class='conteudo-tabela {$classeLinha}'>{$aluno->getNome()}</td>
                                         <td class='conteudo-tabela {$classeLinha}'>{$dataInicio->format('d/m/Y')} - {$dataFim->format('d/m/Y')}</td>
                                         <td class='conteudo-tabela {$classeLinha}'>{$statusLabel}</td>
                                 ";

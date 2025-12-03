@@ -266,6 +266,51 @@ class Estagio{
         return $estagios;
     }
 
+    public static function findallLimit(int $limit, int $offset, ?int $idAluno = null): array {
+        $conexao = new MySQL();
+
+        $idUsuarioInt = (int) ($_SESSION['idUsuario']);
+        $tipo = $_SESSION['tipo'] ?? 'aluno';
+
+        if ($tipo === 'professor') {
+            $sql = "SELECT e.*, a.nome AS nomeAluno
+                    FROM estagio e
+                    LEFT JOIN usuario a ON e.idAluno = a.idUsuario
+                    WHERE e.idProfessor = {$idUsuarioInt}
+                    LIMIT {$limit} OFFSET {$offset}";
+        } else {
+            $sql = "SELECT e.*, u.nome AS nomeProfessor 
+                    FROM estagio e 
+                    LEFT JOIN usuario u ON e.idProfessor = u.idUsuario
+                    WHERE e.idAluno = {$idUsuarioInt}";
+        }
+
+        $resultados = $conexao->consulta($sql);
+        $estagios = array();
+        foreach ($resultados as $resultado) {
+            $profNome = $resultado['nomeProfessor'] ?? '';
+            $e = new Estagio(
+                $resultado['nome'] ?? '',
+                $resultado['dataInicio'] ?? null,
+                $resultado['dataFim'] ?? null,
+                $resultado['empresa'] ?? '',
+                $resultado['setorEmpresa'] ?? '',
+                $resultado['vinculoTrabalhista'] ?? 0,
+                $resultado['obrigatorio'] ?? 0,
+                $resultado['nomeSupervisor'] ?? '',
+                $resultado['emailSupervisor'] ?? '',
+                $resultado['professor'] ?? '',
+                $resultado['idAluno'] ?? null,
+                $resultado['idProfessor'] ?? null
+            );
+            $e->idEstagio = $resultado['idEstagio'] ?? null;
+            $e->setStatus($resultado['status'] ?? 1);
+            $estagios[] = $e;
+        }
+
+        return $estagios;
+    }
+
 
 
     public static function find($idEstagio):Estagio{

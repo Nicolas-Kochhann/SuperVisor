@@ -906,6 +906,7 @@ textarea {
 .tabela-listagem-estagios {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   border-bottom: 1px solid black;
   margin-top: 15px;
 }
