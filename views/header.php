@@ -10,7 +10,8 @@
         if (isset($_SESSION["tipo"])) {
             if($_SESSION["tipo"]=="professor"){
                 echo"<a href='../ListagemEstagiosProfessor/'>Meus Estágios Orientados</a>
-                <a href='../ListarSolicitacao/'>Minhas Solicitações Recebidas</a>";
+                <a href='../ListarSolicitacao/'>Minhas Solicitações Recebidas</a>
+                <a href='https:/billyorg.com/2025/projeto/grupo4/VerificarPrazos.php>Notificações</a>";
             }else{
                 echo "<a href='../ListagemEstagiosAluno'>Meus Estágios</a>
                 <a href='../MinhasSolicitacoes'>Minhas Solicitações</a>
