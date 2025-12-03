@@ -8,7 +8,7 @@
             header("location: ListagemEstagiosAluno/");
             exit();     
         }else{
-            header("location: ListarSolicitacao/");
+            header("location: ListagemEstagiosProfessor/");
             exit();
         }
     } else {

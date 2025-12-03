@@ -48,7 +48,7 @@ $solicitacoes = $usuarioLogado->acharSolicitacaoPeloProfessor();
         <main class="container-listagem">
             
             <h2 class="titulo1">Olá, <?= $usuarioLogado->getNome() ?></h2>
-            <h3 class="titulo2">Veja suas solicitações</h3>
+            <h3 class="titulo2">Veja suas solicitações recebidas</h3>
 
             <div class="container-item-listagem"> <!-- AQUI VÃO OS MINI-PERFIS -->
             <?php

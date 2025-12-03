@@ -271,11 +271,21 @@ class Estagio{
 
         $idUsuarioInt = (int) ($_SESSION['idUsuario']);
 
-        $sql = "SELECT e.*, a.nome AS nomeAluno
-                FROM estagio e
-                LEFT JOIN usuario a ON e.idAluno = a.idUsuario
-                WHERE e.idProfessor = {$idUsuarioInt}
-                LIMIT {$limit} OFFSET {$offset}";
+        $tipo = $_SESSION["tipo"];
+        
+        if ($tipo === 'professor') {
+            $sql = "SELECT e.*, a.nome AS nomeAluno
+                    FROM estagio e
+                    LEFT JOIN usuario a ON e.idAluno = a.idUsuario
+                    WHERE e.idProfessor = {$idUsuarioInt}
+                    LIMIT {$limit} OFFSET {$offset}";
+        } else {
+            $sql = "SELECT e.*, u.nome AS nomeProfessor 
+                    FROM estagio e 
+                    LEFT JOIN usuario u ON e.idProfessor = u.idUsuario
+                    WHERE e.idAluno = {$idUsuarioInt}
+                    LIMIT {$limit} OFFSET {$offset}";
+        }
 
         $resultados = $conexao->consulta($sql);
 
@@ -316,10 +326,19 @@ class Estagio{
 
         $idUsuarioInt = (int) ($_SESSION['idUsuario']);
 
-        $sql = "SELECT e.idEstagio
-                FROM estagio e
-                WHERE e.idProfessor = {$idUsuarioInt}
-                LIMIT {$limit} OFFSET {$offset}";
+        $tipo = $_SESSION["tipo"];
+        
+        if ($tipo === 'professor') {
+            $sql = "SELECT e.idEstagio
+                    FROM estagio e
+                    WHERE e.idProfessor = {$idUsuarioInt}
+                    LIMIT {$limit} OFFSET {$offset}";
+        } else {
+            $sql = "SELECT e.idEstagio
+                    FROM estagio e 
+                    WHERE e.idAluno = {$idUsuarioInt}
+                    LIMIT {$limit} OFFSET {$offset}";
+        }
 
         return count($conexao->consulta($sql));
     }

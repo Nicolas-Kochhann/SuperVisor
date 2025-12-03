@@ -9,8 +9,8 @@
         <?php
         if (isset($_SESSION["tipo"])) {
             if($_SESSION["tipo"]=="professor"){
-                echo"<a href='../ListagemEstagiosProfessor/'>Meus Estágios</a>
-                <a href='../ListarSolicitacao/'>Ver minhas solicitações</a>";
+                echo"<a href='../ListagemEstagiosProfessor/'>Meus Estágios Orientados</a>
+                <a href='../ListarSolicitacao/'>Minhas Solicitações Recebidas</a>";
             }else{
                 echo "<a href='../ListagemEstagiosAluno'>Meus Estágios</a>
                 <a href='../MinhasSolicitacoes'>Minhas Solicitações</a>
