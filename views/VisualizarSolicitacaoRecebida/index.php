@@ -94,7 +94,7 @@ if(isset($_POST['botao'])){
                     if (null !== $solicitacao->getCargaHorariaSemanal()) {
                         echo "{$solicitacao->getCargaHorariaSemanal()} horas semanais";
                     } else {
-                        echo "não informado";
+                        echo "Não informado";
                     }
                 ?>
             </p>
