@@ -92,6 +92,18 @@ if(isset($_SESSION['idUsuario'])){
                 </form>
         </main>
     </div>
+    <?php
+
+
+    if(isset($_SESSION["pop-up"])){
+        echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+        unset($_SESSION["pop-up"]);
+    }
+
+    
+    ?>   
+
+    <script src="../../scripts/esconderPopUp.js"></script>
     <script src="../../scripts/mostraSenha.js"></script>
     <script src="../../scripts/requeridosPreenchidos.js"></script>
 </body>

@@ -32,8 +32,15 @@ foreach($professores as $professor){
 }
 
 
-usort($professores, function($a, $b){ return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
-
+usort($professores, function($a, $b){
+    
+    if ($b->getDisponivel()!=$a->getDisponivel()) {
+        
+        return $b->getDisponivel() <=> $a->getDisponivel(); 
+        
+    }
+    return $b->getInteressesEmComum() <=> $a->getInteressesEmComum(); });
+    
 
 ?>
 

@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
 
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
-                <h1 class="titulo-formulario-grande">Interesses</h1>
+                <h1 class="titulo-formulario-grande">Editar Interesses</h1>
                 <p class="info">Selecione no mínimo 3 interesses</p>
                 <p class="contador-interesse info" id="contador-interesses">0 / 3</p>
 

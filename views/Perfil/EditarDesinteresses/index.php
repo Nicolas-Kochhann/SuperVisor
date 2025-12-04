@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
 
         <main class="container-formulario">
             <form method="POST" action="index.php" enctype="multipart/form-data" class="formulario-grande">
-                <h1 class="titulo-formulario-grande">Editar desinteresses</h1>
+                <h1 class="titulo-formulario-grande">Editar Desinteresses</h1>
                 <div class="bloco-interesses">
                     <!--Aqui são listados os desinteresses-->
                     <?php
