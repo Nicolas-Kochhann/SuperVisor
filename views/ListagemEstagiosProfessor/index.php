@@ -182,6 +182,17 @@ $usuarioLogado = Usuario::acharUsuario($_SESSION["idUsuario"]);
             <?php endif; ?>
         </main>
 
+        <?php
+
+
+            if(isset($_SESSION["pop-up"])){
+                echo "<div id='popup' class='popup esconder'>{$_SESSION['pop-up']['mensagem']}</div>";
+                unset($_SESSION["pop-up"]);
+            }
+
+        
+        ?>
+
     </div>
 
     <script src="../../scripts/menuButton.js"></script>
